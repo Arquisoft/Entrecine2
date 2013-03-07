@@ -20,7 +20,7 @@ public class ReservationTest {
 
     @Test 
     public void seatsCheck() {
-        Reservation r = new Reservation(2, 2.5);
+        Reservation r = new Reservation(3, 2.5);
         assertThat(r.getSeats()).isEqualTo(3);
     }
 

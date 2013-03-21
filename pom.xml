@@ -255,6 +255,18 @@
 			<timezone>2</timezone>
 			<properties />
 		</developer>
+		<developer>
+			<id>Marcos</id>
+			<name>Marcos Rodríguez</name>
+			<email>uo221453@uniovi.es</email>
+			<organization>WESO-University of Oviedo</organization>
+			<organizationUrl>http://www.uniovi.es</organizationUrl>
+			<roles>
+				<role>Developer</role>
+			</roles>
+			<timezone>2</timezone>
+			<properties />
+		</developer>
 	</developers>
 
 

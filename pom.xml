@@ -300,6 +300,20 @@
 			<timezone>2</timezone>
 			<properties />
 		</developer>
+		
+		<developer>
+			<id>dani</id>
+			<name>Daniel Meana Llorián</name>
+			<email>uo219171@uniovi.es</email>
+			<organization>WESO-University of Oviedo</organization>
+			<organizationUrl>http://www.uniovi.es</organizationUrl>
+			<roles>
+				<role>Student</role>
+				<role>Developer</role>
+			</roles>
+			<timezone>2</timezone>
+			<properties />
+		</developer>
 	</developers>
 
 

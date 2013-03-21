@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>es.uniovi.asw</groupId>
-	<artifactId>Entrecine2</artifactId>
+	<artifactId>Entrecine3</artifactId>
 	<version>0.1-SNAPSHOT</version>
 	<name>Entrecine, library</name>
 	<packaging>jar</packaging>
@@ -13,6 +13,23 @@
 	</properties>
 
 	<dependencies>
+	<dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>2.29.1</version>
+    </dependency>
+	<dependency>
+        	<groupId>info.cukes</groupId>
+        	<artifactId>cucumber-picocontainer</artifactId>
+        	<version>1.1.1</version>
+    	    <scope>test</scope>
+    	</dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>1.1.1</version>
+            <scope>test</scope>
+        </dependency>
 
 		<!--Unit Testing -->
 		<dependency>
@@ -250,47 +267,6 @@
 			<organizationUrl>http://www.uniovi.es</organizationUrl>
 			<roles>
 				<role>Project Admin</role>
-				<role>Developer</role>
-			</roles>
-			<timezone>2</timezone>
-			<properties />
-		</developer>
-		<developer>
-			<id>belaustegui</id>
-			<name>Cristian Álvarez Belaustegui</name>
-			<email>uo218847@uniovi.es</email>
-			<organization>WESO-University of Oviedo</organization>
-			<organizationUrl>http://www.uniovi.es</organizationUrl>
-			<roles>
-				<role>Student</role>
-				<role>Developer</role>
-			</roles>
-			<timezone>2</timezone>
-			<properties />
-		</developer>
-		
-		<developer>
-			<id>bruno</id>
-			<name>Bruno López García</name>
-			<email>uo219018@uniovi.es</email>
-			<organization>WESO-University of Oviedo</organization>
-			<organizationUrl>http://www.uniovi.es</organizationUrl>
-			<roles>
-				<role>Student</role>
-				<role>Developer</role>
-			</roles>
-			<timezone>2</timezone>
-			<properties />
-		</developer>
-		
-		<developer>
-			<id>dani</id>
-			<name>Daniel Meana Llorián</name>
-			<email>uo219171@uniovi.es</email>
-			<organization>WESO-University of Oviedo</organization>
-			<organizationUrl>http://www.uniovi.es</organizationUrl>
-			<roles>
-				<role>Student</role>
 				<role>Developer</role>
 			</roles>
 			<timezone>2</timezone>

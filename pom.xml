@@ -255,6 +255,19 @@
 			<timezone>2</timezone>
 			<properties />
 		</developer>
+		<developer>
+			<id>belaustegui</id>
+			<name>Cristian Álvarez Belaustegui</name>
+			<email>uo218847@uniovi.es</email>
+			<organization>WESO-University of Oviedo</organization>
+			<organizationUrl>http://www.uniovi.es</organizationUrl>
+			<roles>
+				<role>Student</role>
+				<role>Developer</role>
+			</roles>
+			<timezone>2</timezone>
+			<properties />
+		</developer>
 		
 		<developer>
 			<id>bruno</id>

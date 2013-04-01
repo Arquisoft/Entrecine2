@@ -3,6 +3,7 @@ Proyecto para la asignatura de Arquitectura de Software de la Escuela de Ingenie
 
 ## Objetivo del proyecto
 El objetivo de este proyecto es crear e implementar una arquitectura para un sistema de gestión de entradas de cine.
+
 El sistema debe gestionar automáticamente tanto la venta de entradas a travñes de Internet como de las que se vendan en las taquillas del propio cine. Adicionamlente la aplicación será utilizada por el administrador para configurar sus parámetros.
 
 ## Autores

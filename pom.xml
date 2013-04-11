@@ -5,7 +5,7 @@
 	<artifactId>Entrecine8</artifactId>
 	<version>0.1-SNAPSHOT</version>
 	<name>Entrecine, library</name>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 	<description>Entrecine - Gestor entradas de cines</description>
 
 	<properties>

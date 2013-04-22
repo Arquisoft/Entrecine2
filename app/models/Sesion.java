@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import play.db.ebean.Model;
+import play.db.jpa.JPA;
 
 public class Sesion extends Model {
 
@@ -28,6 +29,15 @@ public class Sesion extends Model {
 	private List<Entrada> entradas = new ArrayList<Entrada>();
 	private int inicio;
 	private Date dia;
+
+	public static Sesion findById(Long id) {
+		return JPA.em().find(Sesion.class, id);
+	}
+
+	@SuppressWarnings("unchecked")
+	public static List<Sesion> findAll() {
+		return JPA.em().createQuery("SELECT s FROM Sesion s").getResultList();
+	}
 
 	public Sesion() {
 		super();

@@ -9,10 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import play.db.ebean.Model;
+import play.db.jpa.JPA;
 
 @Entity
-public class Pelicula extends Model {
+public class Pelicula extends ModeloPersistente {
 
 	private static final long serialVersionUID = -990873777041332443L;
 	@Id
@@ -23,6 +23,15 @@ public class Pelicula extends Model {
 	private List<Sesion> sesiones = new ArrayList<Sesion>();
 	private Integer año;
 	private String genero;
+
+	public static Pelicula findById(Long id) {
+		return JPA.em().find(Pelicula.class, id);
+	}
+
+	@SuppressWarnings("unchecked")
+	public static List<Pelicula> findAll() {
+		return JPA.em().createQuery("SELECT p FROM Pelicula p").getResultList();
+	}
 
 	public Pelicula() {
 		super();

@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import play.db.ebean.Model;
+import play.db.jpa.JPA;
 
 public class TipoSesion extends Model {
 
@@ -20,6 +21,16 @@ public class TipoSesion extends Model {
 	private Double precio;
 	@OneToMany(mappedBy = "tipo")
 	private List<Sesion> sesiones = new ArrayList<Sesion>();
+
+	public static TipoSesion findById(Long id) {
+		return JPA.em().find(TipoSesion.class, id);
+	}
+
+	@SuppressWarnings("unchecked")
+	public static List<TipoSesion> findAll() {
+		return JPA.em().createQuery("SELECT ts FROM TipoSesion ts")
+				.getResultList();
+	}
 
 	public TipoSesion() {
 		super();

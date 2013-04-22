@@ -8,9 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import play.db.ebean.Model;
+import play.db.jpa.JPA;
 
-public class Cliente extends Model {
+public class Cliente extends ModeloPersistente {
 
 	private static final long serialVersionUID = 2768482032925131180L;
 	@Id
@@ -21,6 +21,15 @@ public class Cliente extends Model {
 	private String password;
 	@OneToMany(mappedBy = "cliente")
 	private List<Entrada> entradas = new ArrayList<Entrada>();
+
+	public static Cliente findById(Long id) {
+		return JPA.em().find(Cliente.class, id);
+	}
+
+	@SuppressWarnings("unchecked")
+	public static List<Cliente> findAll() {
+		return JPA.em().createQuery("SELECT c FROM Cliente c").getResultList();
+	}
 
 	public Cliente() {
 		super();

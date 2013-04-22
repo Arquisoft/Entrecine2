@@ -1,12 +1,14 @@
 package models;
 
+import java.util.List;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import play.db.ebean.Model;
+import play.db.jpa.JPA;
 
-public class Entrada extends Model {
+public class Entrada extends ModeloPersistente {
 
 	private static final long serialVersionUID = 4990936969506463676L;
 	@Id
@@ -18,6 +20,15 @@ public class Entrada extends Model {
 	private Sesion sesion;
 	@ManyToOne
 	private Cliente cliente;
+
+	public static Entrada findById(Long id) {
+		return JPA.em().find(Entrada.class, id);
+	}
+
+	@SuppressWarnings("unchecked")
+	public static List<Entrada> findAll() {
+		return JPA.em().createQuery("SELECT e FROM Entrada e").getResultList();
+	}
 
 	public Entrada() {
 		super();

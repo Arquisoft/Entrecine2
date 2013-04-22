@@ -11,6 +11,7 @@ import play.db.ebean.Model;
 
 public class Cliente extends Model {
 	
+	private static final long serialVersionUID = 2768482032925131180L;
 	@Id
 	@GeneratedValue
 	private Long id;

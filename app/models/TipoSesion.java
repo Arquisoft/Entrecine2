@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 import play.db.ebean.Model;
 
 public class TipoSesion extends Model {
-	
+
 	private static final long serialVersionUID = 7766152580895748217L;
 	@Id
 	@GeneratedValue
@@ -20,7 +20,7 @@ public class TipoSesion extends Model {
 	private Double precio;
 	@OneToMany(mappedBy = "tipo")
 	private List<Sesion> sesiones = new ArrayList<Sesion>();
-	
+
 	public TipoSesion() {
 		super();
 	}
@@ -44,19 +44,44 @@ public class TipoSesion extends Model {
 	public Long getId() {
 		return id;
 	}
-	
+
 	public List<Sesion> getSesiones() {
 		return Collections.unmodifiableList(sesiones);
 	}
-	
+
 	public void addSesion(Sesion sesion) {
 		this.sesiones.add(sesion);
 		sesion.setTipo(this);
 	}
-	
+
 	public void removeSesion(Sesion sesion) {
 		this.sesiones.remove(sesion);
 		sesion.setTipo(null);
 	}
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TipoSesion other = (TipoSesion) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
 }

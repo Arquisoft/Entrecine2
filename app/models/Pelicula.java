@@ -15,20 +15,22 @@ import play.db.ebean.Model;
 public class Pelicula extends Model {
 
 	private static final long serialVersionUID = -990873777041332443L;
-	@Id @GeneratedValue
+	@Id
+	@GeneratedValue
 	private Long id;
 	private String titulo;
 	@OneToMany(mappedBy = "pelicula")
 	private List<Sesion> sesiones = new ArrayList<Sesion>();
 	private Integer año;
 	private String genero;
-	
+
 	public Pelicula() {
 		super();
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static Finder<Long,Pelicula> find = new Finder(Long.class, Pelicula.class);
+	public static Finder<Long, Pelicula> find = new Finder(Long.class,
+			Pelicula.class);
 
 	public static List<Pelicula> all() {
 		return find.all();
@@ -69,19 +71,44 @@ public class Pelicula extends Model {
 	public Long getId() {
 		return id;
 	}
-	
+
 	public List<Sesion> getSesiones() {
 		return Collections.unmodifiableList(sesiones);
 	}
-	
+
 	public void addSesion(Sesion sesion) {
 		sesion.setPelicula(this);
 		sesiones.add(sesion);
 	}
-	
+
 	public void removeSesion(Sesion sesion) {
 		sesion.setPelicula(null);
 		sesiones.remove(sesion);
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pelicula other = (Pelicula) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 
 }

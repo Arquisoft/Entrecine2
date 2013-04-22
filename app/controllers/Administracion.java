@@ -1,5 +1,6 @@
 package controllers;
 
+import controllers.filters.FiltroAdministrador;
 import play.*;
 import play.mvc.*;
 import views.html.*;

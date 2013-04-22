@@ -1,8 +1,9 @@
 package models;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -12,10 +13,11 @@ import play.db.ebean.Model;
 public class Sala extends Model {
 	
 	@Id
+	@GeneratedValue
 	private Long id;
-	private int numButacas;
+	private Integer numButacas;
 	@OneToMany(mappedBy = "sala")
-	private Set<Sesion> sesiones = new HashSet<Sesion>();
+	private List<Sesion> sesiones = new ArrayList<Sesion>();
 	
 
 }

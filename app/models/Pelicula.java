@@ -1,10 +1,10 @@
 package models;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -13,13 +13,13 @@ import play.db.ebean.Model;
 @Entity
 public class Pelicula extends Model {
 
-	@Id
-	public Long id;
-	public String titulo;
+	@Id @GeneratedValue
+	private Long id;
+	private String titulo;
 	@OneToMany(mappedBy = "pelicula")
-	public Set<Sesion> sesiones = new HashSet<Sesion>();
-	public int año;
-	public String genero;
+	private List<Sesion> sesiones = new ArrayList<Sesion>();
+	private Integer año;
+	private String genero;
 
 
 	public static Finder<Long,Pelicula> find = new Finder(Long.class, Pelicula.class);

@@ -1,19 +1,15 @@
 package controllers;
 
+import controllers.filters.FiltroAdministrador;
 import play.*;
 import play.mvc.*;
-
 import views.html.*;
 
 public class Administracion extends Controller {
 
-	// Con la notacion before este metodo se ejecuta antes de cada llamada a uno
-	// de los metodos de este controller
-	@Before
-	private static void isAdminLogeado() {
-		
-	}
-
+	
+	//Ejecutamos el filtro antes de la llamada a este metodo
+	@With(FiltroAdministrador.class)
 	public static Result index() {
 		return ok(admin.render());
 	}

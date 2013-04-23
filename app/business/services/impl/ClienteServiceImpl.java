@@ -10,8 +10,6 @@ import com.avaje.ebean.Ebean;
 
 public class ClienteServiceImpl implements ClienteService {
 
-	// TODO FINDBYLOGIN
-
 	private Finder<Long, Cliente> find = new Finder<Long, Cliente>(Long.class,
 			Cliente.class);
 

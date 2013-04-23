@@ -4,6 +4,8 @@
 
 # Home page
 GET     /                           controllers.Usuarios.index()
+POST	/login						controllers.Usuarios.login()
+GET		/rellenardb					controllers.Usuarios.rellenarDb()
 
 #Administracion
 
@@ -14,7 +16,6 @@ GET		/admin/login				controllers.Administracion.irALogin()
 POST	/admin/login/login			controllers.Administracion.login()
 
 GET		/taquilla					controllers.Taquilla.index()
-GET		/login						controllers.Usuarios.login()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

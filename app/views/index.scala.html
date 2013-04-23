@@ -1,4 +1,4 @@
-@(peliculas: List[Pelicula])
+@(peliculas: List[Pelicula], formCliente: Form[Cliente])
 
 @import helper._
 
@@ -6,8 +6,19 @@
     <h1>¡Bienvenido a Entrecine!</h1>
 
     @form(action = routes.Usuarios.login()) {
-
-}
+        <fieldset>
+            <legend>Login</legend>
+            @inputText(
+                formCliente("login"),
+                '_label -> "Login",
+                '_help -> "Introduce tu nombre de usuario")
+            @inputPassword(
+                formCliente("password"), 
+                '_label -> "Password",
+                '_help -> "Introduce tu password.")
+        </fieldset>
+        <input type="submit" value="login"/>
+    }
 
 
     <h2>Películas en cartelera</h2>

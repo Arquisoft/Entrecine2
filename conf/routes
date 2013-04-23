@@ -4,6 +4,9 @@
 
 # Home page
 GET     /                           controllers.Usuarios.index()
+
+#Administracion
+
 GET		/admin						controllers.Administracion.index()
 POST	/admin/nuevaPelicula		controllers.Administracion.nuevaPelicula()
 POST	/admin/:id/borrarPelicula	controllers.Administracion.borrarPelicula(id: Long)

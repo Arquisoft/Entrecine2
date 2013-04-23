@@ -2,12 +2,14 @@ package business.impl;
 
 import business.BusinessFactory;
 import business.services.ClienteService;
+import business.services.EmpleadoService;
 import business.services.EntradaService;
 import business.services.PeliculaService;
 import business.services.SalaService;
 import business.services.SesionService;
 import business.services.TipoSesionService;
 import business.services.impl.ClienteServiceImpl;
+import business.services.impl.EmpleadoServiceImpl;
 import business.services.impl.EntradaServiceImpl;
 import business.services.impl.PeliculaServiceImpl;
 import business.services.impl.SalaServiceImpl;
@@ -19,6 +21,11 @@ public class BusinessFactoryImpl implements BusinessFactory {
 	@Override
 	public ClienteService getClienteService() {
 		return new ClienteServiceImpl();
+	}
+
+	@Override
+	public EmpleadoService getEmpleadoService() {
+		return new EmpleadoServiceImpl();
 	}
 
 	@Override

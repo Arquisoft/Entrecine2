@@ -16,9 +16,14 @@ public class FiltroAdministrador extends Action.Simple {
 		// El usuario en sesion es el login del usuario
 		String login = ctx.session().get("usuario");
 		Empleado empleado = null;
+		
 		if(login != null)
 			empleado = Empleado.findByLogin(login);
-		if(empleado == null || !empleado.getAdmin() )
+
+		if (empleado == null) 
+			redirect(routes.Administracion.irALogin());
+		
+		if(!empleado.getAdmin() )
 			// Si no esta logeado  o no es admin redirijimos a la pantalla de login
 			redirect(routes.Administracion.irALogin());
 		return null;

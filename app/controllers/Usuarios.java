@@ -43,6 +43,7 @@ public class Usuarios extends Controller {
 		Empleado admin = new Empleado();
 		admin.setPassword("pass");
 		admin.setLogin("admin");
+		admin.setAdmin(true);
 		admin.save();
 		return redirect(routes.Usuarios.index());
 	}

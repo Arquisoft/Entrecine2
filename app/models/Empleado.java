@@ -50,6 +50,7 @@ public class Empleado extends Model{
 
 	public Empleado() {
 		super();
+		this.admin = false;
 	}
 
 	public Long getId() {
@@ -115,6 +116,12 @@ public class Empleado extends Model{
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Empleado [id=" + id + ", nombre=" + nombre + ", login=" + login
+				+ ", password=" + password + ", admin=" + admin + "]";
 	}
 
 	

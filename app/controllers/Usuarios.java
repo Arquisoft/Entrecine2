@@ -30,7 +30,7 @@ public class Usuarios extends Controller {
                 cliente = c;
         }
     	if (cliente == null || !password.equals(cliente.getPassword())) {
-    		return badRequest(index.render(pelis, formCliente));
+    		return badRequest(index.render(Pelicula.findAll(), formCliente));
     	} else {
     		return redirect(routes.Usuarios.index());
     	}

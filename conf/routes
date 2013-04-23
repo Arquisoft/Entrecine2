@@ -5,6 +5,9 @@
 # Home page
 GET     /                           controllers.Usuarios.index()
 GET		/admin						controllers.Administracion.index()
+POST	/admin/nuevaPelicula		controllers.Administracion.nuevaPelicula()
+POST	/admin/:id/borrarPelicula	controllers.Administracion.borrarPelicula(id: Long)
+
 GET		/taquilla					controllers.Taquilla.index()
 GET		/login						controllers.Usuarios.login()
 

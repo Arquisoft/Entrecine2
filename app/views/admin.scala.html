@@ -1,7 +1,24 @@
+@(peliculas: List[models.Pelicula])
+
+@import helper._
+
 @main("Panel de Administracion") {
 	<h1>Panel de Administraci�n</h1>
 	
-	</h2>Login</h2>
+	<h2>Peliculas</h2>
 	
+	<!-- Listado de Películas -->
 	
+	<table>
+	<th><td>Id</td><td>Título</td><td>Año</td><td>Genero</td></th>
+	@for(pelicula <- peliculas) {
+	
+		<tr>
+			<td>@pelicula.getId()</td>
+			<td>@pelicula.getTitulo()</td>
+			<td>@pelicula.getAño()</td>
+			<td>@pelicula.getGenero()</td>	
+		</tr>
+	}
+	</table>
 }

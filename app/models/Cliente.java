@@ -27,23 +27,23 @@ public class Cliente extends Model {
 	private List<Entrada> entradas = new ArrayList<Entrada>();
 
 	public static Cliente findById(Long id) {
-		return Factories.persistence.getClienteDAO().findById(id);
+		return Factories.business.getClienteService().findById(id);
 	}
 
 	public static List<Cliente> findAll() {
-		return Factories.persistence.getClienteDAO().findAll();
+		return Factories.business.getClienteService().findAll();
 	}
 
 	public void update() {
-		Factories.persistence.getClienteDAO().update(this);
+		Factories.business.getClienteService().update(this);
 	}
 
 	public void save() {
-		Factories.persistence.getClienteDAO().save(this);
+		Factories.business.getClienteService().save(this);
 	}
 
 	public void delete() {
-		Factories.persistence.getClienteDAO().delete(this);
+		Factories.business.getClienteService().delete(this);
 	}
 
 	public Cliente() {

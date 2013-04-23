@@ -25,23 +25,23 @@ public class Sala extends Model {
 	private List<Sesion> sesiones = new ArrayList<Sesion>();
 
 	public static Sala findById(Long id) {
-		return Factories.persistence.getSalaDAO().findById(id);
+		return Factories.business.getSalaService().findById(id);
 	}
 
 	public static List<Sala> findAll() {
-		return Factories.persistence.getSalaDAO().findAll();
+		return Factories.business.getSalaService().findAll();
 	}
 
 	public void update() {
-		Factories.persistence.getSalaDAO().update(this);
+		Factories.business.getSalaService().update(this);
 	}
 
 	public void save() {
-		Factories.persistence.getSalaDAO().save(this);
+		Factories.business.getSalaService().save(this);
 	}
 
 	public void delete() {
-		Factories.persistence.getSalaDAO().delete(this);
+		Factories.business.getSalaService().delete(this);
 	}
 
 	public Sala() {

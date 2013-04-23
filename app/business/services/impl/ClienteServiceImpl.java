@@ -1,16 +1,16 @@
-package persistence.dao.impl;
+package business.services.impl;
 
 import java.util.List;
 
 import models.Cliente;
-import persistence.dao.ClienteDAO;
 import play.db.ebean.Model.Finder;
+import business.services.ClienteService;
 
 import com.avaje.ebean.Ebean;
 
-public class ClienteDaoEbean implements ClienteDAO {
-	
-	//TODO FINDBYLOGIN
+public class ClienteServiceImpl implements ClienteService {
+
+	// TODO FINDBYLOGIN
 
 	private Finder<Long, Cliente> find = new Finder<Long, Cliente>(Long.class,
 			Cliente.class);
@@ -18,6 +18,14 @@ public class ClienteDaoEbean implements ClienteDAO {
 	@Override
 	public Cliente findById(Long id) {
 		return find.byId(id);
+	}
+
+	@Override
+	public Cliente findByLogin(String login) {
+		Cliente cliente = find.fetch(
+				"SELECT c FROM Cliente c WHERE c.login = ?", login)
+				.findUnique();
+		return cliente;
 	}
 
 	@Override

@@ -7,11 +7,13 @@ import views.html.index;
 public class Usuarios extends Controller {
   
     public static Result index() {
-        return ok(index.render());
+        // return ok(index.render());
+    	return(TODO);
     }
 
     public static Result login() {
-        return ok(index.render());
+        // return ok(index.render());
+    	return(TODO);
     }
   
 }

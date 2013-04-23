@@ -1,9 +1,9 @@
 package infrastructure;
 
-import persistence.PersistenceService;
-import persistence.impl.PersistenceServiceEbean;
+import business.BusinessFactory;
+import business.impl.BusinessFactoryImpl;
 
 public class Factories {
 
-	public static PersistenceService persistence = new PersistenceServiceEbean();
+	public static BusinessFactory business = new BusinessFactoryImpl();
 }

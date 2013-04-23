@@ -28,23 +28,23 @@ public class Pelicula extends Model {
 	private Boolean enCartelera;
 
 	public static Pelicula findById(Long id) {
-		return Factories.persistence.getPeliculaDAO().findById(id);
+		return Factories.business.getPeliculaService().findById(id);
 	}
 
 	public static List<Pelicula> findAll() {
-		return Factories.persistence.getPeliculaDAO().findAll();
+		return Factories.business.getPeliculaService().findAll();
 	}
 
 	public void update() {
-		Factories.persistence.getPeliculaDAO().update(this);
+		Factories.business.getPeliculaService().update(this);
 	}
 
 	public void save() {
-		Factories.persistence.getPeliculaDAO().save(this);
+		Factories.business.getPeliculaService().save(this);
 	}
 
 	public void delete() {
-		Factories.persistence.getPeliculaDAO().delete(this);
+		Factories.business.getPeliculaService().delete(this);
 	}
 
 	public Pelicula() {

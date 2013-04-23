@@ -1,10 +1,10 @@
-package persistence.dao;
+package business.services;
 
 import java.util.List;
 
 import models.TipoSesion;
 
-public interface TipoSesionDAO {
+public interface TipoSesionService {
 
 	public TipoSesion findById(Long id);
 

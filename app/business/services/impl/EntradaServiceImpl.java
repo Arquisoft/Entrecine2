@@ -1,14 +1,14 @@
-package persistence.dao.impl;
+package business.services.impl;
 
 import java.util.List;
 
 import models.Entrada;
-import persistence.dao.EntradaDAO;
 import play.db.ebean.Model.Finder;
+import business.services.EntradaService;
 
 import com.avaje.ebean.Ebean;
 
-public class EntradaDaoEbean implements EntradaDAO {
+public class EntradaServiceImpl implements EntradaService {
 
 	private Finder<Long, Entrada> find = new Finder<Long, Entrada>(Long.class,
 			Entrada.class);

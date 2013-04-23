@@ -8,6 +8,7 @@ create table cliente (
   nombre                    varchar(255),
   login                     varchar(255),
   password                  varchar(255),
+  constraint uq_cliente_login unique (login),
   constraint pk_cliente primary key (id))
 ;
 
@@ -17,6 +18,7 @@ create table empleado (
   login                     varchar(255),
   password                  varchar(255),
   admin                     boolean,
+  constraint uq_empleado_login unique (login),
   constraint pk_empleado primary key (id))
 ;
 

@@ -1,5 +1,7 @@
 package models;
 
+import infrastructure.Factories;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,10 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import play.db.jpa.JPA;
+import play.db.ebean.Model;
 
 @Entity
-public class Pelicula extends ModeloPersistente {
+public class Pelicula extends Model {
 
 	private static final long serialVersionUID = -990873777041332443L;
 	@Id
@@ -25,32 +27,27 @@ public class Pelicula extends ModeloPersistente {
 	private String genero;
 
 	public static Pelicula findById(Long id) {
-		return JPA.em().find(Pelicula.class, id);
+		return Factories.persistence.getPeliculaDAO().findById(id);
 	}
 
-	@SuppressWarnings("unchecked")
 	public static List<Pelicula> findAll() {
-		return JPA.em().createQuery("SELECT p FROM Pelicula p").getResultList();
+		return Factories.persistence.getPeliculaDAO().findAll();
+	}
+	
+	public void update() {
+		Factories.persistence.getPeliculaDAO().update(this);
+	}
+
+	public void save() {
+		Factories.persistence.getPeliculaDAO().save(this);
+	}
+
+	public void delete() {
+		Factories.persistence.getPeliculaDAO().delete(this);
 	}
 
 	public Pelicula() {
 		super();
-	}
-
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static Finder<Long, Pelicula> find = new Finder(Long.class,
-			Pelicula.class);
-
-	public static List<Pelicula> all() {
-		return find.all();
-	}
-
-	public static void create(Pelicula peli) {
-		peli.save();
-	}
-
-	public static void delete(Long id) {
-		find.ref(id).delete();
 	}
 
 	public String getTitulo() {

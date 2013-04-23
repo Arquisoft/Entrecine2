@@ -1,5 +1,7 @@
 package models;
 
+import infrastructure.Factories;
+
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,7 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import play.db.ebean.Model;
-import play.db.jpa.JPA;
 
 public class Sesion extends Model {
 
@@ -31,12 +32,23 @@ public class Sesion extends Model {
 	private Date dia;
 
 	public static Sesion findById(Long id) {
-		return JPA.em().find(Sesion.class, id);
+		return Factories.persistence.getSesionDAO().findById(id);
 	}
 
-	@SuppressWarnings("unchecked")
 	public static List<Sesion> findAll() {
-		return JPA.em().createQuery("SELECT s FROM Sesion s").getResultList();
+		return Factories.persistence.getSesionDAO().findAll();
+	}
+
+	public void update() {
+		Factories.persistence.getSesionDAO().update(this);
+	}
+
+	public void save() {
+		Factories.persistence.getSesionDAO().save(this);
+	}
+
+	public void delete() {
+		Factories.persistence.getSesionDAO().delete(this);
 	}
 
 	public Sesion() {

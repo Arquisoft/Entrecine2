@@ -1,14 +1,16 @@
 package models;
 
+import infrastructure.Factories;
+
 import java.util.List;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import play.db.jpa.JPA;
+import play.db.ebean.Model;
 
-public class Entrada extends ModeloPersistente {
+public class Entrada extends Model {
 
 	private static final long serialVersionUID = 4990936969506463676L;
 	@Id
@@ -22,12 +24,23 @@ public class Entrada extends ModeloPersistente {
 	private Cliente cliente;
 
 	public static Entrada findById(Long id) {
-		return JPA.em().find(Entrada.class, id);
+		return Factories.persistence.getEntradaDAO().findById(id);
 	}
 
-	@SuppressWarnings("unchecked")
 	public static List<Entrada> findAll() {
-		return JPA.em().createQuery("SELECT e FROM Entrada e").getResultList();
+		return Factories.persistence.getEntradaDAO().findAll();
+	}
+	
+	public void update() {
+		Factories.persistence.getEntradaDAO().update(this);
+	}
+
+	public void save() {
+		Factories.persistence.getEntradaDAO().save(this);
+	}
+
+	public void delete() {
+		Factories.persistence.getEntradaDAO().delete(this);
 	}
 
 	public Entrada() {

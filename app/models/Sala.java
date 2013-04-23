@@ -1,5 +1,7 @@
 package models;
 
+import infrastructure.Factories;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,9 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import play.db.jpa.JPA;
+import play.db.ebean.Model;
 
-public class Sala extends ModeloPersistente {
+public class Sala extends Model {
 
 	private static final long serialVersionUID = -5960605356904138910L;
 	@Id
@@ -21,12 +23,23 @@ public class Sala extends ModeloPersistente {
 	private List<Sesion> sesiones = new ArrayList<Sesion>();
 
 	public static Sala findById(Long id) {
-		return JPA.em().find(Sala.class, id);
+		return Factories.persistence.getSalaDAO().findById(id);
 	}
 
-	@SuppressWarnings("unchecked")
 	public static List<Sala> findAll() {
-		return JPA.em().createQuery("SELECT s FROM Sala s").getResultList();
+		return Factories.persistence.getSalaDAO().findAll();
+	}
+
+	public void update() {
+		Factories.persistence.getSalaDAO().update(this);
+	}
+
+	public void save() {
+		Factories.persistence.getSalaDAO().save(this);
+	}
+
+	public void delete() {
+		Factories.persistence.getSalaDAO().delete(this);
 	}
 
 	public Sala() {

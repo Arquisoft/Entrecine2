@@ -1,5 +1,7 @@
 package models;
 
+import infrastructure.Factories;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import play.db.ebean.Model;
-import play.db.jpa.JPA;
 
 public class TipoSesion extends Model {
 
@@ -23,13 +24,23 @@ public class TipoSesion extends Model {
 	private List<Sesion> sesiones = new ArrayList<Sesion>();
 
 	public static TipoSesion findById(Long id) {
-		return JPA.em().find(TipoSesion.class, id);
+		return Factories.persistence.getTipoSesionDAO().findById(id);
 	}
 
-	@SuppressWarnings("unchecked")
 	public static List<TipoSesion> findAll() {
-		return JPA.em().createQuery("SELECT ts FROM TipoSesion ts")
-				.getResultList();
+		return Factories.persistence.getTipoSesionDAO().findAll();
+	}
+
+	public void update() {
+		Factories.persistence.getTipoSesionDAO().update(this);
+	}
+
+	public void save() {
+		Factories.persistence.getTipoSesionDAO().save(this);
+	}
+
+	public void delete() {
+		Factories.persistence.getTipoSesionDAO().delete(this);
 	}
 
 	public TipoSesion() {

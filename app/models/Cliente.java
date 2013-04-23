@@ -1,5 +1,7 @@
 package models;
 
+import infrastructure.Factories;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,9 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import play.db.jpa.JPA;
+import play.db.ebean.Model;
 
-public class Cliente extends ModeloPersistente {
+public class Cliente extends Model {
 
 	private static final long serialVersionUID = 2768482032925131180L;
 	@Id
@@ -23,12 +25,23 @@ public class Cliente extends ModeloPersistente {
 	private List<Entrada> entradas = new ArrayList<Entrada>();
 
 	public static Cliente findById(Long id) {
-		return JPA.em().find(Cliente.class, id);
+		return Factories.persistence.getClienteDAO().findById(id);
 	}
 
-	@SuppressWarnings("unchecked")
 	public static List<Cliente> findAll() {
-		return JPA.em().createQuery("SELECT c FROM Cliente c").getResultList();
+		return Factories.persistence.getClienteDAO().findAll();
+	}
+	
+	public void update() {
+		Factories.persistence.getClienteDAO().update(this);
+	}
+
+	public void save() {
+		Factories.persistence.getClienteDAO().save(this);
+	}
+
+	public void delete() {
+		Factories.persistence.getClienteDAO().delete(this);
 	}
 
 	public Cliente() {

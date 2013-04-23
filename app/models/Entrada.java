@@ -26,23 +26,23 @@ public class Entrada extends Model {
 	private Cliente cliente;
 
 	public static Entrada findById(Long id) {
-		return Factories.persistence.getEntradaDAO().findById(id);
+		return Factories.business.getEntradaService().findById(id);
 	}
 
 	public static List<Entrada> findAll() {
-		return Factories.persistence.getEntradaDAO().findAll();
+		return Factories.business.getEntradaService().findAll();
 	}
 
 	public void update() {
-		Factories.persistence.getEntradaDAO().update(this);
+		Factories.business.getEntradaService().update(this);
 	}
 
 	public void save() {
-		Factories.persistence.getEntradaDAO().save(this);
+		Factories.business.getEntradaService().save(this);
 	}
 
 	public void delete() {
-		Factories.persistence.getEntradaDAO().delete(this);
+		Factories.business.getEntradaService().delete(this);
 	}
 
 	public Entrada() {

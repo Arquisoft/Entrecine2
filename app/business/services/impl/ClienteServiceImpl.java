@@ -1,14 +1,14 @@
-package persistence.dao.impl;
+package business.services.impl;
 
 import java.util.List;
 
 import models.Cliente;
-import persistence.dao.ClienteDAO;
 import play.db.ebean.Model.Finder;
+import business.services.ClienteService;
 
 import com.avaje.ebean.Ebean;
 
-public class ClienteDaoEbean implements ClienteDAO {
+public class ClienteServiceImpl implements ClienteService {
 	
 	//TODO FINDBYLOGIN
 

@@ -34,23 +34,23 @@ public class Sesion extends Model {
 	private Date dia;
 
 	public static Sesion findById(Long id) {
-		return Factories.persistence.getSesionDAO().findById(id);
+		return Factories.business.getSesionService().findById(id);
 	}
 
 	public static List<Sesion> findAll() {
-		return Factories.persistence.getSesionDAO().findAll();
+		return Factories.business.getSesionService().findAll();
 	}
 
 	public void update() {
-		Factories.persistence.getSesionDAO().update(this);
+		Factories.business.getSesionService().update(this);
 	}
 
 	public void save() {
-		Factories.persistence.getSesionDAO().save(this);
+		Factories.business.getSesionService().save(this);
 	}
 
 	public void delete() {
-		Factories.persistence.getSesionDAO().delete(this);
+		Factories.business.getSesionService().delete(this);
 	}
 
 	public Sesion() {

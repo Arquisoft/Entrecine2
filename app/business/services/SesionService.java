@@ -1,10 +1,10 @@
-package persistence.dao;
+package business.services;
 
 import java.util.List;
 
 import models.Sesion;
 
-public interface SesionDAO {
+public interface SesionService {
 
 	public Sesion findById(Long id);
 

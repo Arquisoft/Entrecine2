@@ -26,23 +26,23 @@ public class TipoSesion extends Model {
 	private List<Sesion> sesiones = new ArrayList<Sesion>();
 
 	public static TipoSesion findById(Long id) {
-		return Factories.persistence.getTipoSesionDAO().findById(id);
+		return Factories.business.getTipoSesionService().findById(id);
 	}
 
 	public static List<TipoSesion> findAll() {
-		return Factories.persistence.getTipoSesionDAO().findAll();
+		return Factories.business.getTipoSesionService().findAll();
 	}
 
 	public void update() {
-		Factories.persistence.getTipoSesionDAO().update(this);
+		Factories.business.getTipoSesionService().update(this);
 	}
 
 	public void save() {
-		Factories.persistence.getTipoSesionDAO().save(this);
+		Factories.business.getTipoSesionService().save(this);
 	}
 
 	public void delete() {
-		Factories.persistence.getTipoSesionDAO().delete(this);
+		Factories.business.getTipoSesionService().delete(this);
 	}
 
 	public TipoSesion() {

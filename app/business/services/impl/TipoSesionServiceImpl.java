@@ -1,14 +1,15 @@
-package persistence.dao.impl;
+package business.services.impl;
 
 import java.util.List;
 
 import models.TipoSesion;
-import persistence.dao.TipoSesionDAO;
 import play.db.ebean.Model.Finder;
+
+import business.services.TipoSesionService;
 
 import com.avaje.ebean.Ebean;
 
-public class TipoSesionDaoEbean implements TipoSesionDAO {
+public class TipoSesionServiceImpl implements TipoSesionService {
 
 	private Finder<Long, TipoSesion> find = new Finder<Long, TipoSesion>(
 			Long.class, TipoSesion.class);

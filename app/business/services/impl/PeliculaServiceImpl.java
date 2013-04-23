@@ -1,14 +1,15 @@
-package persistence.dao.impl;
+package business.services.impl;
 
 import java.util.List;
 
 import models.Pelicula;
-import persistence.dao.PeliculaDAO;
 import play.db.ebean.Model.Finder;
+
+import business.services.PeliculaService;
 
 import com.avaje.ebean.Ebean;
 
-public class PeliculaDaoEbean implements PeliculaDAO {
+public class PeliculaServiceImpl implements PeliculaService {
 
 	private Finder<Long, Pelicula> find = new Finder<Long, Pelicula>(
 			Long.class, Pelicula.class);

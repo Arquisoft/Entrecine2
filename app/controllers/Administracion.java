@@ -11,6 +11,7 @@ import controllers.filters.FiltroAdministrador;
 public class Administracion extends Controller {
 
 	private static Form<Pelicula> formPelicula = Form.form(Pelicula.class);
+
 	
 	// @Marcos: Index muestra una lista con las películas -> render(List<Pelicula>)
 	
@@ -42,5 +43,7 @@ public class Administracion extends Controller {
 		  }
 		return redirect(routes.Administracion.index());
 	}
+
+	
 
 }

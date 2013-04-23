@@ -7,7 +7,11 @@ import views.html.index;
 public class Usuarios extends Controller {
   
     public static Result index() {
-        return ok(index.render("Your new application is ready."));
+        return ok(index.render());
+    }
+
+    public static Result login() {
+        return ok(index.render());
     }
   
 }

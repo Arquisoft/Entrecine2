@@ -1,13 +1,11 @@
-@(peliculas: List[models.Pelicula])
+@(peliculas: List[models.Pelicula], peliculaForm: Form[models.Pelicula])
 
 @import helper._
 
 @main("Panel de Administracion") {
-	<h1>Panel de Administraci�n</h1>
+	<h1>Panel de Administración</h1>
 	
 	<h2>Peliculas</h2>
-	
-	<!-- Listado de Películas -->
 	
 	<table>
 	<th><td>Id</td><td>Título</td><td>Año</td><td>Genero</td></th>
@@ -16,9 +14,24 @@
 		<tr>
 			<td>@pelicula.getId()</td>
 			<td>@pelicula.getTitulo()</td>
-			<td>@pelicula.getAño()</td>
-			<td>@pelicula.getGenero()</td>	
+			<td>@pelicula.getAnio()</td>
+			<td>@pelicula.getGenero()</td>
+			<td>
+			@form(routes.Administracion.borrarPelicula(pelicula.getId())) {
+            	<input type="submit" value="Borrar">
+            }
+            </td>
 		</tr>
 	}
+	
+	<h2>Crear una película</h2>
+	@form(routes.Administracion.nuevaPelicula()) {
+        
+        @inputText(peliculaForm("titulo")) 
+        @inputText(peliculaForm("anio")) 
+        @inputText(peliculaForm("Genero")) 
+        <input type="submit" value="Crear">
+        
+    }
 	</table>
 }

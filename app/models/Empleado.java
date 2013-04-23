@@ -4,6 +4,7 @@ import infrastructure.Factories;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,6 +19,7 @@ public class Empleado extends Model{
 	@GeneratedValue
 	private Long id;
 	private String nombre;
+	@Column(unique=true)
 	private String login;
 	private String password;
 	private Boolean admin;

@@ -20,9 +20,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
 
 	@Override
 	public Empleado findByLogin(String login) {
-		Empleado empleado = find.fetch(
-				"SELECT e FROM Empleado e WHERE e.login = ?", login)
-				.findUnique();
+		Empleado empleado = find.where().eq("login", login).findUnique();
 		return empleado;
 	}
 

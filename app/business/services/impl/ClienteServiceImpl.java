@@ -20,10 +20,7 @@ public class ClienteServiceImpl implements ClienteService {
 
 	@Override
 	public Cliente findByLogin(String login) {
-		//Cliente cliente = find.fetch(
-		//		"SELECT c FROM Cliente c WHERE c.login = ?", login)
-		//		.findUnique();
-		Cliente cliente = find.where().eq("login",login).findUnique();
+		Cliente cliente = find.where().eq("login", login).findUnique();
 		return cliente;
 	}
 

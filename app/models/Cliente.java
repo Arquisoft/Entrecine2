@@ -33,6 +33,10 @@ public class Cliente extends Model {
 	public static List<Cliente> findAll() {
 		return Factories.business.getClienteService().findAll();
 	}
+	
+	public static Cliente findByLogin(String login) {
+		return Factories.business.getClienteService().findByLogin(login);
+	}
 
 	public void update() {
 		Factories.business.getClienteService().update(this);

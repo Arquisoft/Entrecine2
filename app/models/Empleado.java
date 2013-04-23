@@ -29,6 +29,10 @@ public class Empleado extends Model{
 	public static List<Empleado> findAll() {
 		return Factories.business.getEmpleadoService().findAll();
 	}
+	
+	public static Empleado findByLogin(String login){
+		return Factories.business.getEmpleadoService().findByLogin(login);
+	}
 
 	public void update() {
 		Factories.business.getEmpleadoService().update(this);

@@ -1,5 +1,7 @@
 package controllers.filters;
 
+import models.Cliente;
+import controllers.routes;
 import play.mvc.Action;
 import play.mvc.Http.Context;
 import play.mvc.Result;
@@ -14,9 +16,12 @@ public class FiltroUsuarioRegistrado extends Action.Simple{
 	public Result call(Context ctx) throws Throwable {
 		// El usuario en sesion es el login del usuario
 		String login = ctx.session().get("usuario");
-		if(login == null)
+		Cliente cliente = null;
+		if(login != null)
+			cliente = Cliente.findByLogin(login);
+		if(cliente == null)
 			// Si no esta logeado redirijimos al inicio
-			redirect("/");
+			redirect(routes.Usuarios.index());
 		return null;
 	}
 	

@@ -1,0 +1,30 @@
+@(formEmpleado: Form[Empleado])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+@main("Panel de administracion - Login") {
+    
+     @helper.form(action = routes.Administracion.login) {   
+        <fieldset>
+            <legend>Login</legend>
+            
+            @inputText(
+                formEmpleado("login"), 
+                '_label -> "Login", 
+                '_help -> "Introduce tu nombre de usuario"
+                )
+            
+            
+            @inputPassword(
+                formEmpleado("password"), 
+                '_label -> "Password",
+                '_help -> "Introduce tu password."
+            )
+
+            
+        </fieldset>
+        
+        <input type="submit" value="Login">
+       }
+ }

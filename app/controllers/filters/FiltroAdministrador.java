@@ -1,5 +1,7 @@
 package controllers.filters;
 
+import models.Empleado;
+import controllers.routes;
 import play.mvc.Action;
 import play.mvc.Http.Context;
 import play.mvc.Result;
@@ -11,6 +13,14 @@ import play.mvc.Result;
 public class FiltroAdministrador extends Action.Simple {
 
   public Result call(Context ctx) throws Throwable {
-    return delegate.call(ctx);
+		// El usuario en sesion es el login del usuario
+		String login = ctx.session().get("usuario");
+		Empleado empleado = null;
+		if(login != null)
+			empleado = Empleado.findByLogin(login);
+		if(empleado == null || !empleado.getAdmin() )
+			// Si no esta logeado  o no es admin redirijimos a la pantalla de login
+			redirect(routes.Administracion.irALogin());
+		return null;
   }
 }

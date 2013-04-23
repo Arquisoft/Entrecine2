@@ -3,7 +3,7 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Usuarios.index()
+GET     /	                        controllers.Usuarios.index()
 POST	/login						controllers.Usuarios.login()
 GET		/rellenardb					controllers.Usuarios.rellenarDb()
 

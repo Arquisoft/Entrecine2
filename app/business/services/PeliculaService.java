@@ -1,10 +1,10 @@
-package persistence.dao;
+package business.services;
 
 import java.util.List;
 
 import models.Pelicula;
 
-public interface PeliculaDAO {
+public interface PeliculaService {
 
 	public Pelicula findById(Long id);
 

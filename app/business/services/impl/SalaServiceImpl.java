@@ -1,14 +1,15 @@
-package persistence.dao.impl;
+package business.services.impl;
 
 import java.util.List;
 
 import models.Sala;
-import persistence.dao.SalaDAO;
 import play.db.ebean.Model.Finder;
+
+import business.services.SalaService;
 
 import com.avaje.ebean.Ebean;
 
-public class SalaDaoEbean implements SalaDAO {
+public class SalaServiceImpl implements SalaService {
 
 	private Finder<Long, Sala> find = new Finder<Long, Sala>(Long.class,
 			Sala.class);

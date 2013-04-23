@@ -1,10 +1,10 @@
-package persistence.dao;
+package business.services;
 
 import java.util.List;
 
 import models.Sala;
 
-public interface SalaDAO {
+public interface SalaService {
 
 	public Sala findById(Long id);
 

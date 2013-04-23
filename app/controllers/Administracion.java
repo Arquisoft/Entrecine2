@@ -14,14 +14,12 @@ public class Administracion extends Controller {
 
 	
 	// @Marcos: Index muestra una lista con las películas -> render(List<Pelicula>)
-	@play.db.jpa.Transactional
 	@With(FiltroAdministrador.class)
 	public static Result index() {
 		return ok(admin.render(Pelicula.findAll(), formPelicula));
 	}
 	
 	// @Marcos: Acción de borrar presente en la tabla de películas
-	@play.db.jpa.Transactional
 	@With(FiltroAdministrador.class)
 	public static Result borrarPelicula(Long id) {
 		Pelicula.findById(id).delete();
@@ -29,7 +27,6 @@ public class Administracion extends Controller {
 	}
 	
 	// @Marcos: 
-	@play.db.jpa.Transactional
 	@With(FiltroAdministrador.class)
 	public static Result nuevaPelicula() {
 		Form<Pelicula> formularioRecibido = formPelicula.bindFromRequest();

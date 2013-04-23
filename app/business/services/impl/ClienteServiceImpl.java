@@ -9,8 +9,8 @@ import business.services.ClienteService;
 import com.avaje.ebean.Ebean;
 
 public class ClienteServiceImpl implements ClienteService {
-	
-	//TODO FINDBYLOGIN
+
+	// TODO FINDBYLOGIN
 
 	private Finder<Long, Cliente> find = new Finder<Long, Cliente>(Long.class,
 			Cliente.class);
@@ -18,6 +18,14 @@ public class ClienteServiceImpl implements ClienteService {
 	@Override
 	public Cliente findById(Long id) {
 		return find.byId(id);
+	}
+
+	@Override
+	public Cliente findByLogin(String login) {
+		Cliente cliente = find.fetch(
+				"SELECT c FROM Cliente c WHERE c.login = ?", login)
+				.findUnique();
+		return cliente;
 	}
 
 	@Override

@@ -7,6 +7,8 @@ import models.Cliente;
 public interface ClienteService {
 
 	public Cliente findById(Long id);
+	
+	public Cliente findByLogin(String login);
 
 	public List<Cliente> findAll();
 

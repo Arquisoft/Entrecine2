@@ -20,9 +20,11 @@ public class FiltroAdministrador extends Action.Simple {
 		if(login != null)
 			empleado = Empleado.findByLogin(login);
 
-		if (empleado == null) 
+		if (empleado == null) {
 			redirect(routes.Administracion.irALogin());
-		
+			return null;
+		}
+				
 		if(!empleado.getAdmin() )
 			// Si no esta logeado  o no es admin redirijimos a la pantalla de login
 			redirect(routes.Administracion.irALogin());

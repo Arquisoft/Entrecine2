@@ -6,12 +6,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import play.db.ebean.Model;
 
+@Entity
 public class Cliente extends Model {
 
 	private static final long serialVersionUID = 2768482032925131180L;
@@ -31,7 +33,7 @@ public class Cliente extends Model {
 	public static List<Cliente> findAll() {
 		return Factories.persistence.getClienteDAO().findAll();
 	}
-	
+
 	public void update() {
 		Factories.persistence.getClienteDAO().update(this);
 	}

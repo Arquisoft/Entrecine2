@@ -7,43 +7,43 @@ import persistence.dao.PeliculaDAO;
 import persistence.dao.SalaDAO;
 import persistence.dao.SesionDAO;
 import persistence.dao.TipoSesionDAO;
-import persistence.dao.impl.ClienteDAOJpa;
-import persistence.dao.impl.EntradaDAOJpa;
-import persistence.dao.impl.PeliculaDAOJpa;
-import persistence.dao.impl.SalaDAOJpa;
-import persistence.dao.impl.SesionDAOJpa;
-import persistence.dao.impl.TipoSesionDAOJpa;
+import persistence.dao.impl.ClienteDaoEbean;
+import persistence.dao.impl.EntradaDaoEbean;
+import persistence.dao.impl.PeliculaDaoEbean;
+import persistence.dao.impl.SalaDaoEbean;
+import persistence.dao.impl.SesionDaoEbean;
+import persistence.dao.impl.TipoSesionDaoEbean;
 
-public class PersistenceServiceJpa implements PersistenceService {
+public class PersistenceServiceEbean implements PersistenceService {
 
 	@Override
 	public ClienteDAO getClienteDAO() {
-		return new ClienteDAOJpa();
+		return new ClienteDaoEbean();
 	}
 
 	@Override
 	public EntradaDAO getEntradaDAO() {
-		return new EntradaDAOJpa();
+		return new EntradaDaoEbean();
 	}
 
 	@Override
 	public PeliculaDAO getPeliculaDAO() {
-		return new PeliculaDAOJpa();
+		return new PeliculaDaoEbean();
 	}
 
 	@Override
 	public SalaDAO getSalaDAO() {
-		return new SalaDAOJpa();
+		return new SalaDaoEbean();
 	}
 
 	@Override
 	public SesionDAO getSesionDAO() {
-		return new SesionDAOJpa();
+		return new SesionDaoEbean();
 	}
 
 	@Override
 	public TipoSesionDAO getTipoSesionDAO() {
-		return new TipoSesionDAOJpa();
+		return new TipoSesionDaoEbean();
 	}
 
 }

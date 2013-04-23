@@ -23,8 +23,9 @@ public class Pelicula extends Model {
 	private String titulo;
 	@OneToMany(mappedBy = "pelicula")
 	private List<Sesion> sesiones = new ArrayList<Sesion>();
-	private Integer año;
+	private Integer anio;
 	private String genero;
+	private Boolean enCartelera;
 
 	public static Pelicula findById(Long id) {
 		return Factories.persistence.getPeliculaDAO().findById(id);
@@ -33,7 +34,7 @@ public class Pelicula extends Model {
 	public static List<Pelicula> findAll() {
 		return Factories.persistence.getPeliculaDAO().findAll();
 	}
-	
+
 	public void update() {
 		Factories.persistence.getPeliculaDAO().update(this);
 	}
@@ -58,12 +59,12 @@ public class Pelicula extends Model {
 		this.titulo = titulo;
 	}
 
-	public Integer getAño() {
-		return año;
+	public Integer getAnio() {
+		return anio;
 	}
 
-	public void setAño(Integer año) {
-		this.año = año;
+	public void setAnio(Integer anio) {
+		this.anio = anio;
 	}
 
 	public String getGenero() {
@@ -76,6 +77,14 @@ public class Pelicula extends Model {
 
 	public Long getId() {
 		return id;
+	}
+
+	public Boolean getEnCartelera() {
+		return enCartelera;
+	}
+
+	public void setEnCartelera(Boolean enCartelera) {
+		this.enCartelera = enCartelera;
 	}
 
 	public List<Sesion> getSesiones() {

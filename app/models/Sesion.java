@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -14,6 +15,7 @@ import javax.persistence.OneToMany;
 
 import play.db.ebean.Model;
 
+@Entity
 public class Sesion extends Model {
 
 	private static final long serialVersionUID = -1969188576839253301L;

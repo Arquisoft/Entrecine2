@@ -4,35 +4,38 @@ import java.util.List;
 
 import models.Pelicula;
 import persistence.dao.PeliculaDAO;
-import play.db.jpa.JPA;
+import play.db.ebean.Model.Finder;
 
-public class PeliculaDAOJpa implements PeliculaDAO {
+import com.avaje.ebean.Ebean;
+
+public class PeliculaDaoEbean implements PeliculaDAO {
+
+	private Finder<Long, Pelicula> find = new Finder<Long, Pelicula>(
+			Long.class, Pelicula.class);
 
 	@Override
 	public Pelicula findById(Long id) {
-		return JPA.em().find(Pelicula.class, id);
+		return find.byId(id);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Pelicula> findAll() {
-		return JPA.em().createQuery("SELECT p FROM Pelicula p").getResultList();
+		return find.all();
 	}
 
 	@Override
 	public void update(Pelicula p) {
-		JPA.em().merge(p);
-
+		Ebean.update(p);
 	}
 
 	@Override
 	public void save(Pelicula p) {
-		JPA.em().persist(p);
+		Ebean.save(p);
 	}
 
 	@Override
 	public void delete(Pelicula p) {
-		JPA.em().remove(p);
+		Ebean.delete(p);
 	}
 
 }

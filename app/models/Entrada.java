@@ -4,12 +4,14 @@ import infrastructure.Factories;
 
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import play.db.ebean.Model;
 
+@Entity
 public class Entrada extends Model {
 
 	private static final long serialVersionUID = 4990936969506463676L;
@@ -30,7 +32,7 @@ public class Entrada extends Model {
 	public static List<Entrada> findAll() {
 		return Factories.persistence.getEntradaDAO().findAll();
 	}
-	
+
 	public void update() {
 		Factories.persistence.getEntradaDAO().update(this);
 	}

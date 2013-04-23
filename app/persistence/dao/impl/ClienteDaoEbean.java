@@ -4,35 +4,40 @@ import java.util.List;
 
 import models.Cliente;
 import persistence.dao.ClienteDAO;
-import play.db.jpa.JPA;
+import play.db.ebean.Model.Finder;
 
-public class ClienteDAOJpa implements ClienteDAO {
+import com.avaje.ebean.Ebean;
+
+public class ClienteDaoEbean implements ClienteDAO {
+	
+	//TODO FINDBYLOGIN
+
+	private Finder<Long, Cliente> find = new Finder<Long, Cliente>(Long.class,
+			Cliente.class);
 
 	@Override
 	public Cliente findById(Long id) {
-		return JPA.em().find(Cliente.class, id);
+		return find.byId(id);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Cliente> findAll() {
-		return JPA.em().createQuery("SELECT c FROM Cliente c").getResultList();
+		return find.all();
 	}
 
 	@Override
 	public void update(Cliente c) {
-		JPA.em().merge(c);
-
+		Ebean.update(c);
 	}
 
 	@Override
 	public void save(Cliente c) {
-		JPA.em().persist(c);
+		Ebean.save(c);
 	}
 
 	@Override
 	public void delete(Cliente c) {
-		JPA.em().remove(c);
+		Ebean.delete(c);
 	}
 
 }

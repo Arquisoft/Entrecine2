@@ -4,35 +4,38 @@ import java.util.List;
 
 import models.Sesion;
 import persistence.dao.SesionDAO;
-import play.db.jpa.JPA;
+import play.db.ebean.Model.Finder;
 
-public class SesionDAOJpa implements SesionDAO {
+import com.avaje.ebean.Ebean;
+
+public class SesionDaoEbean implements SesionDAO {
+
+	private Finder<Long, Sesion> find = new Finder<Long, Sesion>(Long.class,
+			Sesion.class);
 
 	@Override
 	public Sesion findById(Long id) {
-		return JPA.em().find(Sesion.class, id);
+		return find.byId(id);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Sesion> findAll() {
-		return JPA.em().createQuery("SELECT s FROM Sesion s").getResultList();
+		return find.all();
 	}
 
 	@Override
 	public void update(Sesion s) {
-		JPA.em().merge(s);
-
+		Ebean.update(s);
 	}
 
 	@Override
 	public void save(Sesion s) {
-		JPA.em().persist(s);
+		Ebean.save(s);
 	}
 
 	@Override
 	public void delete(Sesion s) {
-		JPA.em().remove(s);
+		Ebean.delete(s);
 	}
 
 }

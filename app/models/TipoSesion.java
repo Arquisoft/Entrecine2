@@ -6,12 +6,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import play.db.ebean.Model;
 
+@Entity
 public class TipoSesion extends Model {
 
 	private static final long serialVersionUID = 7766152580895748217L;

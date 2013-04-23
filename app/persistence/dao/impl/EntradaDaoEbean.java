@@ -4,35 +4,38 @@ import java.util.List;
 
 import models.Entrada;
 import persistence.dao.EntradaDAO;
-import play.db.jpa.JPA;
+import play.db.ebean.Model.Finder;
 
-public class EntradaDAOJpa implements EntradaDAO {
+import com.avaje.ebean.Ebean;
+
+public class EntradaDaoEbean implements EntradaDAO {
+
+	private Finder<Long, Entrada> find = new Finder<Long, Entrada>(Long.class,
+			Entrada.class);
 
 	@Override
 	public Entrada findById(Long id) {
-		return JPA.em().find(Entrada.class, id);
+		return find.byId(id);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Entrada> findAll() {
-		return JPA.em().createQuery("SELECT e FROM Entrada e").getResultList();
+		return find.all();
 	}
 
 	@Override
 	public void update(Entrada e) {
-		JPA.em().merge(e);
-
+		Ebean.update(e);
 	}
 
 	@Override
 	public void save(Entrada e) {
-		JPA.em().persist(e);
+		Ebean.save(e);
 	}
 
 	@Override
 	public void delete(Entrada e) {
-		JPA.em().remove(e);
+		Ebean.delete(e);
 	}
 
 }

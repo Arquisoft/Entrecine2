@@ -4,35 +4,38 @@ import java.util.List;
 
 import models.Sala;
 import persistence.dao.SalaDAO;
-import play.db.jpa.JPA;
+import play.db.ebean.Model.Finder;
 
-public class SalaDAOJpa implements SalaDAO {
+import com.avaje.ebean.Ebean;
+
+public class SalaDaoEbean implements SalaDAO {
+
+	private Finder<Long, Sala> find = new Finder<Long, Sala>(Long.class,
+			Sala.class);
 
 	@Override
 	public Sala findById(Long id) {
-		return JPA.em().find(Sala.class, id);
+		return find.byId(id);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Sala> findAll() {
-		return JPA.em().createQuery("SELECT s FROM Sala s").getResultList();
+		return find.all();
 	}
 
 	@Override
 	public void update(Sala s) {
-		JPA.em().merge(s);
-
+		Ebean.update(s);
 	}
 
 	@Override
 	public void save(Sala s) {
-		JPA.em().persist(s);
+		Ebean.save(s);
 	}
 
 	@Override
 	public void delete(Sala s) {
-		JPA.em().remove(s);
+		Ebean.delete(s);
 	}
 
 }

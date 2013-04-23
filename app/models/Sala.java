@@ -6,12 +6,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import play.db.ebean.Model;
 
+@Entity
 public class Sala extends Model {
 
 	private static final long serialVersionUID = -5960605356904138910L;

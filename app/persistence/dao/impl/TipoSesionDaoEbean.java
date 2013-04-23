@@ -4,35 +4,38 @@ import java.util.List;
 
 import models.TipoSesion;
 import persistence.dao.TipoSesionDAO;
-import play.db.jpa.JPA;
+import play.db.ebean.Model.Finder;
 
-public class TipoSesionDAOJpa implements TipoSesionDAO {
+import com.avaje.ebean.Ebean;
+
+public class TipoSesionDaoEbean implements TipoSesionDAO {
+
+	private Finder<Long, TipoSesion> find = new Finder<Long, TipoSesion>(
+			Long.class, TipoSesion.class);
 
 	@Override
 	public TipoSesion findById(Long id) {
-		return JPA.em().find(TipoSesion.class, id);
+		return find.byId(id);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<TipoSesion> findAll() {
-		return JPA.em().createQuery("SELECT tp FROM TipoSesion tp").getResultList();
+		return find.all();
 	}
 
 	@Override
 	public void update(TipoSesion ts) {
-		JPA.em().merge(ts);
-
+		Ebean.update(ts);
 	}
 
 	@Override
 	public void save(TipoSesion ts) {
-		JPA.em().persist(ts);
+		Ebean.save(ts);
 	}
 
 	@Override
 	public void delete(TipoSesion ts) {
-		JPA.em().remove(ts);
+		Ebean.delete(ts);
 	}
 
 }

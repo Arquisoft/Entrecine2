@@ -3,52 +3,64 @@
 @import helper._
 @import helper.twitterBootstrap._
 
-@main("Panel de Administracion") {
-	<h1>Panel de Administración</h1>
+<html>
 
-	<h2>Peliculas</h2>
-
-	<table border=1>
-	<tr>
-		<th>ID</th>
-		<th>Título</th>
-		<th>Año</th>
-		<th>Género</th>
-	</tr>
-	@for(pelicula <- peliculas) {
-
-		<tr>
-			<td>@pelicula.getId()</td>
-			<td>@pelicula.getTitulo()</td>
-			<td>@pelicula.getAnio()</td>
-			<td>@pelicula.getGenero()</td>
-			<td>
-			@form(routes.Administracion.borrarPelicula(pelicula.getId())) {
-            	<input type="submit" value="Borrar">
-            }
-            </td>
-		</tr>
-	}
-	</table>
+	<head>
+		<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")">
+		<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+		<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+		<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+		 <title>Panel de Administracion - Principal</title>
+	</head>
 	
-	<h2>Crear una película</h2>
-	@form(routes.Administracion.nuevaPelicula()) {
-        
-        @inputText(	peliculaForm("titulo"),
-        			'_label -> "Titulo", 
-                	'_help -> "Introduce el título de la pelicula") 
-                	
-        @inputText( peliculaForm("anio"),
-        			'_label -> "Login", 
-                	'_help -> "Introduce el año de la película")
-                	
-        @inputText( peliculaForm("Genero"),
-        			'_label -> "Login", 
-                	'_help -> "Género de la película"))
-        
-        <div clas="actions">
-        <input type="submit" value="Crear">
-        </div>
-    }
-
-}
+	<body>
+		<div class="container">
+		<h1>Panel de Administración</h1>
+	
+		<h2>Peliculas</h2>
+	
+		<table border=1>
+		<tr>
+			<th>ID</th>
+			<th>Título</th>
+			<th>Año</th>
+			<th>Género</th>
+		</tr>
+		@for(pelicula <- peliculas) {
+	
+			<tr>
+				<td>@pelicula.getId()</td>
+				<td>@pelicula.getTitulo()</td>
+				<td>@pelicula.getAnio()</td>
+				<td>@pelicula.getGenero()</td>
+				<td>
+				@form(routes.Administracion.borrarPelicula(pelicula.getId())) {
+	            	<input class="btn primary" type="submit" value="Borrar">
+	            }
+	            </td>
+			</tr>
+		}
+		</table>
+		
+		<h2>Crear una película</h2>
+		@form(routes.Administracion.nuevaPelicula()) {
+	        
+	        @inputText(	peliculaForm("titulo"),
+	        			'_label -> "Titulo", 
+	                	'_help -> "Introduce el título de la pelicula") 
+	                	
+	        @inputText( peliculaForm("anio"),
+	        			'_label -> "Login", 
+	                	'_help -> "Introduce el año de la película")
+	                	
+	        @inputText( peliculaForm("Genero"),
+	        			'_label -> "Login", 
+	                	'_help -> "Género de la película"))
+	        
+	        <div clas="actions">
+	        <input class="btn primary" type="submit" value="Crear">
+	        </div>
+	    }
+	    </div>
+	</body>
+</html>

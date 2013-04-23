@@ -7,8 +7,8 @@
 	
 	<h2>Peliculas</h2>
 	
-	<table>
-	<th><td>Id</td><td>Título</td><td>Año</td><td>Genero</td></th>
+	<table border=1>
+	<tr><th>Id</th><th>Titulo</th><th>Año</th><th>Genero</th></tr>
 	@for(pelicula <- peliculas) {
 	
 		<tr>
@@ -23,6 +23,7 @@
             </td>
 		</tr>
 	}
+	</table>
 	
 	<h2>Crear una película</h2>
 	@form(routes.Administracion.nuevaPelicula()) {
@@ -33,5 +34,5 @@
         <input type="submit" value="Crear">
         
     }
-	</table>
+
 }

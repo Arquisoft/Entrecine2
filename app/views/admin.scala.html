@@ -10,7 +10,7 @@
 		<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
 		<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
 		<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-		 <title>Panel de Administracion - Principal</title>
+		<title>Panel de Administracion - Principal</title>
 	</head>
 	
 	<body>
@@ -50,12 +50,12 @@
 	                	'_help -> "Introduce el título de la pelicula") 
 	                	
 	        @inputText( peliculaForm("anio"),
-	        			'_label -> "Login", 
+	        			'_label -> "Año", 
 	                	'_help -> "Introduce el año de la película")
 	                	
 	        @inputText( peliculaForm("Genero"),
-	        			'_label -> "Login", 
-	                	'_help -> "Género de la película"))
+	        			'_label -> "Género", 
+	                	'_help -> "Género de la película")
 	        
 	        <div clas="actions">
 	        <input class="btn primary" type="submit" value="Crear">

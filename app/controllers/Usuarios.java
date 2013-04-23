@@ -7,10 +7,12 @@ import models.Cliente;
 import models.Empleado;
 import models.Pelicula;
 import views.html.index;
+import java.util.*;
 
 public class Usuarios extends Controller {
 
 	private static Form<Cliente> formCliente = Form.form(Cliente.class);
+
   
     public static Result index() {
         return ok(index.render(Pelicula.findAll(), formCliente));
@@ -22,14 +24,16 @@ public class Usuarios extends Controller {
     	String login = formularioRecibido.field("login").value();
     	String password = formularioRecibido.field("password").value();
     	
-    	Cliente cliente = Cliente.findByLogin(login);
+        Cliente cliente = null;
+        for (Cliente c: Cliente.findAll()) {
+            if (c.getLogin().equals(login))
+                cliente = c;
+        }
     	if (cliente == null || !password.equals(cliente.getPassword())) {
-    		return badRequest(index.render(Pelicula.findAll(), formCliente));
+    		return badRequest(index.render(pelis, formCliente));
     	} else {
     		return redirect(routes.Usuarios.index());
     	}
-//        return ok(index.render());
-//    	return(TODO);
     }
     
     public static Result rellenarDb() {

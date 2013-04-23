@@ -1,7 +1,23 @@
-@(message: String)
+@(peliculas: List[Pelicula])
 
-@main("Entrecine") {
-    
-    @play20.welcome(message, style = "Java")
-    
+@import helper._
+
+@main("¡Bienvenido a Entrecine!") {
+    <h1>¡Bienvenido a Entrecine!</h1>
+
+    @form(action = routes.Usuarios.login()) {
+
+}
+
+
+    <h2>Películas en cartelera</h2>
+	@for(pelicula <- peliculas) {
+	<ul>
+    	<li>pelicula.getTitulo()</li>
+    	<li>pelicula.getAño()</li>
+    	<li>pelicula.getGenero()</li>
+    </ul>
+	}
+
+
 }

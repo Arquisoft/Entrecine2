@@ -7,7 +7,9 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.With;
 import views.html.taquilla;
+import views.html.taquillaVerSesiones;
 import views.html.taquillalogin;
+import controllers.filters.FiltroAdministrador;
 import controllers.filters.FiltroTaquilla;;
 
 public class Taquilla extends Controller {
@@ -18,6 +20,12 @@ public class Taquilla extends Controller {
 		return ok(taquilla.render(Pelicula.findAll()));
 	}
 	
+	@With(FiltroTaquilla.class)
+	public static Result verSesiones(Long id) {
+		Pelicula pelicula = Pelicula.findById(id);	
+
+		return ok(taquillaVerSesiones.render(pelicula));
+	}
 	// LOGIN Y REDIRECCIONES EN SEGUNDO PLANO
 
 	public static Result irALogin() {

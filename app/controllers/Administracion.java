@@ -47,7 +47,7 @@ public class Administracion extends Controller {
 		return ok(adminlogin.render(formEmpleado));
 	}
 
-	public static Result login() {
+	public static Result doLogin() {
 		Form<Empleado> formularioRecibido = formEmpleado.bindFromRequest();
 
 		// En este caso no devolveremos los errores correspondientes a si fallo

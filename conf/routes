@@ -13,7 +13,7 @@ GET		/admin						controllers.Administracion.index()
 POST	/admin/nuevaPelicula		controllers.Administracion.nuevaPelicula()
 POST	/admin/:id/borrarPelicula	controllers.Administracion.borrarPelicula(id: Long)
 GET		/admin/login				controllers.Administracion.irALogin()
-POST	/admin/login/login			controllers.Administracion.login()
+POST	/admin/login/dologin		controllers.Administracion.doLogin()
 
 GET		/taquilla					controllers.Taquilla.index()
 

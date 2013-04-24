@@ -25,8 +25,6 @@ public class Administracion extends Controller {
 	@With(FiltroAdministrador.class)
 	public static Result index() {
 		return ok(adminPeliculas.render(Pelicula.findAll(), formPelicula));
-<<<<<<< HEAD
-=======
 	}
 
 	// @Marcos: Acción de borrar presente en la tabla de películas
@@ -34,7 +32,6 @@ public class Administracion extends Controller {
 	public static Result borrarPelicula(Long id) {
 		Pelicula.findById(id).delete();
 		return redirect(routes.Administracion.adminPeliculas());
->>>>>>> branch 'master' of https://github.com/Arquisoft/Entrecine2.git
 	}
 
 	@With(FiltroAdministrador.class)

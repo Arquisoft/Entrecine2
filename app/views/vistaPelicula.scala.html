@@ -6,11 +6,16 @@
 
 	<h1>@pelicula.getTitulo()</h1>
 	
+	<img src="@pelicula.getImagenCartelera()" width="200" height="280" />
+	
 	<h2>Año</h2>
 		<p>@pelicula.getAnio()</h2>
 	
 	<h2>Genero</h2>
 		<p>@pelicula.getGenero()</h2>
+		
+	<h2>Sinopsis</h2>
+		<p>@pelicula.getSinopsis()</h2>
 		
 	@if(cliente != null) {
 		<h2>Sesiones</h2>
@@ -24,10 +29,10 @@
 		</tr>
 		@for(sesion <- pelicula.getSesiones()) {
 			<tr>
-				<td>sesion.getHora()</td>
-				<td>sesion.getDia()</td>
-				<td>sesion.getSala()</td>
-				<td>sesion.getTipo()</td>
+				<td>@sesion.getInicio()</td>
+				<td>@sesion.getDia()</td>
+				<td>@sesion.getSala().getNumero()</td>
+				<td>@sesion.getTipo().getNombre() - @sesion.getTipo().getPrecio()€</td>
 				<td>
 					@form(routes.Clientes.verSesion(sesion.getId())) {
 						<input class="btn btn-success" type="submit" value="Ver sesión">

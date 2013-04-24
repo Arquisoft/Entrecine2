@@ -1,9 +1,14 @@
 package controllers;
 
+import java.sql.Date;
+import java.sql.Time;
+
 import models.Cliente;
 import models.Empleado;
 import models.Pelicula;
+import models.Sala;
 import models.Sesion;
+import models.TipoSesion;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -64,28 +69,68 @@ public class Clientes extends Controller {
 
 		Cliente cliente = new Cliente();
 		cliente.setPassword("pass");
-		cliente.setLogin("login");
+		cliente.setLogin("cliente");
 		cliente.save();
+		
 		Empleado empleado = new Empleado();
 		empleado.setPassword("pass");
 		empleado.setLogin("empleado");
 		empleado.save();
+		
 		Empleado admin = new Empleado();
 		admin.setPassword("pass");
 		admin.setLogin("admin");
 		admin.setAdmin(true);
 		admin.save();
+		
 		Pelicula peli = new Pelicula();
-		peli.setTitulo("Pelicula 1");
+		peli.setTitulo("Oblivion");
 		peli.setAnio(2013);
 		peli.setGenero("Accion");
+		peli.setEnCartelera(true);
+		peli.setImagenCartelera("http://www.cinesa.es/Manager/peliculas/oblivion/cartelera.jpg");
+		peli.setSinopsis("En un planeta Tierra espectacular que ha evolucionado hasta ser irreconocible, un hombre se enfrenta al pasado y toma el camino de la redención mientras lucha para salvar a la raza humana");
+		Sala sala = new Sala();
+		sala.setNumButacas(200);
+		sala.setNumero(1);
+		TipoSesion tipo = new TipoSesion();
+		tipo.setNombre("Ordinaria");
+		tipo.setPrecio(8.60);
+		Sesion sesion = new Sesion();
+		sesion.setDia(new Date(2013,04,29));
+		sesion.setInicio(22);
+		sesion.setTipo(tipo);
+		sesion.setPelicula(peli);
+		sesion.setSala(sala);
 		peli.save();
-		Pelicula peli2 = new Pelicula();
-		peli2.setTitulo("Pelicula 2");
-		peli2.setAnio(2013);
-		peli2.setGenero("Accion");
-		peli2.save();
-
+		sala.save();
+		tipo.save();
+		sesion.save();
+		
+		peli = new Pelicula();
+		peli.setTitulo("Los Croods");
+		peli.setAnio(2013);
+		peli.setGenero("Animación");
+		peli.setEnCartelera(true);
+		peli.setImagenCartelera("http://www.cinesa.es/Manager/peliculas/loscroods/cartelera.jpg");
+		peli.setSinopsis("LOS CROODS es una aventura cómica en 3D que sigue los pasos de la primera familia moderna del mundo durante el viaje de su vida.");
+		sala = new Sala();
+		sala.setNumButacas(100);
+		sala.setNumero(2);
+		tipo = new TipoSesion();
+		tipo.setNombre("Matutina");
+		tipo.setPrecio(5.90);
+		sesion = new Sesion();
+		sesion.setDia(new Date(2013,04,29));
+		sesion.setInicio(10);
+		sesion.setTipo(tipo);
+		sesion.setPelicula(peli);
+		sesion.setSala(sala);
+		peli.save();
+		sala.save();
+		tipo.save();
+		sesion.save();
+		
 		return redirect(routes.Clientes.index());
 	}
 	

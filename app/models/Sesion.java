@@ -61,6 +61,17 @@ public class Sesion extends Model {
 			butacas.remove(e.getButaca());
 		return butacas;
 	}
+	
+	public List<Boolean> getButacas() {
+		List<Boolean> butacas = new ArrayList<Boolean>();
+		//Crear todas las butacas como libres
+		for (int i = 0; i < sala.getNumButacas(); i++)
+			butacas.add(true);
+		//Cambiar aquellas que esten ocupadas
+		for (Entrada e: entradas)
+			butacas.set(e.getButaca(), false);
+		return butacas;
+	}
 
 	public Sesion() {
 		super();

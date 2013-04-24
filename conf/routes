@@ -4,12 +4,14 @@
 
 # Home page
 GET     /	                        controllers.Clientes.index()
+GET     /index                      controllers.Clientes.index()
 POST	/login						controllers.Clientes.login()
 GET		/rellenardb					controllers.Clientes.rellenarDb()
 GET		/peliculas/:id 				controllers.Clientes.verPelicula(id: Long)
 GET		/sesiones/:id				controllers.Clientes.verSesion(id: Long)
 GET		/logout						controllers.Clientes.logout()
 POST	/reservar					controllers.Clientes.reservarButaca()
+GET		/tpvVirtual					controllers.Clientes.tpvVirtual()
 
 #Administracion
 
@@ -24,7 +26,6 @@ POST	/admin/login/dologin						controllers.Administracion.doLogin()
 #Taquilla
 
 GET		/taquilla					controllers.Taquilla.index()
-GET		/tpvVirtual					controllers.Clientes.tpvVirtual()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

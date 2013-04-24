@@ -1,10 +1,10 @@
 package controllers;
 
 import java.sql.Date;
+import java.sql.Time;
 
 import models.Cliente;
 import models.Empleado;
-import models.Entrada;
 import models.Pelicula;
 import models.Sala;
 import models.Sesion;
@@ -19,10 +19,10 @@ import views.html.vistaSesion;
 public class Clientes extends Controller {
 
 	private static Form<Cliente> formCliente = Form.form(Cliente.class);
-	private static Form<Entrada> formEntrada = Form.form(Entrada.class);
 
 	public static Result index() {
-		return ok(index.render(Pelicula.findAll(), formCliente));
+		Cliente cliente = Cliente.findByLogin(session().get("cliente"));
+		return ok(index.render(Pelicula.findAll(), formCliente, cliente));
 	}
 
 	public static Result login() {
@@ -36,7 +36,7 @@ public class Clientes extends Controller {
 		if (cliente == null || !password.equals(cliente.getPassword())) {
 			//Solamente mostramos el error en login, asi no se sabe si el error lo dio porque no existe el usuario o porque la contraseña no coincide
 			formularioRecibido.reject("login", "El usuario o contraseña no es correcto");
-			return badRequest(index.render(Pelicula.findAll(), formularioRecibido));
+			return badRequest(index.render(Pelicula.findAll(), formularioRecibido, cliente));
 		} else {
 			session().put("cliente", login);
 			return redirect(routes.Clientes.index());
@@ -55,9 +55,9 @@ public class Clientes extends Controller {
 		
 
 		if (pelicula == null) {
-			return badRequest(index.render(Pelicula.findAll(), formCliente));
+			return badRequest(index.render(Pelicula.findAll(), formCliente, cliente));
 		} else {
-			return ok(vistaPelicula.render(pelicula, cliente,formCliente));
+			return ok(vistaPelicula.render(pelicula, cliente));
 		}
 	}
 	
@@ -70,24 +70,7 @@ public class Clientes extends Controller {
 			return ok(vistaSesion.render(sesion));
 		}
 	}
-	
-	public static Result reservarButaca() {
-		Form<Entrada> formularioRecibido = formEntrada.bindFromRequest();
-		
-		String butaca = formularioRecibido.field("butaca").value();
-		String idSesion = formularioRecibido.field("id_sesion").value();
-		
-		Sesion sesion = Sesion.findById(Long.parseLong(idSesion));
-		Entrada entrada = new Entrada();
-		entrada.setButaca(Integer.parseInt(butaca));
-		entrada.setSesion(sesion);
-		entrada.setCliente(Cliente.findByLogin(session().get("cliente")));
-		entrada.save();
-		
-		return redirect(routes.Clientes.index());
-	}
 
-	@SuppressWarnings("deprecation")
 	public static Result rellenarDb() {
 		
 		// Añadir Clientes
@@ -95,10 +78,6 @@ public class Clientes extends Controller {
 		cliente.setPassword("pass");
 		cliente.setNombre("Pepito");
 		cliente.setLogin("cliente");
-		cliente.save();
-		cliente = new Cliente();
-		cliente.setPassword("pass");
-		cliente.setLogin("null");
 		cliente.save();
 		
 		// Añadir empleados

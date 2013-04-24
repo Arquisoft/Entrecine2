@@ -21,7 +21,7 @@ public class FiltroUsuarioRegistrado extends Action.Simple{
 			cliente = Cliente.findByLogin(login);
 		if(cliente == null)
 			// Si no esta logeado redirijimos al inicio
-			return redirect(routes.Usuarios.index());
+			return redirect(routes.Clientes.index());
 		return delegate.call(ctx);
 	}
 	

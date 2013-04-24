@@ -1,7 +1,33 @@
-@(pelicula: Pelicula)
+@(pelicula: Pelicula, cliente: Cliente)
 
 @main("Vista de peliculas") {
 
 	<h1>@pelicula.getTitulo()</h1>
+	
+	<h2>Año</h2>
+		<p>@pelicula.getAnio()</h2>
+	
+	<h2>Genero</h2>
+		<p>@pelicula.getGenero()</h2>
+		
+	@if(cliente != null) {
+		<h2>Sesiones</h2>
+		<table class="table">
+		<tr>
+			<th>Hora de inicio</th>
+			<th>Dia</th>
+			<th>Sala</th>
+			<th>Tipo de sesión</th>
+		</tr>
+		@for(sesion <- pelicula.getSesiones()) {
+			<tr>
+				<td>sesion.getHora()</td>
+				<td>sesion.getDia()</td>
+				<td>sesion.getSala()</td>
+				<td>sesion.getTipo()</td>
+			</tr>
+		}
+		</table>
+	}
 	
 }

@@ -9,6 +9,7 @@ GET		/rellenardb					controllers.Clientes.rellenarDb()
 GET		/peliculas/:id 				controllers.Clientes.verPelicula(id: Long)
 GET		/sesiones/:id				controllers.Clientes.verSesion(id: Long)
 GET	/logout						controllers.Clientes.logout()
+POST	/reservar					controllers.Clientes.reservarButaca()
 
 #Administracion
 

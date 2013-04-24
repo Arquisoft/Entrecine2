@@ -11,13 +11,14 @@
 <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
 <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
 <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
- <title>Panel de Administracion - Login</title>
+ <title>Panel de Administración - Login</title>
  </head>
  <body>
- <div class="container">
+ <div class="container centerpanel">
+
      @helper.form(action = routes.Administracion.doLogin) {   
         <fieldset>
-            <legend>Login</legend>
+            <legend>Panel de Administración</legend>
             
             @inputText(
                 formEmpleado("login"), 

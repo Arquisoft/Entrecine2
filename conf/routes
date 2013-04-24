@@ -15,6 +15,7 @@ POST	/reservar					controllers.Clientes.reservarButaca()
 
 GET		/admin										controllers.Administracion.index()
 GET		/admin/adminPeliculas						controllers.Administracion.adminPeliculas()
+GET		/admin/adminSesiones						controllers.Administracion.adminSesiones()
 POST	/admin/adminPeliculas/nuevaPelicula			controllers.Administracion.nuevaPelicula()
 POST	/admin/adminPeliculas/:id/borrarPelicula	controllers.Administracion.borrarPelicula(id: Long)
 GET		/admin/login								controllers.Administracion.irALogin()

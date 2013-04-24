@@ -6,6 +6,12 @@ El objetivo de este proyecto es crear e implementar una arquitectura para un sis
 
 El sistema debe gestionar automáticamente tanto la venta de entradas a travñes de Internet como de las que se vendan en las taquillas del propio cine. Adicionalmente la aplicación será utilizada por el administrador para configurar sus parámetros.
 
+## Tecnologías utilizadas
+Para la construcción de este proyecto se han utilizado las siguientes tecnologías:
+- Play! Framework
+- JPA
+- Twitter Bootstrap
+
 ## Autores
 * [Jose Emilio Labra Gayo](mailto:labra@uniovi.es)
 * [Bruno López García](mailto:uo219018@uniovi.es)

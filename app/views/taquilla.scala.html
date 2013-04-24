@@ -1,10 +1,79 @@
-@main("Panel de Empleado") {
-	<h1>Panel de Empleado</h1>
-	
-	
-	
-	</h2>Login</h2>
-	
-	
-	
-}
+@(peliculas: List[Pelicula])
+ @import helper._ 
+ @import helper.twitterBootstrap._
+
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" media="screen"
+	href="@routes.Assets.at("stylesheets/bootstrap.css")">
+<link rel="stylesheet" type="text/css" media="screen"
+	href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+<link rel="stylesheet" type="text/css" media="screen"
+	href="@routes.Assets.at("stylesheets/main.css")">
+<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+<title>Panel de Empleado - Principal</title>
+</head>
+
+<body>
+
+	<div class="navbar">
+		<div class="navbar-inner">
+			<a class="brand" href="#"><img src="@routes.Assets.at("images/favicon.png")">
+				Inicio</a>
+			<ul class="nav">
+				<li class="divider-vertical"><a href="/taquilla">Reservas</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="container">
+		<h1>Panel de Empleado</h1>
+		<h1>Realiza una nueva reserva</h1>
+		<div class="row">
+
+			<div class="span12">
+				<h2>Peliculas</h2>
+
+				<table class="table table-hover">
+					<tr>
+						<th>ID</th>
+						<th>Título</th>
+						<th>Año</th>
+						<th>Género</th>
+						<th></th>
+						<th></th>
+					</tr>
+					@for(pelicula <- peliculas) {
+
+					<tr>
+						<td>@pelicula.getId()</td>
+						<td>@pelicula.getTitulo()</td>
+						<td>@pelicula.getAnio()</td>
+						<td>@pelicula.getGenero()</td>
+						<td>
+							@form(routes.Administracion.editarPelicula(pelicula.getId())) { <input
+							class="btn btn-warning btn-mini" type="submit" value="Editar">
+							}
+						</td>
+						<td>
+							@form(routes.Administracion.borrarPelicula(pelicula.getId())) { <input
+							class="btn btn-danger btn-mini" type="submit" value="Borrar">
+							}
+						</td>
+					</tr>
+					}
+				</table>
+			</div>
+		</div>
+	</div>
+
+
+
+	</h2>
+	Login
+	</h2>
+</body>
+
+</html>
+
+

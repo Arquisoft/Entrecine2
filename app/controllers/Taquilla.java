@@ -1,23 +1,21 @@
 package controllers;
 
 import models.Empleado;
-import models.Sesion;
+import models.Pelicula;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.With;
 import views.html.taquilla;
 import views.html.taquillalogin;
-import controllers.filters.FiltroAdministrador;
 import controllers.filters.FiltroTaquilla;;
 
 public class Taquilla extends Controller {
-	private static Form<Sesion> formSesion = Form.form(Sesion.class);
 	private static Form<Empleado> formEmpleado = Form.form(Empleado.class);
 	
 	@With(FiltroTaquilla.class)
 	public static Result index() {
-		return ok(taquilla.render());
+		return ok(taquilla.render(Pelicula.findAll()));
 	}
 	
 	// LOGIN Y REDIRECCIONES EN SEGUNDO PLANO

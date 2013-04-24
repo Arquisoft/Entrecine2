@@ -12,14 +12,14 @@ import javax.persistence.Id;
 import play.db.ebean.Model;
 
 @Entity
-public class Empleado extends Model{
-	
+public class Empleado extends Model {
+
 	private static final long serialVersionUID = -1974384819366278040L;
 	@Id
 	@GeneratedValue
 	private Long id;
 	private String nombre;
-	@Column(unique=true)
+	@Column(unique = true)
 	private String login;
 	private String password;
 	private Boolean admin;
@@ -31,8 +31,8 @@ public class Empleado extends Model{
 	public static List<Empleado> findAll() {
 		return Factories.business.getEmpleadoService().findAll();
 	}
-	
-	public static Empleado findByLogin(String login){
+
+	public static Empleado findByLogin(String login) {
 		return Factories.business.getEmpleadoService().findByLogin(login);
 	}
 
@@ -55,10 +55,6 @@ public class Empleado extends Model{
 
 	public Long getId() {
 		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public String getNombre() {
@@ -96,8 +92,8 @@ public class Empleado extends Model{
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		int result = super.hashCode();
+		result = prime * result + ((login == null) ? 0 : login.hashCode());
 		return result;
 	}
 
@@ -105,15 +101,15 @@ public class Empleado extends Model{
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		Empleado other = (Empleado) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (login == null) {
+			if (other.login != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!login.equals(other.login))
 			return false;
 		return true;
 	}
@@ -123,7 +119,5 @@ public class Empleado extends Model{
 		return "Empleado [id=" + id + ", nombre=" + nombre + ", login=" + login
 				+ ", password=" + password + ", admin=" + admin + "]";
 	}
-
-	
 
 }

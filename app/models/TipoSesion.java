@@ -75,12 +75,12 @@ public class TipoSesion extends Model {
 
 	public void addSesion(Sesion sesion) {
 		this.sesiones.add(sesion);
-		sesion.setTipo(this);
+		sesion._setTipo(this);
 	}
 
 	public void removeSesion(Sesion sesion) {
 		this.sesiones.remove(sesion);
-		sesion.setTipo(null);
+		sesion._setTipo(null);
 	}
 
 	@Override
@@ -106,6 +106,12 @@ public class TipoSesion extends Model {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "TipoSesion [id=" + id + ", nombre=" + nombre + ", precio="
+				+ precio + "]";
 	}
 
 }

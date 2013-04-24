@@ -21,7 +21,8 @@
             <legend>Login</legend>
             @inputText(
                 formCliente("login"),
-                '_label -> "Login")
+                '_label -> "Login",
+                '_error -> formCliente.globalError)
             @inputPassword(
                 formCliente("password"), 
                 '_label -> "Password")

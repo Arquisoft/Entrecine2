@@ -26,7 +26,9 @@ public class Usuarios extends Controller {
 		Cliente cliente = Cliente.findByLogin(login);
 
 		if (cliente == null || !password.equals(cliente.getPassword())) {
-			return badRequest(index.render(Pelicula.findAll(), formCliente));
+			//Solamente mostramos el error en login, asi no se sabe si el error lo dio porque no existe el usuario o porque la contraseña no coincide
+			formularioRecibido.reject("login", "El usuario o contraseña no es correcto");
+			return badRequest(index.render(Pelicula.findAll(), formularioRecibido));
 		} else {
 			session().put("usuario", login);
 			return redirect(routes.Usuarios.index());

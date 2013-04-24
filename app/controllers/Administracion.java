@@ -35,6 +35,11 @@ public class Administracion extends Controller {
 		return ok(adminPeliculas.render(Pelicula.findAll(), formPelicula));
 	}
 
+	@With(FiltroAdministrador.class)
+	public static Result adminSesiones() {
+		return TODO;
+	}
+	
 	// @Marcos:
 	@With(FiltroAdministrador.class)
 	public static Result nuevaPelicula() {

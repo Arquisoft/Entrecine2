@@ -30,7 +30,7 @@ $('.dropdown-toggle').dropdown();
  <li class="divider-vertical"><a href="/taquilla">Panel de Empleado</a></li>
 </ul>
 <ul class="nav pull-right">
- @if(session.get("cliente").equals("null")) {
+ @if(session.get("cliente") == null) {
  <li class="dropdown">
     <a class="dropdown-toggle"
        data-toggle="dropdown"

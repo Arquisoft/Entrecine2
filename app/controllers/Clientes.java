@@ -5,6 +5,7 @@ import java.sql.Time;
 
 import models.Cliente;
 import models.Empleado;
+import models.Entrada;
 import models.Pelicula;
 import models.Sala;
 import models.Sesion;
@@ -19,6 +20,7 @@ import views.html.vistaSesion;
 public class Clientes extends Controller {
 
 	private static Form<Cliente> formCliente = Form.form(Cliente.class);
+	private static Form<Entrada> formEntrada = Form.form(Entrada.class);
 
 	public static Result index() {
 		Cliente cliente = Cliente.findByLogin(session().get("cliente"));
@@ -69,6 +71,22 @@ public class Clientes extends Controller {
 		} else {
 			return ok(vistaSesion.render(sesion));
 		}
+	}
+	
+	public static Result reservarButaca() {
+		Form<Entrada> formularioRecibido = formEntrada.bindFromRequest();
+		
+		String butaca = formularioRecibido.field("butaca").value();
+		String idSesion = formularioRecibido.field("id_sesion").value();
+		
+		Sesion sesion = Sesion.findById(Long.parseLong(idSesion));
+		Entrada entrada = new Entrada();
+		entrada.setButaca(Integer.parseInt(butaca));
+		entrada.setSesion(sesion);
+		entrada.setCliente(Cliente.findByLogin(session().get("cliente")));
+		entrada.save();
+		
+		return redirect(routes.Clientes.index());
 	}
 
 	public static Result rellenarDb() {

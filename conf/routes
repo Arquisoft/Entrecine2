@@ -8,16 +8,17 @@ POST	/login						controllers.Clientes.login()
 GET		/rellenardb					controllers.Clientes.rellenarDb()
 GET		/peliculas/:id 				controllers.Clientes.verPelicula(id: Long)
 GET		/sesiones/:id				controllers.Clientes.verSesion(id: Long)
-GET	/logout						controllers.Clientes.logout()
+GET		/logout						controllers.Clientes.logout()
 POST	/reservar					controllers.Clientes.reservarButaca()
 
 #Administracion
 
-GET		/admin						controllers.Administracion.index()
-POST	/admin/nuevaPelicula		controllers.Administracion.nuevaPelicula()
-POST	/admin/:id/borrarPelicula	controllers.Administracion.borrarPelicula(id: Long)
-GET		/admin/login				controllers.Administracion.irALogin()
-POST	/admin/login/dologin		controllers.Administracion.doLogin()
+GET		/admin										controllers.Administracion.index()
+GET		/admin/adminPeliculas						controllers.Administracion.adminPeliculas()
+POST	/admin/adminPeliculas/nuevaPelicula			controllers.Administracion.nuevaPelicula()
+POST	/admin/adminPeliculas/:id/borrarPelicula	controllers.Administracion.borrarPelicula(id: Long)
+GET		/admin/login								controllers.Administracion.irALogin()
+POST	/admin/login/dologin						controllers.Administracion.doLogin()
 
 GET		/taquilla					controllers.Taquilla.index()
 

@@ -6,8 +6,8 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.With;
-import views.html.admin;
-import views.html.adminlogin;
+
+import views.html.*;
 import controllers.filters.FiltroAdministrador;
 
 public class Administracion extends Controller {
@@ -20,7 +20,7 @@ public class Administracion extends Controller {
 	// render(List<Pelicula>)
 	@With(FiltroAdministrador.class)
 	public static Result index() {
-		return ok(admin.render(Pelicula.findAll(), formPelicula));
+		return ok(adminPeliculas.render(Pelicula.findAll(), formPelicula));
 	}
 
 	// @Marcos: Acción de borrar presente en la tabla de películas
@@ -29,13 +29,18 @@ public class Administracion extends Controller {
 		Pelicula.findById(id).delete();
 		return redirect(routes.Administracion.index());
 	}
+	
+	@With(FiltroAdministrador.class)
+	public static Result adminPeliculas() {
+		return ok(adminPeliculas.render(Pelicula.findAll(), formPelicula));
+	}
 
 	// @Marcos:
 	@With(FiltroAdministrador.class)
 	public static Result nuevaPelicula() {
 		Form<Pelicula> formularioRecibido = formPelicula.bindFromRequest();
 		if (formularioRecibido.hasErrors()) {
-			return badRequest(admin.render(Pelicula.findAll(),
+			return badRequest(adminPeliculas.render(Pelicula.findAll(),
 					formularioRecibido));
 		} else {
 			formularioRecibido.get().save();

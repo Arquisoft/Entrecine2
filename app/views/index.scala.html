@@ -22,13 +22,21 @@
 
 
     <h2>Películas en cartelera</h2>
-	@for(pelicula <- peliculas) {
-	<ul>
-    	<li>pelicula.getTitulo()</li>
-    	<li>pelicula.getAño()</li>
-    	<li>pelicula.getGenero()</li>
-    </ul>
-	}
+	<table border=1>
+		<tr>
+			<th>Título</th>
+			<th>Año</th>
+			<th>Género</th>
+		</tr>
+		@for(pelicula <- peliculas) {
+	
+			<tr>
+				<td>@pelicula.getTitulo()</td>
+				<td>@pelicula.getAnio()</td>
+				<td>@pelicula.getGenero()</td>
+			</tr>
+		}
+		</table>
 
 
 }

@@ -33,6 +33,7 @@ public class Usuarios extends Controller {
 	}
 
 	public static Result rellenarDb() {
+
 		Cliente cliente = new Cliente();
 		cliente.setPassword("pass");
 		cliente.setLogin("login");
@@ -46,6 +47,12 @@ public class Usuarios extends Controller {
 		admin.setLogin("admin");
 		admin.setAdmin(true);
 		admin.save();
+		Pelicula peli = new Pelicula();
+		peli.setTitulo("Pelicula");
+		peli.setAnio(2013);
+		peli.setGenero("Accion");
+		peli.save();
+
 		return redirect(routes.Usuarios.index());
 	}
 }

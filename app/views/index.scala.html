@@ -10,6 +10,14 @@
 <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
 <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
 <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+<script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")"></script>
+<script type="text/javascript" src="@routes.Assets.at("javascripts/bootstrap.js")"></script>
+ <script>
+
+$('.dropdown-toggle').dropdown();
+
+
+</script>
  <title>Entrecine - Inicio</title>
  </head>
  <body>
@@ -20,15 +28,19 @@
  <ul class="nav">
  <li class="divider-vertical"><a href="/admin">Panel de Administrador</a></li>
  <li class="divider-vertical"><a href="/taquilla">Panel de Empleado</a></li>
- </ul>
- </div>
- 
- </div>
-    <h1>¡Bienvenido a Entrecine!</h1>
-	@if(cliente == null) {
-	    @form(action = routes.Clientes.login()) {
+</ul>
+<ul class="nav pull-right">
+ @if(cliente == null) {
+ <li class="dropdown">
+    <a class="dropdown-toggle"
+       data-toggle="dropdown"
+       href="#">
+        Login
+        <b class="caret"></b>
+      </a>
+    <ul class="dropdown-menu">
+          <li>	    @form(action = routes.Clientes.login()) {
 	        <fieldset>
-	            <legend>Login</legend>
 	            @inputText(
 	                formCliente("login"),
 	                '_label -> "Login",
@@ -42,8 +54,17 @@
 	        <input type="submit" class="btn primary" value="Login">
 	        </div>
 	    }
-    }
+	    </li>
 
+    </ul>
+  </li>
+  }
+</ul>
+ </div> 
+</div>
+
+    <h1>¡Bienvenido a Entrecine!</h1>
+	
 
     <h2>Películas en cartelera</h2>
 	<table border=1 class="table">

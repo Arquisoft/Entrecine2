@@ -66,6 +66,7 @@ public class Administracion extends Controller {
 			return badRequest(adminlogin.render(formEmpleado));
 
 		// Si todo ha sido correcto vamos al index
+		session().put("usuario", login);
 		return redirect(routes.Administracion.index());
 	}
 

@@ -21,12 +21,13 @@
 				<div class="span6">
 					<h2>Peliculas</h2>
 				
-					<table border=1>
+					<table class="table table-hover">
 					<tr>
 						<th>ID</th>
 						<th>Título</th>
 						<th>Año</th>
 						<th>Género</th>
+						<th></th>
 					</tr>
 					@for(pelicula <- peliculas) {
 				
@@ -37,7 +38,7 @@
 							<td>@pelicula.getGenero()</td>
 							<td>
 							@form(routes.Administracion.borrarPelicula(pelicula.getId())) {
-				            	<input class="btn primary" type="submit" value="Borrar">
+				            	<input class="btn btn-danger btn-mini" type="submit" value="Borrar">
 				            }
 				            </td>
 						</tr>
@@ -59,7 +60,7 @@
 				        			'_label -> "Género")
 				        
 				        <div clas="actions">
-				        <input class="btn primary" type="submit" value="Crear">
+				        <input class="btn btn-success" type="submit" value="Crear">
 				        </div>
 				    }
 		    		

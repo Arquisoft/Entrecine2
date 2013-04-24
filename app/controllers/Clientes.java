@@ -56,7 +56,7 @@ public class Clientes extends Controller {
 		if (pelicula == null) {
 			return badRequest(index.render(Pelicula.findAll(), formCliente));
 		} else {
-			return ok(vistaPelicula.render(pelicula, cliente));
+			return ok(vistaPelicula.render(pelicula, cliente,formCliente));
 		}
 	}
 	

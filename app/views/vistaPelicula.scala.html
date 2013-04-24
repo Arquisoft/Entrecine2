@@ -1,4 +1,4 @@
-@(pelicula: Pelicula, cliente: Cliente)
+@(pelicula: Pelicula, cliente: Cliente, formCliente: Form[Cliente])
 
 @import helper._
 
@@ -10,9 +10,62 @@
 <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
 <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
 <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+<script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")"></script>
+<script type="text/javascript" src="@routes.Assets.at("javascripts/bootstrap.js")"></script>
+<script>
+	$('.dropdown-toggle').dropdown();
+</script>
 <title>Entrecine - Película</title>
 </head>
 <body>
+	<div class="container">
+		<div class="navbar">
+	 		<div class="navbar-inner">
+	 			<a class="brand" href="..\"><img src="@routes.Assets.at("images/favicon.png")"> Inicio</a>
+	 			<ul class="nav">
+	 				<li class="divider-vertical"><a href="/admin">Panel de Administrador</a></li>
+					<li class="divider-vertical"><a href="/taquilla">Panel de Empleado</a></li>
+				</ul>
+				<ul class="nav pull-right">
+	 			@if(session.get("cliente").equals("null")) {
+	 				<li class="dropdown">
+	   					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	   						Login
+	        				<b class="caret"></b>
+	      				</a>
+	    				<ul class="dropdown-menu">
+	          				<li>@form(action = routes.Clientes.login()) {
+		        				<fieldset>
+						            @inputText(
+						                formCliente("login"),
+						                '_label -> "Login",
+						                '_error -> formCliente.globalError)
+						            @inputPassword(
+						                formCliente("password"), 
+						                '_label -> "Password")
+						        </fieldset>
+		        				<div class="actions">
+		        					<input type="submit" class="btn primary" value="Login">
+		        				</div>
+		   					}
+		   					</li>
+	    				</ul>
+	  				</li>
+	  			} else {
+	 				<li class="dropdown">
+	    				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+	        				@session.get("cliente")
+	        				<b class="caret"></b>
+	      				</a>
+		    			<ul class="dropdown-menu">
+		          			<li><a href="/logout">Logout</a></li>
+		    			</ul>
+	  				</li>
+	  			}
+				</ul>
+			</div> 
+		</div>
+
 	<div class="container">
 		<h1>¡Bienvenido a Entrecine!</h1>
 		<h2>Detalles de película</h2>
@@ -30,32 +83,31 @@
 				<p>@pelicula.getSinopsis()</h2>
 			</div>
 		</div>
-	@if(cliente != null) {
+		
 		<h2>Sesiones</h2>
 		<table class="table">
-		<tr>
-			<th>Hora de inicio</th>
-			<th>Dia</th>
-			<th>Sala</th>
-			<th>Tipo de sesión</th>
-			<th/>
-		</tr>
-		@for(sesion <- pelicula.getSesiones()) {
 			<tr>
-				<td>@sesion.getInicio()</td>
-				<td>@sesion.getDia()</td>
-				<td>@sesion.getSala().getNumero()</td>
-				<td>@sesion.getTipo().getNombre() - @sesion.getTipo().getPrecio()€</td>
-				<td>
-					@form(routes.Clientes.verSesion(sesion.getId())) {
-						<input class="btn btn-success" type="submit" value="Ver sesión">
-					}
-				</td>
+				<th>Hora de inicio</th>
+				<th>Dia</th>
+				<th>Sala</th>
+				<th>Tipo de sesión</th>
 			</tr>
-		}
+			@for(sesion <- pelicula.getSesiones()) {
+				<tr>
+					<td>@sesion.getInicio()</td>
+					<td>@sesion.getDia()</td>
+					<td>@sesion.getSala().getNumero()</td>
+					<td>@sesion.getTipo().getNombre() - @sesion.getTipo().getPrecio()€</td>
+					@if(cliente != null) {
+						<td>
+							@form(routes.Clientes.verSesion(sesion.getId())) {
+								<input class="btn btn-success" type="submit" value="Ver sesión">
+							}
+						</td>
+					}
+				</tr>
+			}
 		</table>
-	}
-	
 	</div>
 </body>
 </html>

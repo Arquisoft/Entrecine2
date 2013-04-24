@@ -87,12 +87,16 @@
 	
 	<h2>Butacas libres</h2>
 	@for(butaca <- sesion.getButacasLibres) {
+	<div class="floatleft">
 		@butaca
 		@form(routes.Clientes.reservarButaca()) {
 			<input type="hidden" name="butaca" value="@butaca">
 			<input type="hidden" name="id_sesion" value="@sesion.getId()">
-			<input type="submit" value="reservar">
+			<div class="actions">
+			<input type="submit" class="btn primary" value="Reservar">
+			</div>
 		}
+		</div>
 	
 }
 

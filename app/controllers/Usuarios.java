@@ -30,18 +30,20 @@ public class Usuarios extends Controller {
 			formularioRecibido.reject("login", "El usuario o contraseña no es correcto");
 			return badRequest(index.render(Pelicula.findAll(), formularioRecibido));
 		} else {
-			session().put("usuario", login);
+			session().put("cliente", login);
 			return redirect(routes.Usuarios.index());
 		}
 	}
 
 	public static Result verPelicula(Long id) {
 		Pelicula pelicula = Pelicula.findById(id);
+		Cliente cliente = Cliente.findByLogin(session().get("cliente"));
+		
 
 		if (pelicula == null) {
 			return badRequest(index.render(Pelicula.findAll(), formCliente));
 		} else {
-			return ok(vistaPelicula.render(pelicula));
+			return ok(vistaPelicula.render(pelicula, cliente));
 		}
 	}
 

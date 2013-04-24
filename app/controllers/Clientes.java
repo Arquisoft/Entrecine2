@@ -51,14 +51,12 @@ public class Clientes extends Controller {
 	}
 
 	public static Result verPelicula(Long id) {
-		Pelicula pelicula = Pelicula.findById(id);
-		Cliente cliente = Cliente.findByLogin(session().get("cliente"));
-		
+		Pelicula pelicula = Pelicula.findById(id);	
 
 		if (pelicula == null) {
 			return badRequest(index.render(Pelicula.findAll(), formCliente));
 		} else {
-			return ok(vistaPelicula.render(pelicula, cliente, formCliente));
+			return ok(vistaPelicula.render(pelicula, formCliente));
 		}
 	}
 	

@@ -36,7 +36,7 @@ public class Pelicula extends Model {
 	public static List<Pelicula> findAll() {
 		return Factories.business.getPeliculaService().findAll();
 	}
-	
+
 	public static List<Pelicula> findAllEnCartelera() {
 		return Factories.business.getPeliculaService().findAllEnCartelera();
 	}
@@ -146,6 +146,14 @@ public class Pelicula extends Model {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Pelicula [id=" + id + ", titulo=" + titulo + ", anio=" + anio
+				+ ", genero=" + genero + ", imagenCartelera=" + imagenCartelera
+				+ ", sinopsis=" + sinopsis + ", enCartelera=" + enCartelera
+				+ "]";
 	}
 
 }

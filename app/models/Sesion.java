@@ -86,7 +86,7 @@ public class Sesion extends Model {
 			this.pelicula.removeSesion(this);
 		pelicula.addSesion(this);
 	}
-	
+
 	void _setPelicula(Pelicula pelicula) {
 		this.pelicula = pelicula;
 	}
@@ -100,7 +100,7 @@ public class Sesion extends Model {
 			this.sala.removeSesion(this);
 		sala.addSesion(this);
 	}
-	
+
 	void _setSala(Sala sala) {
 		this.sala = sala;
 	}
@@ -114,7 +114,7 @@ public class Sesion extends Model {
 			this.tipo.removeSesion(this);
 		tipo.addSesion(this);
 	}
-	
+
 	void _setTipo(TipoSesion tipo) {
 		this.tipo = tipo;
 	}
@@ -156,6 +156,13 @@ public class Sesion extends Model {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Sesion [id=" + id + ", tipo=" + tipo + ", sala=" + sala
+				+ ", pelicula=" + pelicula + ", inicio=" + inicio + ", dia="
+				+ dia + "]";
 	}
 
 }

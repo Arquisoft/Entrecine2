@@ -108,4 +108,10 @@ public class TipoSesion extends Model {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "TipoSesion [id=" + id + ", nombre=" + nombre + ", precio="
+				+ precio + "]";
+	}
+
 }

@@ -83,7 +83,7 @@ public class Clientes extends Controller {
 		if (sesion == null) {
 			return redirect(routes.Clientes.index());
 		} else {
-			return ok(vistaSesion.render(sesion));
+			return ok(vistaSesion.render(sesion, formCliente));
 		}
 	}
 	

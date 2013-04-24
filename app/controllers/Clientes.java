@@ -72,23 +72,65 @@ public class Clientes extends Controller {
 	}
 
 	public static Result rellenarDb() {
-
+		
+		// Añadir Clientes
 		Cliente cliente = new Cliente();
 		cliente.setPassword("pass");
+		cliente.setNombre("Pepito");
 		cliente.setLogin("cliente");
 		cliente.save();
 		
+		// Añadir empleados
 		Empleado empleado = new Empleado();
 		empleado.setPassword("pass");
 		empleado.setLogin("empleado");
 		empleado.save();
 		
+		// Añadir admin
 		Empleado admin = new Empleado();
 		admin.setPassword("pass");
 		admin.setLogin("admin");
 		admin.setAdmin(true);
 		admin.save();
 		
+		// Añadimos salas
+		Sala sala = new Sala();
+		sala.setNumButacas(200);
+		sala.setNumero(1);
+		sala.save();
+		Sala sala1 = new Sala();
+		sala1.setNumButacas(400);
+		sala1.setNumero(2);
+		sala1.save();
+
+		Sala sala2 = new Sala();
+		sala2.setNumButacas(600);
+		sala2.setNumero(3);
+		sala2.save();
+
+		// Añadimos Tipos
+		TipoSesion tipoOrdinaria = new TipoSesion();
+		tipoOrdinaria.setNombre("Ordinaria");
+		tipoOrdinaria.setPrecio(8.60);
+		tipoOrdinaria.save();
+		
+		TipoSesion tipoMatutina = new TipoSesion();
+		tipoMatutina.setNombre("Matutina");
+		tipoMatutina.setPrecio(7.60);
+		tipoMatutina.save();
+
+		TipoSesion tipoEspectador = new TipoSesion();
+		tipoEspectador.setNombre("Día del Espectador");
+		tipoEspectador.setPrecio(5.60);
+		tipoEspectador.save();
+
+		
+		TipoSesion tipoNoche = new TipoSesion();
+		tipoNoche.setNombre("Noche");
+		tipoNoche.setPrecio(7.80);
+		tipoNoche.save();
+
+		// Añadimos Películas
 		Pelicula peli = new Pelicula();
 		peli.setTitulo("Oblivion");
 		peli.setAnio(2013);
@@ -96,46 +138,88 @@ public class Clientes extends Controller {
 		peli.setEnCartelera(true);
 		peli.setImagenCartelera("http://www.cinesa.es/Manager/peliculas/oblivion/cartelera.jpg");
 		peli.setSinopsis("En un planeta Tierra espectacular que ha evolucionado hasta ser irreconocible, un hombre se enfrenta al pasado y toma el camino de la redención mientras lucha para salvar a la raza humana");
-		Sala sala = new Sala();
-		sala.setNumButacas(200);
-		sala.setNumero(1);
-		TipoSesion tipo = new TipoSesion();
-		tipo.setNombre("Ordinaria");
-		tipo.setPrecio(8.60);
+		peli.save();
+		
+		
+		Pelicula peli1 = new Pelicula();
+		peli1.setTitulo("Los Croods");
+		peli1.setAnio(2013);
+		peli1.setGenero("Animación");
+		peli1.setEnCartelera(true);
+		peli1.setImagenCartelera("http://www.cinesa.es/Manager/peliculas/loscroods/cartelera.jpg");
+		peli1.setSinopsis("LOS CROODS es una aventura cómica en 3D que sigue los pasos de la primera familia moderna del mundo durante el viaje de su vida.");
+		peli1.save();
+
+		Pelicula peli2 = new Pelicula();
+		peli2.setTitulo("Memorias de un Zombie Adolescente");
+		peli2.setAnio(2013);
+		peli2.setGenero("Comedia");
+		peli2.setEnCartelera(true);
+		peli2.setImagenCartelera("http://www.cinesa.es/Manager/peliculas/memoriasdeunzombieadolescente/cartelera.jpg");
+		peli2.setSinopsis("R (Nicholas Hoult) es un zombie que vaga perdido, solo y sin rumbo tras una plaga mundial que ha convertido a casi toda la población en muertos vivientes.");
+		peli2.save();
+
+		Pelicula peli3 = new Pelicula();
+		peli3.setTitulo("On the Road");
+		peli3.setAnio(2013);
+		peli3.setGenero("Drama");
+		peli3.setEnCartelera(true);
+		peli3.setImagenCartelera("http://www.cinesa.es/Manager/peliculas/ontheroadenlacarretera/cartelera.jpg");
+		peli3.setSinopsis("Nada más morir su padre, Sal Paradise, un neoyorkino aspirante a escritor, conoce a Dean Moriarty, un ex-convicto de un encanto arrollador y casado con la súper liberada y seductora Marylou.");
+		peli3.save();
+
+		
+		// Añadimos Sesiones
+		
 		Sesion sesion = new Sesion();
 		sesion.setDia(new Date(2013,04,29));
 		sesion.setInicio(22);
-		sesion.setTipo(tipo);
+		sesion.setTipo(tipoNoche);
 		sesion.setPelicula(peli);
 		sesion.setSala(sala);
-		peli.save();
-		sala.save();
-		tipo.save();
 		sesion.save();
 		
-		peli = new Pelicula();
-		peli.setTitulo("Los Croods");
-		peli.setAnio(2013);
-		peli.setGenero("Animación");
-		peli.setEnCartelera(true);
-		peli.setImagenCartelera("http://www.cinesa.es/Manager/peliculas/loscroods/cartelera.jpg");
-		peli.setSinopsis("LOS CROODS es una aventura cómica en 3D que sigue los pasos de la primera familia moderna del mundo durante el viaje de su vida.");
-		sala = new Sala();
-		sala.setNumButacas(100);
-		sala.setNumero(2);
-		tipo = new TipoSesion();
-		tipo.setNombre("Matutina");
-		tipo.setPrecio(5.90);
-		sesion = new Sesion();
-		sesion.setDia(new Date(2013,04,29));
-		sesion.setInicio(10);
-		sesion.setTipo(tipo);
-		sesion.setPelicula(peli);
-		sesion.setSala(sala);
-		peli.save();
-		sala.save();
-		tipo.save();
-		sesion.save();
+		Sesion sesion2 = new Sesion();
+		sesion2.setDia(new Date(2013,04,29));
+		sesion2.setInicio(22);
+		sesion2.setTipo(tipoNoche);
+		sesion2.setPelicula(peli2);
+		sesion2.setSala(sala2);
+		sesion2.save();
+		
+		Sesion sesion3 = new Sesion();
+		sesion3.setDia(new Date(2013,04,30));
+		sesion3.setInicio(12);
+		sesion3.setTipo(tipoMatutina);
+		sesion3.setPelicula(peli);
+		sesion3.setSala(sala);
+		sesion3.save();
+		
+		Sesion sesion4 = new Sesion();
+		sesion4.setDia(new Date(2013,04,30));
+		sesion4.setInicio(12);
+		sesion4.setTipo(tipoMatutina);
+		sesion4.setPelicula(peli2);
+		sesion4.setSala(sala2);
+		sesion4.save();
+		
+		Sesion sesion5 = new Sesion();
+		sesion5.setDia(new Date(2013,04,30));
+		sesion5.setInicio(12);
+		sesion5.setTipo(tipoMatutina);
+		sesion5.setPelicula(peli3);
+		sesion5.setSala(sala1);
+		sesion5.save();
+		
+		Sesion sesion6 = new Sesion();
+		sesion6.setDia(new Date(2013,04,30));
+		sesion6.setInicio(17);
+		sesion6.setTipo(tipoEspectador);
+		sesion6.setPelicula(peli1);
+		sesion6.setSala(sala);
+		sesion6.save();
+		
+		
 		
 		return redirect(routes.Clientes.index());
 	}

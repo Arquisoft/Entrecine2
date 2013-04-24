@@ -27,6 +27,7 @@ public class Usuarios extends Controller {
 		if (cliente == null || !password.equals(cliente.getPassword())) {
 			return badRequest(index.render(Pelicula.findAll(), formCliente));
 		} else {
+			session().put("usuario", login);
 			return redirect(routes.Usuarios.index());
 		}
 	}

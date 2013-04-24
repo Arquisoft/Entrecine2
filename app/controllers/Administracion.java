@@ -70,7 +70,6 @@ public class Administracion extends Controller {
 		session().put("usuario", login);
 		
 		// Si todo ha sido correcto vamos al index
-		session().put("usuario", login);
 		return redirect(routes.Administracion.index());
 	}
 

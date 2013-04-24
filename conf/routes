@@ -22,6 +22,7 @@ POST	/admin/adminPeliculas/nuevaPelicula			controllers.Administracion.nuevaPelic
 POST	/admin/adminSesiones/nuevaSesion			controllers.Administracion.nuevaSesion()
 POST	/admin/adminPeliculas/:id/borrarPelicula	controllers.Administracion.borrarPelicula(id: Long)
 POST	/admin/adminSesiones/:id/borrarSesion	    controllers.Administracion.borrarSesion(id: Long)
+POST	/admin/adminPeliculas/:id/editarPelicula	controllers.Administracion.editarPelicula(id: Long)
 GET		/admin/login								controllers.Administracion.irALogin()
 POST	/admin/login/dologin						controllers.Administracion.doLogin()
 

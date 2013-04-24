@@ -98,7 +98,7 @@
 					<td>@sesion.getDia()</td>
 					<td>@sesion.getSala().getNumero()</td>
 					<td>@sesion.getTipo().getNombre() - @sesion.getTipo().getPrecio()€</td>
-					@if(session.get("cliente") == null) {
+					@if(session.get("cliente") != null) {
 						<td>
 							@form(routes.Clientes.verSesion(sesion.getId())) {
 								<input class="btn btn-success" type="submit" value="Ver sesión">

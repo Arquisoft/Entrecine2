@@ -1,5 +1,8 @@
 package controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import models.Empleado;
 import models.Pelicula;
 import models.Sesion;
@@ -8,8 +11,8 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.With;
 import views.html.adminPeliculas;
-import views.html.adminlogin;
 import views.html.adminSesiones;
+import views.html.adminlogin;
 import controllers.filters.FiltroAdministrador;
 
 public class Administracion extends Controller {
@@ -17,21 +20,14 @@ public class Administracion extends Controller {
 	private static Form<Pelicula> formPelicula = Form.form(Pelicula.class);
 
 	private static Form<Empleado> formEmpleado = Form.form(Empleado.class);
-	
+
 	private static Form<Sesion> formSesion = Form.form(Sesion.class);
 
-	//	NAVEGACION MENU SUPERIOR
-	
+	// NAVEGACION MENU SUPERIOR
+
 	@With(FiltroAdministrador.class)
 	public static Result index() {
 		return ok(adminPeliculas.render(Pelicula.findAll(), formPelicula));
-	}
-
-	// @Marcos: Acción de borrar presente en la tabla de películas
-	@With(FiltroAdministrador.class)
-	public static Result borrarPelicula(Long id) {
-		Pelicula.findById(id).delete();
-		return redirect(routes.Administracion.adminPeliculas());
 	}
 
 	@With(FiltroAdministrador.class)
@@ -39,21 +35,23 @@ public class Administracion extends Controller {
 		return ok(adminPeliculas.render(Pelicula.findAll(), formPelicula));
 	}
 
-
 	@With(FiltroAdministrador.class)
 	public static Result adminSesiones() {
-		return TODO;
+		List<Pelicula> peliculas = Pelicula.findAllEnCartelera();
+		List<String> titulos = new ArrayList<String>();
+		for (Pelicula peli : peliculas) {
+			titulos.add(peli.getTitulo());
+		}
+		return ok(adminSesiones.render(Sesion.findAll(), titulos, formSesion));
 	}
-	
-	
+
 	// CRUD PELICULAS
 
 	@With(FiltroAdministrador.class)
 	public static Result borrarPelicula(Long id) {
 		Pelicula.findById(id).delete();
-		return redirect(routes.Administracion.index());
+		return redirect(routes.Administracion.adminPeliculas());
 	}
-	
 
 	@With(FiltroAdministrador.class)
 	public static Result nuevaPelicula() {
@@ -68,9 +66,13 @@ public class Administracion extends Controller {
 	}
 
 	@With(FiltroAdministrador.class)
-	public static Result adminSesiones() {
-		return ok(adminSesiones.render(Sesion.findAll(), formSesion));
+	public static Result editarPelicula(Long id) {
+		Pelicula p = Pelicula.findById(id);
+		Form<Pelicula> f = Form.form(Pelicula.class).fill(p);
+		return badRequest(adminPeliculas.render(Pelicula.findAll(), f));
 	}
+
+	// CRUD SESIONES
 
 	@With(FiltroAdministrador.class)
 	public static Result borrarSesion(Long id) {
@@ -80,26 +82,23 @@ public class Administracion extends Controller {
 
 	@With(FiltroAdministrador.class)
 	public static Result nuevaSesion() {
+		List<Pelicula> peliculas = Pelicula.findAllEnCartelera();
+		List<String> titulos = new ArrayList<String>();
+		for (Pelicula peli : peliculas) {
+			titulos.add(peli.getTitulo());
+		}
 		Form<Sesion> formularioRecibido = formSesion.bindFromRequest();
 		if (formularioRecibido.hasErrors()) {
-			return badRequest(adminSesiones.render(Sesion.findAll(),
+			return badRequest(adminSesiones.render(Sesion.findAll(), titulos,
 					formularioRecibido));
 		} else {
 			formularioRecibido.get().save();
 			return redirect(routes.Administracion.index());
 		}
 	}
-	
-	@With(FiltroAdministrador.class)
-	public static Result editarPelicula(Long id) {
-		Pelicula p = Pelicula.findById(id);
-		Form<Pelicula> f = Form.form(Pelicula.class).fill(p);
-		return badRequest(adminPeliculas.render(Pelicula.findAll(), f));
-	}
 
-	
 	// LOGIN Y REDIRECCIONES EN SEGUNDO PLANO
-	
+
 	public static Result irALogin() {
 		return ok(adminlogin.render(formEmpleado));
 	}

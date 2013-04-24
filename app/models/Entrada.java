@@ -4,6 +4,7 @@ import infrastructure.Factories;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,6 +20,8 @@ public class Entrada extends Model {
 	@GeneratedValue
 	private Long id;
 	private Integer butaca;
+	@Column(unique = true)
+	@GeneratedValue
 	private Long codigo;
 	@ManyToOne
 	private Sesion sesion;
@@ -73,15 +76,27 @@ public class Entrada extends Model {
 		return sesion;
 	}
 
-	void setSesion(Sesion sesion) {
+	public void setSesion(Sesion sesion) {
+		if (this.sesion != null)
+			this.sesion.removeEntrada(this);
+		sesion.addEntrada(this);
+	}
+	
+	void _setSesion(Sesion sesion) {
 		this.sesion = sesion;
 	}
 
 	Cliente getCliente() {
 		return cliente;
 	}
+	
+	public void setCliente(Cliente cliente){
+		if (this.cliente != null)
+			this.cliente.removeEntrada(this);
+		cliente.addEntrada(this);
+	}
 
-	void setCliente(Cliente cliente) {
+	void _setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 
@@ -89,7 +104,7 @@ public class Entrada extends Model {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		return result;
 	}
 
@@ -102,12 +117,18 @@ public class Entrada extends Model {
 		if (getClass() != obj.getClass())
 			return false;
 		Entrada other = (Entrada) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (codigo == null) {
+			if (other.codigo != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!codigo.equals(other.codigo))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Entrada [id=" + id + ", butaca=" + butaca + ", codigo="
+				+ codigo + ", sesion=" + sesion + ", cliente=" + cliente + "]";
 	}
 
 }

@@ -4,7 +4,6 @@ import java.util.List;
 
 import models.Pelicula;
 import play.db.ebean.Model.Finder;
-
 import business.services.PeliculaService;
 
 import com.avaje.ebean.Ebean;
@@ -23,6 +22,12 @@ public class PeliculaServiceImpl implements PeliculaService {
 	public List<Pelicula> findAll() {
 		return find.all();
 	}
+	
+	@Override
+	public List<Pelicula> findAllEnCartelera() {
+		List<Pelicula> peliculas = find.where().eq("enCartelera", true).findList();
+		return peliculas;
+	}
 
 	@Override
 	public void update(Pelicula p) {
@@ -38,5 +43,7 @@ public class PeliculaServiceImpl implements PeliculaService {
 	public void delete(Pelicula p) {
 		Ebean.delete(p);
 	}
+
+	
 
 }

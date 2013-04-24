@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -21,6 +22,8 @@ public class Sala extends Model {
 	@GeneratedValue
 	private Long id;
 	private Integer numButacas;
+	@Column(unique=true)
+	private Integer numero;
 	@OneToMany(mappedBy = "sala")
 	private List<Sesion> sesiones = new ArrayList<Sesion>();
 
@@ -61,17 +64,26 @@ public class Sala extends Model {
 	}
 
 	public void addSesion(Sesion sesion) {
-		sesion.setSala(this);
+		sesion._setSala(this);
 		sesiones.add(sesion);
 	}
 
 	public void removeSesion(Sesion sesion) {
-		sesion.setSala(null);
+		sesion._setSala(null);
 		sesiones.remove(sesion);
 	}
 
 	public List<Sesion> getSesiones() {
 		return Collections.unmodifiableList(sesiones);
+	}
+	
+
+	public Integer getNumero() {
+		return numero;
+	}
+
+	public void setNumero(Integer numero) {
+		this.numero = numero;
 	}
 
 	@Override

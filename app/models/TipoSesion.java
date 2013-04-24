@@ -75,12 +75,12 @@ public class TipoSesion extends Model {
 
 	public void addSesion(Sesion sesion) {
 		this.sesiones.add(sesion);
-		sesion.setTipo(this);
+		sesion._setTipo(this);
 	}
 
 	public void removeSesion(Sesion sesion) {
 		this.sesiones.remove(sesion);
-		sesion.setTipo(null);
+		sesion._setTipo(null);
 	}
 
 	@Override

@@ -81,15 +81,27 @@ public class Sesion extends Model {
 		return pelicula;
 	}
 
-	void setPelicula(Pelicula pelicula) {
+	public void setPelicula(Pelicula pelicula) {
+		if (this.pelicula != null)
+			this.pelicula.removeSesion(this);
+		pelicula.addSesion(this);
+	}
+	
+	void _setPelicula(Pelicula pelicula) {
 		this.pelicula = pelicula;
 	}
 
-	Sala getSala() {
+	public Sala getSala() {
 		return sala;
 	}
 
-	void setSala(Sala sala) {
+	public void setSala(Sala sala) {
+		if (this.sala != null)
+			this.sala.removeSesion(this);
+		sala.addSesion(this);
+	}
+	
+	void _setSala(Sala sala) {
 		this.sala = sala;
 	}
 
@@ -97,17 +109,23 @@ public class Sesion extends Model {
 		return tipo;
 	}
 
-	void setTipo(TipoSesion tipo) {
+	public void setTipo(TipoSesion tipo) {
+		if (this.tipo != null)
+			this.tipo.removeSesion(this);
+		tipo.addSesion(this);
+	}
+	
+	void _setTipo(TipoSesion tipo) {
 		this.tipo = tipo;
 	}
 
 	public void addEntrada(Entrada entrada) {
-		entrada.setSesion(this);
+		entrada._setSesion(this);
 		entradas.add(entrada);
 	}
 
 	public void removeEntrada(Entrada entrada) {
-		entrada.setSesion(null);
+		entrada._setSesion(null);
 		entradas.remove(entrada);
 	}
 

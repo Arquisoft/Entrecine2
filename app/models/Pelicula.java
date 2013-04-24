@@ -25,6 +25,8 @@ public class Pelicula extends Model {
 	private List<Sesion> sesiones = new ArrayList<Sesion>();
 	private Integer anio;
 	private String genero;
+	private String imagenCartelera;
+	private String sinopsis;
 	private Boolean enCartelera;
 
 	public static Pelicula findById(Long id) {
@@ -33,6 +35,10 @@ public class Pelicula extends Model {
 
 	public static List<Pelicula> findAll() {
 		return Factories.business.getPeliculaService().findAll();
+	}
+	
+	public static List<Pelicula> findAllEnCartelera() {
+		return Factories.business.getPeliculaService().findAllEnCartelera();
 	}
 
 	public void update() {
@@ -92,13 +98,29 @@ public class Pelicula extends Model {
 	}
 
 	public void addSesion(Sesion sesion) {
-		sesion.setPelicula(this);
+		sesion._setPelicula(this);
 		sesiones.add(sesion);
 	}
 
 	public void removeSesion(Sesion sesion) {
-		sesion.setPelicula(null);
+		sesion._setPelicula(null);
 		sesiones.remove(sesion);
+	}
+
+	public String getImagenCartelera() {
+		return imagenCartelera;
+	}
+
+	public void setImagenCartelera(String imagenCartelera) {
+		this.imagenCartelera = imagenCartelera;
+	}
+
+	public String getSinopsis() {
+		return sinopsis;
+	}
+
+	public void setSinopsis(String sinopsis) {
+		this.sinopsis = sinopsis;
 	}
 
 	@Override

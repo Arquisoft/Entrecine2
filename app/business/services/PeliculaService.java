@@ -10,6 +10,8 @@ public interface PeliculaService {
 
 	public List<Pelicula> findAll();
 
+	public List<Pelicula> findAllEnCartelera();
+
 	public void update(Pelicula p);
 
 	public void save(Pelicula p);

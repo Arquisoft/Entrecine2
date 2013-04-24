@@ -1,7 +1,6 @@
 package controllers;
 
 import java.sql.Date;
-import java.sql.Time;
 
 import models.Cliente;
 import models.Empleado;
@@ -76,6 +75,10 @@ public class Clientes extends Controller {
 		Cliente cliente = new Cliente();
 		cliente.setPassword("pass");
 		cliente.setLogin("cliente");
+		cliente.save();
+		cliente = new Cliente();
+		cliente.setPassword("pass");
+		cliente.setLogin("null");
 		cliente.save();
 		
 		Empleado empleado = new Empleado();

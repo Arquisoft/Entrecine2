@@ -3,11 +3,13 @@ package controllers;
 import models.Cliente;
 import models.Empleado;
 import models.Pelicula;
+import models.Sesion;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.index;
 import views.html.vistaPelicula;
+import views.html.vistaSesion;
 
 public class Clientes extends Controller {
 
@@ -47,6 +49,16 @@ public class Clientes extends Controller {
 			return ok(vistaPelicula.render(pelicula, cliente));
 		}
 	}
+	
+	public static Result verSesion(Long id) {
+		Sesion sesion = Sesion.findById(id);
+		
+		if (sesion == null) {
+			return redirect(routes.Clientes.index());
+		} else {
+			return ok(vistaSesion.render(sesion));
+		}
+	}
 
 	public static Result rellenarDb() {
 
@@ -76,4 +88,5 @@ public class Clientes extends Controller {
 
 		return redirect(routes.Clientes.index());
 	}
+	
 }

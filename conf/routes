@@ -7,6 +7,7 @@ GET     /	                        controllers.Clientes.index()
 POST	/login						controllers.Clientes.login()
 GET		/rellenardb					controllers.Clientes.rellenarDb()
 GET		/peliculas/:id 				controllers.Clientes.verPelicula(id: Long)
+GET		/sesiones/:id				controllers.Clientes.verSesion(id: Long)
 
 #Administracion
 

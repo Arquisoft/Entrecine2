@@ -1,5 +1,7 @@
 @(pelicula: Pelicula, cliente: Cliente)
 
+@import helper._
+
 @main("Vista de peliculas") {
 
 	<h1>@pelicula.getTitulo()</h1>
@@ -18,6 +20,7 @@
 			<th>Dia</th>
 			<th>Sala</th>
 			<th>Tipo de sesión</th>
+			<th/>
 		</tr>
 		@for(sesion <- pelicula.getSesiones()) {
 			<tr>
@@ -25,6 +28,11 @@
 				<td>sesion.getDia()</td>
 				<td>sesion.getSala()</td>
 				<td>sesion.getTipo()</td>
+				<td>
+					@form(routes.Clientes.verSesion(sesion.getId())) {
+						<input class="btn btn-success" type="submit" value="Ver sesión">
+					}
+				</td>
 			</tr>
 		}
 		</table>

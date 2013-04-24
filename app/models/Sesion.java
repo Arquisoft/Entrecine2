@@ -52,6 +52,15 @@ public class Sesion extends Model {
 	public void delete() {
 		Factories.business.getSesionService().delete(this);
 	}
+	
+	public List<Integer> getButacasLibres() {
+		List<Integer> butacas = new ArrayList<Integer>();
+		for (int i=1; i<=sala.getNumButacas();i++)
+			butacas.add(i);
+		for (Entrada e: entradas)
+			butacas.remove(e.getButaca());
+		return butacas;
+	}
 
 	public Sesion() {
 		super();

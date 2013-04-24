@@ -21,7 +21,7 @@ public class Clientes extends Controller {
 
 	public static Result index() {
 		Cliente cliente = Cliente.findByLogin(session().get("cliente"));
-		return ok(index.render(Pelicula.findAll(), formCliente, cliente));
+		return ok(index.render(Pelicula.findAll(), formCliente));
 	}
 
 	public static Result login() {
@@ -35,7 +35,7 @@ public class Clientes extends Controller {
 		if (cliente == null || !password.equals(cliente.getPassword())) {
 			//Solamente mostramos el error en login, asi no se sabe si el error lo dio porque no existe el usuario o porque la contraseña no coincide
 			formularioRecibido.reject("login", "El usuario o contraseña no es correcto");
-			return badRequest(index.render(Pelicula.findAll(), formularioRecibido, cliente));
+			return badRequest(index.render(Pelicula.findAll(), formularioRecibido));
 		} else {
 			session().put("cliente", login);
 			return redirect(routes.Clientes.index());
@@ -54,7 +54,7 @@ public class Clientes extends Controller {
 		
 
 		if (pelicula == null) {
-			return badRequest(index.render(Pelicula.findAll(), formCliente, cliente));
+			return badRequest(index.render(Pelicula.findAll(), formCliente));
 		} else {
 			return ok(vistaPelicula.render(pelicula, cliente));
 		}

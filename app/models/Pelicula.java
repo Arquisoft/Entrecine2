@@ -40,6 +40,10 @@ public class Pelicula extends Model {
 	public static List<Pelicula> findAllEnCartelera() {
 		return Factories.business.getPeliculaService().findAllEnCartelera();
 	}
+	
+	public static List<String> findAllTitulos() {
+		return Factories.business.getPeliculaService().findAllTitulos();
+	}
 
 	public void update() {
 		Factories.business.getPeliculaService().update(this);

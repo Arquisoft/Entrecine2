@@ -22,11 +22,18 @@ public class PeliculaServiceImpl implements PeliculaService {
 	public List<Pelicula> findAll() {
 		return find.all();
 	}
-	
+
 	@Override
 	public List<Pelicula> findAllEnCartelera() {
-		List<Pelicula> peliculas = find.where().eq("enCartelera", true).findList();
+		List<Pelicula> peliculas = find.where().eq("enCartelera", true)
+				.findList();
 		return peliculas;
+	}
+
+	@Override
+	public List<String> findAllTitulos() {
+		
+		return null;
 	}
 
 	@Override
@@ -43,7 +50,5 @@ public class PeliculaServiceImpl implements PeliculaService {
 	public void delete(Pelicula p) {
 		Ebean.delete(p);
 	}
-
-	
 
 }

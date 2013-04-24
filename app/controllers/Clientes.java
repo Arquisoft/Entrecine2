@@ -22,7 +22,6 @@ public class Clientes extends Controller {
 	private static Form<Entrada> formEntrada = Form.form(Entrada.class);
 
 	public static Result index() {
-		Cliente cliente = Cliente.findByLogin(session().get("cliente"));
 		return ok(index.render(Pelicula.findAll(), formCliente));
 	}
 
@@ -88,6 +87,7 @@ public class Clientes extends Controller {
 		return redirect(routes.Clientes.index());
 	}
 
+	@SuppressWarnings("deprecation")
 	public static Result rellenarDb() {
 
 		Cliente cliente = new Cliente();

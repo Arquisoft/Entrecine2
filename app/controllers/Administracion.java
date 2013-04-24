@@ -50,10 +50,6 @@ public class Administracion extends Controller {
 	public static Result doLogin() {
 		Form<Empleado> formularioRecibido = formEmpleado.bindFromRequest();
 
-		// En este caso no devolveremos los errores correspondientes a si fallo
-		// el login o el password, si no que devolveremos un error generico para
-		// que un posible atacante malicioso no sepa si lo que ha fallado ha
-		// sido la contraseña o el usuario
 		String login = formularioRecibido.field("login").value();
 		String pass = formularioRecibido.field("password").value();
 
@@ -61,10 +57,11 @@ public class Administracion extends Controller {
 		
 
 		if (empleado == null || !empleado.getAdmin()
-				|| !empleado.getPassword().equals(pass))
-			// No devolvemos el mismo formulario ya que no queremos devolver la
-			// contraseña otra vez
-			return badRequest(adminlogin.render(formEmpleado));
+				|| !empleado.getPassword().equals(pass)){
+			//Solamente mostramos el error en login, asi no se sabe si el error lo dio porque no existe el usuario o porque la contraseña no coincide
+			formularioRecibido.reject("login", "El usuario o contraseña no es correcto");
+			return badRequest(adminlogin.render(formularioRecibido));
+		}
 		
 		// Lo metemos en sesion
 		session().put("usuario", login);

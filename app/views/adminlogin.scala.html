@@ -22,14 +22,13 @@
             @inputText(
                 formEmpleado("login"), 
                 '_label -> "Login", 
-                '_help -> "Introduce tu nombre de usuario"
+                '_error -> formEmpleado.globalError
                 )
             
             
             @inputPassword(
                 formEmpleado("password"), 
-                '_label -> "Password",
-                '_help -> "Introduce tu password."
+                '_label -> "Password"
             )
 
             

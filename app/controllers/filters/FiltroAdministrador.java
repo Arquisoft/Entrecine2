@@ -14,7 +14,7 @@ public class FiltroAdministrador extends Action.Simple {
 
   public Result call(Context ctx) throws Throwable {
 		// El usuario en sesion es el login del usuario
-		String login = ctx.session().get("usuario");
+		String login = ctx.session().get("empleado");
 		Empleado empleado = null;
 		
 		if(login != null)

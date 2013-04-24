@@ -3,10 +3,10 @@
 # ~~~~
 
 # Home page
-GET     /	                        controllers.Usuarios.index()
-POST	/login						controllers.Usuarios.login()
-GET		/rellenardb					controllers.Usuarios.rellenarDb()
-GET		/peliculas/:id 				controllers.Usuarios.verPelicula(id: Long)
+GET     /	                        controllers.Clientes.index()
+POST	/login						controllers.Clientes.login()
+GET		/rellenardb					controllers.Clientes.rellenarDb()
+GET		/peliculas/:id 				controllers.Clientes.verPelicula(id: Long)
 
 #Administracion
 

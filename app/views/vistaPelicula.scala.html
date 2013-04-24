@@ -1,4 +1,4 @@
-@(pelicula: Pelicula, cliente: Cliente, formCliente: Form[Cliente])
+@(pelicula: Pelicula, formCliente: Form[Cliente])
 
 @import helper._
 
@@ -27,7 +27,7 @@
 					<li class="divider-vertical"><a href="/taquilla">Panel de Empleado</a></li>
 				</ul>
 				<ul class="nav pull-right">
-	 			@if(session.get("cliente").equals("null")) {
+	 			@if(session.get("cliente") == null) {
 	 				<li class="dropdown">
 	   					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 	   						Login
@@ -98,7 +98,7 @@
 					<td>@sesion.getDia()</td>
 					<td>@sesion.getSala().getNumero()</td>
 					<td>@sesion.getTipo().getNombre() - @sesion.getTipo().getPrecio()€</td>
-					@if(cliente != null) {
+					@if(session.get("cliente") == null) {
 						<td>
 							@form(routes.Clientes.verSesion(sesion.getId())) {
 								<input class="btn btn-success" type="submit" value="Ver sesión">

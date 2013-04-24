@@ -1,4 +1,4 @@
-@(peliculas: List[Pelicula], formCliente: Form[Cliente])
+@(peliculas: List[Pelicula], formCliente: Form[Cliente], cliente: Cliente)
 
 @import helper._
 
@@ -25,22 +25,23 @@
  
  </div>
     <h1>¡Bienvenido a Entrecine!</h1>
-
-    @form(action = routes.Usuarios.login()) {
-        <fieldset>
-            <legend>Login</legend>
-            @inputText(
-                formCliente("login"),
-                '_label -> "Login",
-                '_error -> formCliente.globalError)
-            @inputPassword(
-                formCliente("password"), 
-                '_label -> "Password")
-        </fieldset>
-        
-        <div class="actions">
-        <input type="submit" class="btn primary" value="Login">
-        </div>
+	@if(cliente == null) {
+	    @form(action = routes.Usuarios.login()) {
+	        <fieldset>
+	            <legend>Login</legend>
+	            @inputText(
+	                formCliente("login"),
+	                '_label -> "Login",
+	                '_error -> formCliente.globalError)
+	            @inputPassword(
+	                formCliente("password"), 
+	                '_label -> "Password")
+	        </fieldset>
+	        
+	        <div class="actions">
+	        <input type="submit" class="btn primary" value="Login">
+	        </div>
+	    }
     }
 
 

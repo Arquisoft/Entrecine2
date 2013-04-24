@@ -15,7 +15,7 @@ public class FiltroUsuarioRegistrado extends Action.Simple{
 	@Override
 	public Result call(Context ctx) throws Throwable {
 		// El usuario en sesion es el login del usuario
-		String login = ctx.session().get("usuario");
+		String login = ctx.session().get("cliente");
 		Cliente cliente = null;
 		if(login != null)
 			cliente = Cliente.findByLogin(login);

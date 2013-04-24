@@ -58,13 +58,17 @@ public class Administracion extends Controller {
 		String pass = formularioRecibido.field("password").value();
 
 		Empleado empleado = Empleado.findByLogin(login);
+		
 
 		if (empleado == null || !empleado.getAdmin()
 				|| !empleado.getPassword().equals(pass))
 			// No devolvemos el mismo formulario ya que no queremos devolver la
 			// contraseña otra vez
 			return badRequest(adminlogin.render(formEmpleado));
-
+		
+		// Lo metemos en sesion
+		session().put("usuario", login);
+		
 		// Si todo ha sido correcto vamos al index
 		session().put("usuario", login);
 		return redirect(routes.Administracion.index());

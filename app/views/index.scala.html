@@ -31,7 +31,7 @@
 		@for(pelicula <- peliculas) {
 	
 			<tr>
-				<td>@pelicula.getTitulo()</td>
+				<td><a href="/peliculas/@pelicula.getId()">@pelicula.getTitulo()</a></td>
 				<td>@pelicula.getAnio()</td>
 				<td>@pelicula.getGenero()</td>
 			</tr>

@@ -6,6 +6,7 @@
 GET     /	                        controllers.Usuarios.index()
 POST	/login						controllers.Usuarios.login()
 GET		/rellenardb					controllers.Usuarios.rellenarDb()
+GET		/peliculas/:id 				controllers.Usuarios.verPelicula(id: Long)
 
 #Administracion
 

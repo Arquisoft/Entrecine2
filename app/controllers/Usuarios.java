@@ -7,6 +7,7 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.index;
+import views.html.vistaPelicula;
 
 public class Usuarios extends Controller {
 
@@ -32,6 +33,16 @@ public class Usuarios extends Controller {
 		}
 	}
 
+	public static Result verPelicula(Long id) {
+		Pelicula pelicula = Pelicula.findById(id);
+
+		if (pelicula == null) {
+			return badRequest(index.render(Pelicula.findAll(), formCliente));
+		} else {
+			return ok(vistaPelicula.render(pelicula));
+		}
+	}
+
 	public static Result rellenarDb() {
 
 		Cliente cliente = new Cliente();
@@ -41,17 +52,22 @@ public class Usuarios extends Controller {
 		Empleado empleado = new Empleado();
 		empleado.setPassword("pass");
 		empleado.setLogin("empleado");
+		empleado.setAdmin(false);
 		empleado.save();
 		Empleado admin = new Empleado();
 		admin.setPassword("pass");
 		admin.setLogin("admin");
-		admin.setAdmin(true);
 		admin.save();
 		Pelicula peli = new Pelicula();
-		peli.setTitulo("Pelicula");
+		peli.setTitulo("Pelicula 1");
 		peli.setAnio(2013);
 		peli.setGenero("Accion");
 		peli.save();
+		Pelicula peli2 = new Pelicula();
+		peli2.setTitulo("Pelicula 2");
+		peli2.setAnio(2013);
+		peli2.setGenero("Accion");
+		peli2.save();
 
 		return redirect(routes.Usuarios.index());
 	}

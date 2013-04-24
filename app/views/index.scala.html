@@ -2,7 +2,18 @@
 
 @import helper._
 
-@main("¡Bienvenido a Entrecine!") {
+<!DOCTYPE html>
+
+<html>
+<head>
+<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")">
+<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+ <title>Entrecine - Inicio</title>
+ </head>
+ <body>
+ <div class="container">
     <h1>¡Bienvenido a Entrecine!</h1>
 
     @form(action = routes.Usuarios.login()) {
@@ -10,14 +21,15 @@
             <legend>Login</legend>
             @inputText(
                 formCliente("login"),
-                '_label -> "Login",
-                '_help -> "Introduce tu nombre de usuario")
+                '_label -> "Login")
             @inputPassword(
                 formCliente("password"), 
-                '_label -> "Password",
-                '_help -> "Introduce tu password.")
+                '_label -> "Password")
         </fieldset>
-        <input type="submit" value="login"/>
+        
+        <div class="actions">
+        <input type="submit" class="btn primary" value="Login">
+        </div>
     }
 
 
@@ -38,5 +50,7 @@
 		}
 		</table>
 
+</div>
+</body>
+</html>
 
-}

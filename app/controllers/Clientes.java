@@ -45,8 +45,8 @@ public class Clientes extends Controller {
 	}
 	
 	public static Result logout(){
-		//Simplemente ponemos cliente a null(que es lo mismo que que no este metido, y si no estaba metido nos da igual)
-		session().put("cliente", null);
+		// Sacamos a cliente de sesion
+		session().remove("cliente");
 		return redirect(routes.Clientes.index());
 	}
 

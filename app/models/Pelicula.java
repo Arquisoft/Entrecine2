@@ -55,6 +55,7 @@ public class Pelicula extends Model {
 
 	public Pelicula() {
 		super();
+		imagenCartelera = "http://img526.imageshack.us/img526/1449/nodisponible.jpg";
 	}
 
 	public String getTitulo() {

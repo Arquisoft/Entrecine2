@@ -56,8 +56,14 @@
 				        @inputText( peliculaForm("anio"),
 				        			'_label -> "Año")
 				                	
-				        @inputText( peliculaForm("Genero"),
+				        @inputText( peliculaForm("genero"),
 				        			'_label -> "Género")
+				        
+				        @textarea( peliculaForm("sinopsis"),
+				        			'_label -> "Sinopsis")
+				        		
+				        @inputText( peliculaForm("imagenCartelera"),
+				        			'_label -> "Imagen de la cartelera")
 				        
 				        <div clas="actions">
 				        <input class="btn btn-success" type="submit" value="Crear">

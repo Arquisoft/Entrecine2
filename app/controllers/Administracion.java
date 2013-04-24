@@ -16,18 +16,11 @@ public class Administracion extends Controller {
 
 	private static Form<Empleado> formEmpleado = Form.form(Empleado.class);
 
-	// @Marcos: Index muestra una lista con las películas ->
-	// render(List<Pelicula>)
+	//	NAVEGACION MENU SUPERIOR
+	
 	@With(FiltroAdministrador.class)
 	public static Result index() {
 		return ok(adminPeliculas.render(Pelicula.findAll(), formPelicula));
-	}
-
-	// @Marcos: Acción de borrar presente en la tabla de películas
-	@With(FiltroAdministrador.class)
-	public static Result borrarPelicula(Long id) {
-		Pelicula.findById(id).delete();
-		return redirect(routes.Administracion.index());
 	}
 	
 	@With(FiltroAdministrador.class)
@@ -40,7 +33,15 @@ public class Administracion extends Controller {
 		return TODO;
 	}
 	
-	// @Marcos:
+	
+	// CRUD PELICULAS
+
+	@With(FiltroAdministrador.class)
+	public static Result borrarPelicula(Long id) {
+		Pelicula.findById(id).delete();
+		return redirect(routes.Administracion.index());
+	}
+	
 	@With(FiltroAdministrador.class)
 	public static Result nuevaPelicula() {
 		Form<Pelicula> formularioRecibido = formPelicula.bindFromRequest();
@@ -52,7 +53,17 @@ public class Administracion extends Controller {
 			return redirect(routes.Administracion.index());
 		}
 	}
+	
+	@With(FiltroAdministrador.class)
+	public static Result editarPelicula(Long id) {
+		Pelicula p = Pelicula.findById(id);
+		Form<Pelicula> f = Form.form(Pelicula.class).fill(p);
+		return badRequest(adminPeliculas.render(Pelicula.findAll(), f));
+	}
 
+	
+	// LOGIN Y REDIRECCIONES EN SEGUNDO PLANO
+	
 	public static Result irALogin() {
 		return ok(adminlogin.render(formEmpleado));
 	}

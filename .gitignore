@@ -15,4 +15,4 @@ dist
 /RUNNING_PID
 /.settings
 conf/evolutions
-*.db
+/*.db

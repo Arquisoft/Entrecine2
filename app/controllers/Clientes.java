@@ -15,6 +15,7 @@ import play.mvc.Result;
 import views.html.index;
 import views.html.vistaPelicula;
 import views.html.vistaSesion;
+import views.html.tpvVirtual;
 
 public class Clientes extends Controller {
 
@@ -86,6 +87,11 @@ public class Clientes extends Controller {
 		} else {
 			return ok(vistaSesion.render(sesion));
 		}
+	}
+	
+	
+	public static Result tpvVirtual() {
+		return ok(tpvVirtual.render());
 	}
 
 	@SuppressWarnings("deprecation")

@@ -76,7 +76,7 @@ public class Clientes extends Controller {
 	  entrada.setCliente(Cliente.findByLogin(session().get("cliente")));
 	  entrada.save();
 	  
-	  return redirect(routes.Clientes.index());
+	  return redirect(routes.Clientes.tpvVirtual());
 	}
 	
 	public static Result verSesion(Long id) {

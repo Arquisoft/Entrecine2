@@ -1,0 +1,44 @@
+@(formEmpleado: Form[Empleado])
+
+@import helper._
+@import helper.twitterBootstrap._
+
+<!DOCTYPE html>
+
+<html>
+<head>
+<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")">
+<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+ <title>Panel de Empleado - Login</title>
+ </head>
+ <body>
+ <div class="container centerpanel">
+
+     @helper.form(action = routes.Taquilla.doLogin) {   
+        <fieldset>
+            <legend>Panel de Empleado</legend>
+            
+            @inputText(
+                formEmpleado("login"), 
+                '_label -> "Login", 
+                '_error -> formEmpleado.globalError
+                )
+            
+            
+            @inputPassword(
+                formEmpleado("password"), 
+                '_label -> "Password"
+            )
+
+            
+        </fieldset>
+        
+        <div class="actions">
+        <input type="submit" class="btn primary" value="Login">
+        </div>
+       }
+ </div>
+</body>
+ </html>

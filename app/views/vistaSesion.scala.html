@@ -1,9 +1,80 @@
-@(sesion: Sesion)
+@(sesion: Sesion, formCliente: Form[Cliente])
 
 @import helper._
 
-@main("Vista de sesion") {
+<!DOCTYPE html>
 
+<html>
+<head>
+<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")">
+<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+<script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")"></script>
+<script type="text/javascript" src="@routes.Assets.at("javascripts/bootstrap.js")"></script>
+ <script>
+
+ $('.dropdown-toggle').dropdown();
+
+
+ </script>
+  <title>Entrecine - Inicio</title>
+  </head>
+  
+  <body>
+  <div class="container">
+ <div class="navbar">
+ <div class="navbar-inner">
+ <a class="brand" href="#"><img src="@routes.Assets.at("images/favicon.png")"> Inicio</a>
+ <ul class="nav">
+ <li class="divider-vertical"><a href="/admin">Panel de Administrador</a></li>
+ <li class="divider-vertical"><a href="/taquilla">Panel de Empleado</a></li>
+</ul>
+<ul class="nav pull-right">
+ @if(session.get("cliente") == null) {
+ <li class="dropdown">
+    <a class="dropdown-toggle"
+       data-toggle="dropdown"
+       href="#">
+        Login
+        <b class="caret"></b>
+      </a>
+    <ul class="dropdown-menu">
+          <li>	    @form(action = routes.Clientes.login()) {
+	        <fieldset>
+	            @inputText(
+	                formCliente("login"),
+	                '_label -> "Login",
+	                '_error -> formCliente.globalError)
+	            @inputPassword(
+	                formCliente("password"), 
+	                '_label -> "Password")
+	        </fieldset>
+	        
+	        <div class="actions">
+	        <input type="submit" class="btn primary" value="Login">
+	        </div>
+	    }
+	    </li>
+
+    </ul>
+  </li>
+  } else{
+  <li class="dropdown">
+    <a class="dropdown-toggle"
+       data-toggle="dropdown"
+       href="#">
+        @session.get("cliente")
+        <b class="caret"></b>
+      </a>
+    <ul class="dropdown-menu">
+          <li><a href="/logout">Logout</a></li>
+    </ul>
+  </li>
+  }
+</ul>
+ </div> 
+</div>
 	<h1>Sesión @sesion.getId()</h1>
 	
 	<h2>@sesion.getPelicula().getTitulo()</h2>
@@ -22,6 +93,7 @@
 			<input type="hidden" name="id_sesion" value="@sesion.getId()">
 			<input type="submit" value="reservar">
 		}
-	}
 	
 }
+
+</body>

@@ -64,7 +64,7 @@ public class Administracion extends Controller {
 		}
 		
 		// Lo metemos en sesion
-		session().put("usuario", login);
+		session().put("empleado", login);
 		
 		// Si todo ha sido correcto vamos al index
 		return redirect(routes.Administracion.index());

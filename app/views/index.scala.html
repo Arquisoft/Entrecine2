@@ -81,6 +81,7 @@ $('.dropdown-toggle').dropdown();
     <h2>Películas en cartelera</h2>
 	<table border=1 class="table">
 		<tr>
+			<th>Imágen</th>
 			<th>Título</th>
 			<th>Año</th>
 			<th>Género</th>
@@ -88,6 +89,7 @@ $('.dropdown-toggle').dropdown();
 		@for(pelicula <- peliculas) {
 	
 			<tr>
+				<td><img src="@pelicula.getImagenCartelera()" width="100" height="140"/></td>
 				<td><a href="/peliculas/@pelicula.getId()">@pelicula.getTitulo()</a></td>
 				<td>@pelicula.getAnio()</td>
 				<td>@pelicula.getGenero()</td>

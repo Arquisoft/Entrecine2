@@ -52,11 +52,11 @@ public class Usuarios extends Controller {
 		Empleado empleado = new Empleado();
 		empleado.setPassword("pass");
 		empleado.setLogin("empleado");
-		empleado.setAdmin(false);
 		empleado.save();
 		Empleado admin = new Empleado();
 		admin.setPassword("pass");
 		admin.setLogin("admin");
+		admin.setAdmin(true);
 		admin.save();
 		Pelicula peli = new Pelicula();
 		peli.setTitulo("Pelicula 1");

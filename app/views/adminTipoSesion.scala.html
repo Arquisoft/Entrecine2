@@ -68,10 +68,7 @@
 				        			'_label -> "Nombre") 
 				                	
 				        @inputText( tipoSesionForm("precio"),
-				        			'_label -> "Año")
-				                	
-				        @inputText( tipoSesionForm("genero"),
-				        			'_label -> "Precio")
+				        			'_label -> "precio")
 				        			
 				        @helper.input(tipoSesionForm("id")) { (id, name, value, args) =>
 						    <input type="hidden" name="@name" id="@id" @toHtmlArgs(args)>

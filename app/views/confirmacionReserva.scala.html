@@ -65,7 +65,7 @@
 				<table class="table table-hover">
 					<tr>
 						<th>Titulo</th>
-						<th>A–o</th>
+						<th>Aï¿½o</th>
 						<th>Genero</th>
 					</tr>
 
@@ -85,7 +85,7 @@
 						<th>Butaca</th>
 						<th>Dia</th>
 						<th>Hora/th>
-						<th>C—digo</th>
+						<th>Cï¿½digo</th>
 
 					</tr>
 
@@ -109,14 +109,14 @@
 					<div class="span3">
 		
 		<form>
-			<input type="button" onclick="location.href='../tpvVirtual'"
+			<input type="button" class="btn btn-success" onclick="location.href='../tpvVirtual'"
 				value="ContinÃºa con la reserva">
 		</form>
 		</div>
 					<div class="span3">
 
 		@form(routes.Clientes.cancelarReserva()) { <input type="hidden"
-			name="entrada" value="@entrada.getId()" /> <input type="submit"
+			name="entrada" value="@entrada.getId()" /> <input  class="btn btn-danger"  type="submit"
 			value="No, cancela mi reserva" /> }
 			</div>
 			</div>

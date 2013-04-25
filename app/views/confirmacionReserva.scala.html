@@ -1,43 +1,124 @@
-@(entrada: Entrada)
-
-@import helper._
+@(entrada: Entrada, formCliente: Form[Cliente]) @import helper._
 
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Confirmación de reserva.</title>
-	</head>
-	<body>
+<head>
+<link rel="stylesheet" type="text/css" media="screen"
+	href="@routes.Assets.at("stylesheets/bootstrap.css")">
+<link rel="stylesheet" type="text/css" media="screen"
+	href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+<link rel="stylesheet" type="text/css" media="screen"
+	href="@routes.Assets.at("stylesheets/main.css")">
+<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+<script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")"></script>
+<script type="text/javascript" src="@routes.Assets.at("javascripts/bootstrap.js")"></script>
+<script>
+	$('.dropdown-toggle').dropdown();
+</script>
+<title>Entrecine - Confirme su reserva</title>
+</head>
+<body>
+	<div class="container">
+		<div class="navbar">
+			<div class="navbar-inner">
+				<a class="brand" href="#"><img src="@routes.Assets.at("images/favicon.png")">
+					Inicio</a>
+				<ul class="nav">
+					<li class="divider-vertical"><a href="/admin">Panel de
+							Administrador</a></li>
+					<li class="divider-vertical"><a href="/taquilla">Panel de
+							Empleado</a></li>
+				</ul>
+				<ul class="nav pull-right">
+					@if(session.get("cliente") == null) {
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" href="#"> Login <b class="caret"></b>
+					</a>
+						<ul class="dropdown-menu">
+							<li>@form(action = routes.Clientes.login()) {
+								<fieldset>@inputText( formCliente("login"), '_label
+									-> "Login", '_error -> formCliente.globalError) @inputPassword(
+									formCliente("password"), '_label -> "Password")</fieldset>
+
+								<div class="actions">
+									<input type="submit" class="btn primary" value="Login">
+								</div> }
+							</li>
+
+						</ul></li> } else{
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" href="#"> @session.get("cliente") <b
+							class="caret"></b>
+					</a>
+						<ul class="dropdown-menu">
+							<li><a href="/logout">Logout</a></li>
+						</ul></li> }
+				</ul>
+			</div>
+		</div>
 		<h1>Confirme su reserva</h1>
 		<p>Esta es la información de su reserva.</p>
-		
-		<h2>Película</h2>
-		<ul>
-		<li>Título: @entrada.getSesion().getPelicula().getTitulo()</li>
-		<li>Género: @entrada.getSesion().getPelicula().getGenero()</li>
-		<li>Año: @entrada.getSesion().getPelicula().getAnio()</li>
-		</ul>
-		
-		<h2>Entrada</h2>
-		<ul>
-		<li>Sala: @entrada.getSesion().getSala().getNumero()</li>
-		<li>Butaca: @entrada.getButaca()</li>
-		<li>Dia: @entrada.getSesion.getDia()</li>
-		<li>Hora: @entrada.getSesion().getHora()</li>
-		<li>Código: @entrada.getCodigo()</li>
-		</ul>
-		<p>ATENCION: el código de la entrada le será requerido para su cancelación antes de entrar a la sala.</p>
-		
+		<div class="row">
+			<div class="span6">
+
+				<h2>Película</h2>
+				<table class="table table-hover">
+					<tr>
+						<th>Titulo</th>
+						<th>A�o</th>
+						<th>Genero</th>
+					</tr>
+
+					<tr>
+						<td>@entrada.getSesion().getPelicula().getTitulo()</td>
+						<td>@entrada.getSesion().getPelicula().getAnio()</td>
+						<td>@entrada.getSesion().getPelicula().getGenero()</td>
+					</tr>
+				</table>
+			</div>
+			<div class="span8">
+
+				<h2>Entrada</h2>
+				<table class="table table-hover">
+					<tr>
+						<th>Sala</th>
+						<th>Butaca</th>
+						<th>Dia</th>
+						<th>Hora/th>
+						<th>C�digo</th>
+
+					</tr>
+
+					<tr>
+						<td>@entrada.getSesion().getSala().getNumero()</td>
+						<td>@entrada.getButaca()</td>
+						<td>@entrada.getSesion.getDia()</td>
+						<td>@entrada.getSesion().getHora()</td>
+						<td>@entrada.getCodigo()</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<p>ATENCION: el código de la entrada le será requerido para su
+			cancelación antes de entrar a la sala.</p>
+
 		<h2>Confirme su reserva</h2>
-		<p>Si la información de su reserva es correcta será usted enviado a nuestra pasarela de pago virtual.</p>
+		<p>Si la información de su reserva es correcta será usted
+			enviado a nuestra pasarela de pago virtual.</p>
+					<div class="row">
+					<div class="span3">
+		
 		<form>
-			<input type="button" onclick="location.href='../tpvVirtual'" value="Continúa con la reserva">
-		</form> 
-		
-		@form(routes.Clientes.cancelarReserva()) {
-			<input type="hidden" name="entrada" value="@entrada.getId()"/>
-			<input type="submit" value="No, cancela mi reserva"/>
-		}
-		
-	</body>
+			<input type="button" onclick="location.href='../tpvVirtual'"
+				value="Continúa con la reserva">
+		</form>
+		</div>
+					<div class="span3">
+
+		@form(routes.Clientes.cancelarReserva()) { <input type="hidden"
+			name="entrada" value="@entrada.getId()" /> <input type="submit"
+			value="No, cancela mi reserva" /> }
+			</div>
+			</div>
+</body>
 </html>

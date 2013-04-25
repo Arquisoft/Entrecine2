@@ -80,7 +80,7 @@ public class Clientes extends Controller {
 		entrada.setCliente(Cliente.findByLogin(session().get("cliente")));
 		entrada.setCodigo(new Random().nextLong());
 		entrada.save();
-		return ok(confirmacionReserva.render(entrada));
+		return ok(confirmacionReserva.render(entrada, formCliente));
 	}
 
 	public static Result cancelarReserva() {

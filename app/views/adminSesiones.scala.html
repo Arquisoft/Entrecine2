@@ -90,8 +90,8 @@
 						)
 						
 						
-						@helper.input(sesionForm("dia"), args = '_label -> "Día") { (id, name, value, args) =>
-						    <input type="date" name="@name" id="@id">
+						@input(sesionForm("dia"), args = '_label -> "Día") { (id, name, value, args) =>
+						    <input type="date" name="@name" id="@id" @toHtmlArgs(args)>
 						} 
 
 

@@ -40,17 +40,17 @@ public class Pelicula extends Model {
 	public static List<Pelicula> findAllEnCartelera() {
 		return Factories.business.getPeliculaService().findAllEnCartelera();
 	}
-	
-	public static List<String> findAllTitulos() {
-		return Factories.business.getPeliculaService().findAllTitulos();
-	}
 
 	public void update() {
 		Factories.business.getPeliculaService().update(this);
 	}
 
 	public void save() {
-		Factories.business.getPeliculaService().save(this);
+		Pelicula peli = Pelicula.findById(id);
+		if (peli == null)
+			Factories.business.getPeliculaService().save(this);
+		else
+			update();
 	}
 
 	public void delete() {

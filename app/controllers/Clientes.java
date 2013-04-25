@@ -1,6 +1,7 @@
 package controllers;
 
 import java.sql.Date;
+import java.util.Random;
 
 import models.Cliente;
 import models.Empleado;
@@ -12,10 +13,7 @@ import models.TipoSesion;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.index;
-import views.html.vistaPelicula;
-import views.html.vistaSesion;
-import views.html.tpvVirtual;
+import views.html.*;
 
 public class Clientes extends Controller {
 
@@ -72,10 +70,11 @@ public class Clientes extends Controller {
 	  entrada.setButaca(Integer.parseInt(butaca));
 	  entrada.setSesion(sesion);
 	  entrada.setCliente(Cliente.findByLogin(session().get("cliente")));
-	  entrada.save();
+	  entrada.setCodigo(new Random().nextLong());
 	  
-	  return redirect(routes.Clientes.tpvVirtual());
+	  return ok(confirmacionReserva.render(entrada));
 	}
+	
 	
 	public static Result verSesion(Long id) {
 		Sesion sesion = Sesion.findById(id);

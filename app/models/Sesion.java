@@ -3,6 +3,7 @@ package models;
 import infrastructure.Factories;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -33,6 +34,7 @@ public class Sesion extends Model {
 	@OneToMany(mappedBy = "sesion")
 	private List<Entrada> entradas = new ArrayList<Entrada>();
 	private int inicio;
+	private Time hora;
 	private Date dia;
 
 	public static Sesion findById(Long id) {
@@ -139,6 +141,14 @@ public class Sesion extends Model {
 
 	void _setTipo(TipoSesion tipo) {
 		this.tipo = tipo;
+	}
+
+	public Time getHora() {
+		return hora;
+	}
+
+	public void setHora(Time hora) {
+		this.hora = hora;
 	}
 
 	public void addEntrada(Entrada entrada) {

@@ -94,6 +94,9 @@
 						    <input type="date" name="@name" id="@id" @toHtmlArgs(args)>
 						} 
 
+						@input(sesionForm("hora"), args = '_label -> "Día") { (id, name, value, args) =>
+						    <input type="time" name="@name" id="@id" @toHtmlArgs(args)>
+						} 
 
 				        <div clas="actions">
 				        <input class="btn btn-success" type="submit" value="Crear">

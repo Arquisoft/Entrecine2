@@ -106,6 +106,7 @@ public class Clientes extends Controller {
 		Empleado empleado = new Empleado();
 		empleado.setPassword("pass");
 		empleado.setLogin("empleado");
+		empleado.setAdmin(false);
 		empleado.save();
 		
 		// Añadir admin

@@ -72,8 +72,7 @@ public class Taquilla extends Controller {
 
 		Empleado empleado = Empleado.findByLogin(login);
 
-		if (empleado == null || !empleado.getAdmin()
-				|| !empleado.getPassword().equals(pass)) {
+		if (empleado == null ||!empleado.getPassword().equals(pass)) {
 			// Solamente mostramos el error en login, asi no se sabe si el error
 			// lo dio porque no existe el usuario o porque la contraseña no
 			// coincide

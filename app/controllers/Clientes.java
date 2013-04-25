@@ -83,7 +83,7 @@ public class Clientes extends Controller {
 		Entrada entrada = Entrada.findById(Long.parseLong(idEntrada));
 		entrada.delete();
 		
-		return redirect(routes.Clientes.index());
+		return redirect(routes.Clientes.verSesion(entrada.getSesion().getId()));
 	}
 	
 	

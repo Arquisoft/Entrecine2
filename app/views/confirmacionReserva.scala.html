@@ -28,13 +28,15 @@
 		</ul>
 		<p>ATENCION: el código de la entrada le será requerido para su cancelación antes de entrar a la sala.</p>
 		
+		<h2>Confirme su reserva</h2>
+		<p>Si la información de su reserva es correcta será usted enviado a nuestra pasarela de pago virtual.</p>
 		<form>
-			<input type="button" onclick="location.href='../tpvVirtual'" value="reserva">
+			<input type="button" onclick="location.href='../tpvVirtual'" value="Continúa con la reserva">
 		</form> 
 		
 		@form(routes.Clientes.cancelarReserva()) {
 			<input type="hidden" name="entrada" value="@entrada.getId()"/>
-			<input type="submit" value="no Reservar"/>
+			<input type="submit" value="No, cancela mi reserva"/>
 		}
 		
 	</body>

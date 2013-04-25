@@ -101,6 +101,12 @@ public class Clientes extends Controller {
 		cliente.setLogin("cliente");
 		cliente.save();
 		
+		Cliente clienteTaquilla = new Cliente();
+		 clienteTaquilla.setPassword("pass");
+		 clienteTaquilla.setNombre("Taquilla");
+		 clienteTaquilla.setLogin("taquilla");
+		 clienteTaquilla.save();
+		
 		// AÃ±adir empleados
 		Empleado empleado = new Empleado();
 		empleado.setPassword("pass");

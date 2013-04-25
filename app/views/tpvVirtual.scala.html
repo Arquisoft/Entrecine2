@@ -1,15 +1,43 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")">
+<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+<script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")"></script>
+<script type="text/javascript" src="@routes.Assets.at("javascripts/bootstrap.js")"></script>
+<meta http-equiv="refresh" content="5; URL=index">
+<title>Pasarela de pago virtual</title>
+ 
+ <script>
+
+$('.dropdown-toggle').dropdown();
+
+
+</script>
+<script>
+var progress = setInterval(function() {
+    var $bar = $('.bar');
+    
+    if ($bar.width()==400) {
+        clearInterval(progress);
+        $('.progress').removeClass('active');
+    } else {
+        $bar.width($bar.width()+80);
+    }
+    $bar.text($bar.width()/4 + "%");
+}, 800);
+
+</script>
 </head>
-	<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")">
-	<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
-	<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
-	<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-	<meta http-equiv="refresh" content="5; URL=index">
-	<title>Pasarela de pago virtual</title>
+	
 <body>
+
 	<div class="container">
+    <div class="progress progress-striped active">
+        <div class="bar" style="width: 0%;"></div>
+    </div>
+</div>
 	<h1>Pasarela de pago virtual</h1>
 	<p>En estos momentos se está procesando su reserva, posteriormente será redirigido de forma automática</p>
 	<p>Gracias por confiar en Entrecine. Que disfrute la película</p>

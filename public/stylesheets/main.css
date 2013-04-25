@@ -6,6 +6,10 @@
    
 }
 
+.centertexto{
+  text-align: center;
+}
+
 .floatleft{
 	float: left;
 }

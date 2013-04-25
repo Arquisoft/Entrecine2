@@ -74,9 +74,11 @@ $('.dropdown-toggle').dropdown();
 </ul>
  </div> 
 </div>
-
-    <h1>¡Bienvenido a Entrecine!</h1>
-	
+	@if(session().get("cliente") == null) {
+    	<h1>¡Bienvenido a Entrecine!</h1>
+	} else {
+		<h1>¡Bienvenido @session().get("cliente")!</h1>
+	}
 
     <h2>Películas en cartelera</h2>
     <table class="table table-striped">

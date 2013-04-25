@@ -12,8 +12,6 @@ public interface PeliculaService {
 
 	public List<Pelicula> findAllEnCartelera();
 	
-	public List<String> findAllTitulos();
-
 	public void update(Pelicula p);
 
 	public void save(Pelicula p);

@@ -67,12 +67,16 @@
 						<th>Titulo</th>
 						<th>A�o</th>
 						<th>Genero</th>
+						<th>Duracion</th>
+
 					</tr>
 
 					<tr>
 						<td>@entrada.getSesion().getPelicula().getTitulo()</td>
 						<td>@entrada.getSesion().getPelicula().getAnio()</td>
 						<td>@entrada.getSesion().getPelicula().getGenero()</td>
+						<td>@entrada.getSesion().getPelicula().getDuracion()</td>
+
 					</tr>
 				</table>
 			</div>
@@ -105,20 +109,22 @@
 		<h2>Confirme su reserva</h2>
 		<p>Si la información de su reserva es correcta será usted
 			enviado a nuestra pasarela de pago virtual.</p>
-					<div class="row">
-					<div class="span3">
-		
-		<form>
-			<input type="button" class="btn btn-success" onclick="location.href='../tpvVirtual'"
-				value="Continúa con la reserva">
-		</form>
-		</div>
-					<div class="span3">
+		<div class="row">
+			<div class="span3">
 
-		@form(routes.Clientes.cancelarReserva()) { <input type="hidden"
-			name="entrada" value="@entrada.getId()" /> <input  class="btn btn-danger"  type="submit"
-			value="No, cancela mi reserva" /> }
+				<form>
+					<input type="button" class="btn btn-success"
+						onclick="location.href='../tpvVirtual'"
+						value="Continúa con la reserva">
+				</form>
 			</div>
+			<div class="span3">
+
+				@form(routes.Clientes.cancelarReserva()) { <input type="hidden"
+					name="entrada" value="@entrada.getId()" /> <input
+					class="btn btn-danger" type="submit" value="No, cancela mi reserva" />
+				}
 			</div>
+		</div>
 </body>
 </html>

@@ -86,6 +86,8 @@ $('.dropdown-toggle').dropdown();
 			<th>Título</th>
 			<th>Año</th>
 			<th>Género</th>
+			<th>Duracion</th>
+			
 		</tr>
 		@for(pelicula <- sugerencias) {
 	
@@ -97,6 +99,8 @@ $('.dropdown-toggle').dropdown();
 				</td>
 				<td>@pelicula.getAnio()</td>
 				<td>@pelicula.getGenero()</td>
+				<td>@pelicula.getDuracion()</td>
+				
 			</tr>
 		}
 		</table>
@@ -112,6 +116,8 @@ $('.dropdown-toggle').dropdown();
 			<th>Título</th>
 			<th>Año</th>
 			<th>Género</th>
+						<th>Duracion</th>
+			
 		</tr>
 		@for(pelicula <- peliculas) {
 	
@@ -123,6 +129,8 @@ $('.dropdown-toggle').dropdown();
 				</td>
 				<td>@pelicula.getAnio()</td>
 				<td>@pelicula.getGenero()</td>
+				<td>@pelicula.getDuracion()</td>
+				
 			</tr>
 		}
 		</table>

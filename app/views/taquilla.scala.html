@@ -1,6 +1,6 @@
-@(peliculas: List[Pelicula])
- @import helper._ 
- @import helper.twitterBootstrap._
+@(peliculas: List[Pelicula]) 
+@import helper._
+@import helper.twitterBootstrap._
 
 <html>
 
@@ -40,6 +40,8 @@
 						<th>Título</th>
 						<th>Año</th>
 						<th>Género</th>
+						<th>Duracion</th>
+
 						<th></th>
 					</tr>
 					@for(pelicula <- peliculas) {
@@ -49,8 +51,9 @@
 						<td>@pelicula.getTitulo()</td>
 						<td>@pelicula.getAnio()</td>
 						<td>@pelicula.getGenero()</td>
-						<td>
-							@form(routes.Taquilla.verSesiones(pelicula.getId())) { <input
+						<td>@pelicula.getDuracion()</td>
+						
+						<td>@form(routes.Taquilla.verSesiones(pelicula.getId())) { <input
 							class="btn btn-success" type="submit" value="Ver Sesiones">
 							}
 						</td>

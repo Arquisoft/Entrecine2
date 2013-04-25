@@ -5,7 +5,9 @@ import java.util.List;
 
 import models.Empleado;
 import models.Pelicula;
+import models.Sala;
 import models.Sesion;
+import models.TipoSesion;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -37,12 +39,8 @@ public class Administracion extends Controller {
 
 	@With(FiltroAdministrador.class)
 	public static Result adminSesiones() {
-		List<Pelicula> peliculas = Pelicula.findAllEnCartelera();
-		List<String> titulos = new ArrayList<String>();
-		for (Pelicula peli : peliculas) {
-			titulos.add(peli.getTitulo());
-		}
-		return ok(adminSesiones.render(Sesion.findAll(), titulos, formSesion));
+		return ok(adminSesiones.render(Sesion.findAll(), Pelicula.findAll(),
+				TipoSesion.findAll(), Sala.findAll(), formSesion));
 	}
 
 	// CRUD PELICULAS
@@ -82,14 +80,10 @@ public class Administracion extends Controller {
 
 	@With(FiltroAdministrador.class)
 	public static Result nuevaSesion() {
-		List<Pelicula> peliculas = Pelicula.findAllEnCartelera();
-		List<String> titulos = new ArrayList<String>();
-		for (Pelicula peli : peliculas) {
-			titulos.add(peli.getTitulo());
-		}
 		Form<Sesion> formularioRecibido = formSesion.bindFromRequest();
 		if (formularioRecibido.hasErrors()) {
-			return badRequest(adminSesiones.render(Sesion.findAll(), titulos,
+			return badRequest(adminSesiones.render(Sesion.findAll(),
+					Pelicula.findAll(), TipoSesion.findAll(), Sala.findAll(),
 					formularioRecibido));
 		} else {
 			formularioRecibido.get().save();

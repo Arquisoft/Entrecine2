@@ -12,6 +12,9 @@ public class PeliculaServiceImpl implements PeliculaService {
 
 	private Finder<Long, Pelicula> find = new Finder<Long, Pelicula>(
 			Long.class, Pelicula.class);
+	
+	private Finder<Long, String> findString = new Finder<Long, String>(
+			Long.class, String.class);
 
 	@Override
 	public Pelicula findById(Long id) {
@@ -33,6 +36,7 @@ public class PeliculaServiceImpl implements PeliculaService {
 	@Override
 	public List<String> findAllTitulos() {
 		
+		//findString.fe
 		return null;
 	}
 

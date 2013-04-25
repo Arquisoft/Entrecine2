@@ -49,7 +49,7 @@
 							<td>@sesion.getPelicula().getTitulo()</td>
 							<td>@sesion.getSala().getNumero()</td>
 							<td>@sesion.getDia()</td>
-							<td>@sesion.getInicio()</td>
+							<td>@sesion.getHora()</td>
 							<td>@sesion.getTipo().getNombre() - @sesion.getTipo().getPrecio()</td>
 							<td>
 							@form(routes.Administracion.borrarSesion(sesion.getId())) {
@@ -94,7 +94,7 @@
 						    <input type="date" name="@name" id="@id" @toHtmlArgs(args)>
 						} 
 
-						@input(sesionForm("hora"), args = '_label -> "Día") { (id, name, value, args) =>
+						@input(sesionForm("hora"), args = '_label -> "Hora") { (id, name, value, args) =>
 						    <input type="time" name="@name" id="@id" @toHtmlArgs(args)>
 						} 
 

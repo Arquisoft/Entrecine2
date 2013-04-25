@@ -33,7 +33,6 @@ public class Sesion extends Model {
 	private Pelicula pelicula;
 	@OneToMany(mappedBy = "sesion")
 	private List<Entrada> entradas = new ArrayList<Entrada>();
-	private int inicio;
 	private Time hora;
 	private Date dia;
 
@@ -56,37 +55,29 @@ public class Sesion extends Model {
 	public void delete() {
 		Factories.business.getSesionService().delete(this);
 	}
-	
+
 	public List<Integer> getButacasLibres() {
 		List<Integer> butacas = new ArrayList<Integer>();
-		for (int i=1; i<=sala.getNumButacas();i++)
+		for (int i = 1; i <= sala.getNumButacas(); i++)
 			butacas.add(i);
-		for (Entrada e: entradas)
+		for (Entrada e : entradas)
 			butacas.remove(e.getButaca());
 		return butacas;
 	}
-	
+
 	public Map<Integer, Boolean> getButacas() {
 		Map<Integer, Boolean> butacas = new HashMap<Integer, Boolean>();
-		//Crear todas las butacas como libres
+		// Crear todas las butacas como libres
 		for (int i = 0; i < sala.getNumButacas(); i++)
 			butacas.put(i, false);
-		//Cambiar aquellas que esten ocupadas
-		for (Entrada e: entradas)
+		// Cambiar aquellas que esten ocupadas
+		for (Entrada e : entradas)
 			butacas.put(e.getButaca(), true);
 		return butacas;
 	}
 
 	public Sesion() {
 		super();
-	}
-
-	public int getInicio() {
-		return inicio;
-	}
-
-	public void setInicio(int inicio) {
-		this.inicio = inicio;
 	}
 
 	public Date getDia() {
@@ -193,8 +184,8 @@ public class Sesion extends Model {
 	@Override
 	public String toString() {
 		return "Sesion [id=" + id + ", tipo=" + tipo + ", sala=" + sala
-				+ ", pelicula=" + pelicula + ", inicio=" + inicio + ", dia="
-				+ dia + "]";
+				+ ", pelicula=" + pelicula + ", hora=" + hora + ", dia=" + dia
+				+ "]";
 	}
 
 }

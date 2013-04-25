@@ -1,5 +1,6 @@
 package business.services.impl;
 
+import java.sql.Date;
 import java.util.List;
 
 import models.Sesion;
@@ -23,6 +24,11 @@ public class SesionServiceImpl implements SesionService {
 	public List<Sesion> findAll() {
 		return find.all();
 	}
+	
+	@Override
+	public List<Sesion> findByFecha(Date fecha) {
+		return find.where().eq("dia", fecha).findList();
+	}
 
 	@Override
 	public void update(Sesion s) {
@@ -38,5 +44,7 @@ public class SesionServiceImpl implements SesionService {
 	public void delete(Sesion s) {
 		Ebean.delete(s);
 	}
+
+	
 
 }

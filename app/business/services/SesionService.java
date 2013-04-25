@@ -1,5 +1,6 @@
 package business.services;
 
+import java.sql.Date;
 import java.util.List;
 
 import models.Sesion;
@@ -15,4 +16,6 @@ public interface SesionService {
 	public void save(Sesion s);
 
 	public void delete(Sesion s);
+
+	public List<Sesion> findByFecha(Date fecha);
 }

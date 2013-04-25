@@ -1,5 +1,6 @@
 package controllers;
 
+import java.security.InvalidParameterException;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
@@ -113,7 +114,13 @@ public class Administracion extends Controller {
 		if (formularioRecibido.hasErrors()) {
 			return badRequest(adminSesiones.render(Pelicula.findAll()));
 		} else {
-			return ok(adminSesionesDePelicula.render(peli));
+			try {
+				Date fecha = Date.valueOf(formularioRecibido.data().get("fecha"));
+				List<Sesion> sesiones = Sesion.findByFecha(fecha);
+				return ok(adminSesionesDePelicula.render(peli, sesiones));
+			} catch (IllegalArgumentException e) {
+				return badRequest(adminSesiones.render(Pelicula.findAll())); 
+			}
 		}
 	}
 	

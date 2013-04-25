@@ -1,4 +1,4 @@
-@(peli: Pelicula)
+@(peli: Pelicula, sesiones: List[models.Sesion])
 
 @import helper._
 @import helper.twitterBootstrap._
@@ -44,7 +44,7 @@
 					<th></th>
 					<th></th>
 				</tr>
-				@for(sesion <- peli.getSesiones()) {
+				@for(sesion <- sesiones) {
 			
 					<tr>
 						<td>@sesion.getId()</td>

@@ -65,14 +65,14 @@ public class Sesion extends Model {
 		return butacas;
 	}
 
-	public Map<Integer, Boolean> getButacas() {
-		Map<Integer, Boolean> butacas = new HashMap<Integer, Boolean>();
+	public List<Boolean> getButacas() {
+		List<Boolean> butacas = new ArrayList<Boolean>();
 		// Crear todas las butacas como libres
-		for (int i = 1; i <= sala.getNumButacas(); i++)
-			butacas.put(i, false);
+		for (int i = 0; i <= sala.getNumButacas(); i++)
+			butacas.add(false);
 		// Cambiar aquellas que esten ocupadas
 		for (Entrada e : entradas)
-			butacas.put(e.getButaca(), true);
+			butacas.set(e.getButaca(), true);
 		return butacas;
 	}
 

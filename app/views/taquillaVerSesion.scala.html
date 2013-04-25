@@ -40,8 +40,8 @@
 			<li>Capacidad: @sesion.getSala().getNumButacas() butacas</li>
 		</ul>
 
-		<h2>Butacas</h2>
-			@for((butaca, estaReservada) <- sesion.getButacas) {
+<h2>Butacas</h2>
+	@for((estaReservada, butaca) <- sesion.getButacas.zipWithIndex) {
 	<div class="floatleft">
 		<div class="centertexto">
 		Nº: @butaca
@@ -58,9 +58,7 @@
 		}
 		}
 		</div>
-		}
-
-
+}
 
 
 

@@ -1,6 +1,8 @@
 package controllers;
 
+import models.Cliente;
 import models.Empleado;
+import models.Entrada;
 import models.Pelicula;
 import models.Sesion;
 import play.data.Form;
@@ -11,11 +13,11 @@ import views.html.taquilla;
 import views.html.taquillaVerSesiones;
 import views.html.taquillalogin;
 import views.html.taquillaVerSesion;
-import views.html.vistaSesion;
-import controllers.filters.FiltroAdministrador;
+import views.html.reservaRealizadaTaquilla;
 import controllers.filters.FiltroTaquilla;;
 
 public class Taquilla extends Controller {
+	private static Form<Entrada> formEntrada = Form.form(Entrada.class);
 	private static Form<Empleado> formEmpleado = Form.form(Empleado.class);
 	
 	@With(FiltroTaquilla.class)
@@ -35,7 +37,27 @@ public class Taquilla extends Controller {
 		Sesion sesion = Sesion.findById(id);
 			return ok(taquillaVerSesion.render(sesion));
 		}
+	@With(FiltroTaquilla.class)
+	public static Result reservarButacaTaquilla() {
+		  Form<Entrada> formularioRecibido = formEntrada.bindFromRequest();
+		  
+		  String butaca = formularioRecibido.field("butaca").value();
+		  String idSesion = formularioRecibido.field("id_sesion").value();
+		  
+		  Sesion sesion = Sesion.findById(Long.parseLong(idSesion));
+		  Entrada entrada = new Entrada();
+		  entrada.setButaca(Integer.parseInt(butaca));
+		  entrada.setSesion(sesion);
+		  entrada.setCliente(Cliente.findByLogin(session().get("cliente")));
+		  entrada.save();
+		  
+		  return redirect(routes.Taquilla.reservaRealizada());
+		}
 	
+	@With(FiltroTaquilla.class)
+	public static Result reservaRealizada() {
+	 return ok(reservaRealizadaTaquilla.render());
+	}
 	// LOGIN Y REDIRECCIONES EN SEGUNDO PLANO
 
 	public static Result irALogin() {

@@ -33,6 +33,8 @@ GET		/taquilla/login				controllers.Taquilla.irALogin()
 GET		/taquilla/login/dologin		controllers.Taquilla.doLogin()
 POST	/taquilla/verSesiones/:id	controllers.Taquilla.verSesiones(id: Long)
 GET		/taquilla/sesiones/:id		controllers.Taquilla.verSesionTaquilla(id: Long)
+POST	/taquilla/reservar			controllers.Taquilla.reservarButacaTaquilla()
+GET		/taquilla/reservaRealizada	controllers.Taquilla.reservaRealizada()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

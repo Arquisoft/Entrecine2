@@ -140,6 +140,12 @@ public class Clientes extends Controller {
 		clienteTaquilla.setNombre("Taquilla");
 		clienteTaquilla.setLogin("taquilla");
 		clienteTaquilla.save();
+				
+		Cliente oblivion = new Cliente();
+		oblivion.setPassword("pass");
+		oblivion.setNombre("oblivion");
+		oblivion.setLogin("oblivion");
+		oblivion.save();
 
 		// Añadir empleados
 		Empleado empleado = new Empleado();
@@ -160,6 +166,7 @@ public class Clientes extends Controller {
 		sala.setNumButacas(200);
 		sala.setNumero(1);
 		sala.save();
+		
 		Sala sala1 = new Sala();
 		sala1.setNumButacas(400);
 		sala1.setNumero(2);
@@ -277,6 +284,69 @@ public class Clientes extends Controller {
 		sesion6.setPelicula(peli1);
 		sesion6.setSala(sala);
 		sesion6.save();
+		
+		
+		// Añadimos entradas
+		// El cliente Oblivion tiene 3 entradas a la peli Oblivion
+		Entrada entrada1 = new Entrada();
+		entrada1.setSesion(sesion);
+		entrada1.setCliente(oblivion);
+		entrada1.setButaca(1);
+		entrada1.setCodigo(1L);
+		entrada1.save();
+		Entrada entrada2 = new Entrada();
+		entrada2.setSesion(sesion);
+		entrada2.setCliente(oblivion);
+		entrada2.setButaca(2);
+		entrada2.setCodigo(11L);
+		entrada2.save();
+		Entrada entrada3 = new Entrada();
+		entrada3.setSesion(sesion);
+		entrada3.setCliente(oblivion);
+		entrada3.setButaca(3);
+		entrada3.setCodigo(12L);
+		entrada3.save();
+		
+		//El cliente Cliente tiene 2 entradas  Oblivion y 1 a Croods
+		Entrada entrada4 = new Entrada();
+		entrada4.setSesion(sesion);
+		entrada4.setCliente(cliente);
+		entrada4.setButaca(16);
+		entrada4.setCodigo(13L);
+		entrada4.save();
+		Entrada entrada5 = new Entrada();
+		entrada5.setSesion(sesion);
+		entrada5.setCliente(cliente);
+		entrada5.setButaca(21);
+		entrada5.setCodigo(14L);
+		entrada5.save();
+		Entrada entrada6 = new Entrada();
+		entrada6.setSesion(sesion6);
+		entrada6.setCliente(cliente);
+		entrada6.setButaca(21);
+		entrada6.setCodigo(15L);
+		entrada6.save();
+		
+		//El cliente Taquilla tiene 2 entradas a The Croods y una a The Road
+		Entrada entrada7 = new Entrada();
+		entrada4.setSesion(sesion6);
+		entrada4.setCliente(clienteTaquilla);
+		entrada4.setButaca(19);
+		entrada4.setCodigo(16L);
+		entrada4.save();
+		Entrada entrada8 = new Entrada();
+		entrada5.setSesion(sesion6);
+		entrada5.setCliente(clienteTaquilla);
+		entrada5.setButaca(23);
+		entrada5.setCodigo(17L);
+		entrada5.save();
+		Entrada entrada9 = new Entrada();
+		entrada6.setSesion(sesion5);
+		entrada6.setCliente(clienteTaquilla);
+		entrada6.setButaca(21);
+		entrada6.setCodigo(18L);
+		entrada6.save();
+		
 
 		return redirect(routes.Clientes.index());
 	}

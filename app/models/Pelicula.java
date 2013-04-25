@@ -60,6 +60,10 @@ public class Pelicula extends Model {
 	public void delete() {
 		Factories.business.getPeliculaService().delete(this);
 	}
+	
+	public List<Cliente> getEspectadores(){
+		return Factories.business.getPeliculaService().getEspectadores(this);
+	}
 
 	public Pelicula() {
 		super();

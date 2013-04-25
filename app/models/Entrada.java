@@ -86,7 +86,7 @@ public class Entrada extends Model {
 		this.sesion = sesion;
 	}
 
-	Cliente getCliente() {
+	public Cliente getCliente() {
 		return cliente;
 	}
 	

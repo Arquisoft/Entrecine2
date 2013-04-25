@@ -1,4 +1,4 @@
-@(peliculas: List[Pelicula], formCliente: Form[Cliente])
+@(peliculas: List[Pelicula], sugerencias: List[Pelicula], formCliente: Form[Cliente])
 
 @import helper._
 
@@ -78,6 +78,31 @@ $('.dropdown-toggle').dropdown();
     	<h1>¡Bienvenido a Entrecine!</h1>
 	} else {
 		<h1>¡Bienvenido @session().get("cliente")!</h1>
+		<h2>Sugerencias</h2>
+		
+		 <table class="table table-striped">
+		<tr>
+			<th>Imágen</th>
+			<th>Título</th>
+			<th>Año</th>
+			<th>Género</th>
+		</tr>
+		@for(pelicula <- sugerencias) {
+	
+			<tr>
+				<td width="100" height="140"><a href="/peliculas/@pelicula.getId()"><img src="@pelicula.getImagenCartelera()" width="100" height="140"/></a></td>
+				<td>
+					<p><a href="/peliculas/@pelicula.getId()">@pelicula.getTitulo()</a></p>
+					<p>@pelicula.getSinopsis()</p>
+				</td>
+				<td>@pelicula.getAnio()</td>
+				<td>@pelicula.getGenero()</td>
+			</tr>
+		}
+		</table>
+		
+		
+		
 	}
 
     <h2>Películas en cartelera</h2>

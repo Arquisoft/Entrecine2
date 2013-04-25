@@ -28,7 +28,13 @@ public class Clientes extends Controller {
 	private static Form<Entrada> formEntrada = Form.form(Entrada.class);
 
 	public static Result index() {
-		return ok(index.render(Pelicula.findAll(), formCliente));
+		// Si hay un cliente logeado le vamos a mostrar sugerencias
+		if(session().get("cliente") != null){
+			return ok(index.render(Pelicula.findAll(), Cliente.findByLogin(session().get("cliente")).getSugerencias(), formCliente));
+		}else{		
+		//Si no hay cliente logeado no pasamos sugerencias
+		return ok(index.render(Pelicula.findAll(), null, formCliente));
+		}
 	}
 
 	public static Result login() {
@@ -45,7 +51,7 @@ public class Clientes extends Controller {
 			// coincide
 			formularioRecibido.reject("login",
 					"El usuario o contraseÃ±a no es correcto");
-			return badRequest(index.render(Pelicula.findAll(),
+			return badRequest(index.render(Pelicula.findAll(), null,
 					formularioRecibido));
 		} else {
 			session().put("cliente", login);
@@ -64,7 +70,11 @@ public class Clientes extends Controller {
 		Pelicula pelicula = Pelicula.findById(id);
 
 		if (pelicula == null) {
-			return badRequest(index.render(Pelicula.findAll(), formCliente));
+			String cliente = session().get("cliente");
+			if(cliente != null)
+				return badRequest(index.render(Pelicula.findAll(), Cliente.findByLogin(cliente).getSugerencias(), formCliente));
+			else
+				return badRequest(index.render(Pelicula.findAll(), null, formCliente));
 		} else {
 			return ok(vistaPelicula.render(pelicula, formCliente));
 		}

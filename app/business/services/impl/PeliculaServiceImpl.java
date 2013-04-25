@@ -1,8 +1,12 @@
 package business.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import models.Cliente;
+import models.Entrada;
 import models.Pelicula;
+import models.Sesion;
 import play.db.ebean.Model.Finder;
 import business.services.PeliculaService;
 
@@ -43,6 +47,19 @@ public class PeliculaServiceImpl implements PeliculaService {
 	@Override
 	public void delete(Pelicula p) {
 		Ebean.delete(p);
+	}
+
+	@Override
+	public List<Cliente> getEspectadores(Pelicula p) {
+		// Busco todos los clientes que alguna vez vieron esta pelicula
+		List<Cliente> espectadores = new ArrayList<Cliente>();		
+		Ebean.beginTransaction();
+			for(Sesion sesion : p.getSesiones())
+				for(Entrada entrada : sesion.getEntradas())
+					espectadores.add(entrada.getCliente());
+		
+		Ebean.endTransaction();
+		return espectadores;
 	}
 
 }

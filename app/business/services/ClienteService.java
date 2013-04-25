@@ -3,6 +3,7 @@ package business.services;
 import java.util.List;
 
 import models.Cliente;
+import models.Pelicula;
 
 public interface ClienteService {
 
@@ -17,4 +18,6 @@ public interface ClienteService {
 	public void save(Cliente c);
 
 	public void delete(Cliente c);
+	
+	public List<Pelicula> findPeliculasVistas(Cliente c);
 }

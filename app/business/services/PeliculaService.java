@@ -2,6 +2,7 @@ package business.services;
 
 import java.util.List;
 
+import models.Cliente;
 import models.Pelicula;
 
 public interface PeliculaService {
@@ -17,6 +18,8 @@ public interface PeliculaService {
 	public void save(Pelicula p);
 
 	public void delete(Pelicula p);
+	
+	public List<Cliente> getEspectadores(Pelicula p);
 
 
 }

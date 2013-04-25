@@ -71,8 +71,19 @@ public class Clientes extends Controller {
 	  entrada.setSesion(sesion);
 	  entrada.setCliente(Cliente.findByLogin(session().get("cliente")));
 	  entrada.setCodigo(new Random().nextLong());
-	  
+	  entrada.save();
 	  return ok(confirmacionReserva.render(entrada));
+	}
+	
+	public static Result cancelarReserva() {
+		Form<Entrada> formRecibido = formEntrada.bindFromRequest();
+		
+		String idEntrada = formRecibido.field("entrada").value();
+		
+		Entrada entrada = Entrada.findById(Long.parseLong(idEntrada));
+		entrada.delete();
+		
+		return redirect(routes.Clientes.index());
 	}
 	
 	

@@ -2,21 +2,20 @@ package controllers;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
 
 import models.Empleado;
 import models.Pelicula;
 import models.Sala;
 import models.Sesion;
 import models.TipoSesion;
+import play.data.DynamicForm;
 import play.data.Form;
 import play.db.ebean.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.With;
-import views.html.adminPeliculas;
-import views.html.adminSesiones;
-import views.html.adminlogin;
-import views.html.adminTipoSesion;
+import views.html.*;
 import controllers.filters.FiltroAdministrador;
 import controllers.forms.SesionForm;
 
@@ -49,8 +48,7 @@ public class Administracion extends Controller {
 
 	@With(FiltroAdministrador.class)
 	public static Result adminSesiones() {
-		return ok(adminSesiones.render(Sesion.findAll(), Pelicula.findAll(),
-				TipoSesion.findAll(), Sala.findAll(), formSesion));
+		return ok(adminSesiones.render(Pelicula.findAll()));
 	}
 
 	// CRUD PELICULAS
@@ -106,8 +104,19 @@ public class Administracion extends Controller {
 		return badRequest(adminTipoSesion.render(TipoSesion.findAll(), f));
 	}
 
-	// CRUD SESIONES
-
+	// ADMIN SESIONES
+	
+	@With(FiltroAdministrador.class)
+	public static Result getSesionesDePelicula(Long id) { //TODO falta mirar la fecha
+		Pelicula peli = Pelicula.findById(id);
+		DynamicForm formularioRecibido = Form.form().bindFromRequest();
+		if (formularioRecibido.hasErrors()) {
+			return badRequest(adminSesiones.render(Pelicula.findAll()));
+		} else {
+			return ok(adminSesionesDePelicula.render(peli));
+		}
+	}
+	
 	@With(FiltroAdministrador.class)
 	public static Result borrarSesion(Long id) {
 		Sesion.findById(id).delete();
@@ -124,8 +133,7 @@ public class Administracion extends Controller {
 		sesionForm.setDia(s.getDia().toString());
 		sesionForm.setHora(s.getHora().toString());
 		Form<SesionForm> f = Form.form(SesionForm.class).fill(sesionForm);
-		return badRequest(adminSesiones.render(Sesion.findAll(),
-				Pelicula.findAll(), TipoSesion.findAll(), Sala.findAll(), f));
+		return badRequest(adminSesiones.render(Pelicula.findAll()));
 	}
 
 	@Transactional
@@ -133,8 +141,7 @@ public class Administracion extends Controller {
 	public static Result nuevaSesion() {
 		Form<SesionForm> formularioRecibido = formSesion.bindFromRequest();
 		if (formularioRecibido.hasErrors()) {
-			return badRequest(adminSesiones.render(Sesion.findAll(),
-					Pelicula.findAll(), TipoSesion.findAll(), Sala.findAll(), formularioRecibido));
+			return badRequest(adminSesiones.render(Pelicula.findAll()));
 		} else {
 			SesionForm form = formularioRecibido.get();
 			Sesion sesion = new Sesion();

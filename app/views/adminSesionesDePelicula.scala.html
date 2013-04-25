@@ -1,4 +1,4 @@
-@(peliculas: List[Pelicula])
+@(peli: Pelicula)
 
 @import helper._
 @import helper.twitterBootstrap._
@@ -29,35 +29,43 @@
 		 	</div>
 		
 			<h1>Panel de Administración</h1>
-			<h2>Administrar sesiones de películas</h2>	
-	
+			<h2>Administrar sesiones de películas: Ver sesiones</h2>	
+			<h3>Pelicula: @peli.getTitulo()</h3>
+			<h4>Duración: @peli.getDuracion() min. - Año: @peli.getAnio() - Genero: @peli.getGenero()</h4>
+			
 			<table class="table table-striped">
 				<tr>
 					<th>ID</th>
-					<th>Titulo</th>
-					<th>Duración</th>
-					<th>Año</th>
-					<th>Género</th>
+					<th>Sala</th>
+					<th>Día</th>
+					<th>Hora</th>
+					<th>Tipo</th>
+					<th>Precio</th>
+					<th></th>
 					<th></th>
 				</tr>
-				@for(peli <- peliculas) {
+				@for(sesion <- peli.getSesiones()) {
 			
 					<tr>
-						<td>@peli.getId()</td>
-						<td>@peli.getTitulo()</td>
-						<td>@peli.getDuracion() min.</td>
-						<td>@peli.getAnio()</td>
-						<td>@peli.getGenero()</td>
+						<td>@sesion.getId()</td>
+						<td>@sesion.getSala().getNumero()</td>
+						<td>@sesion.getDia()</td>
+						<td>@sesion.getHora()</td>
+						<td>@sesion.getTipo().getNombre()</td>
+						<td>@sesion.getTipo().getPrecio() €</td>
 						<td>
-						@form(routes.Administracion.getSesionesDePelicula(peli.getId())) {
-						    <label for="fecha">Fecha: </label>
-						    <input type="date" name="fecha" id="fecha" error="Fecha no válida">
-			            	<input class="btn btn-success" type="submit" value="Ver sesiones">
+						@form(routes.Administracion.editarSesion(sesion.getId())) {
+			            	<input class="btn btn-warning" type="submit" value="Editar">
+			            }
+			            </td>
+						<td>
+						@form(routes.Administracion.borrarSesion(sesion.getId())) {
+			            	<input class="btn btn-danger" type="submit" value="Borrar">
 			            }
 			            </td>
 					</tr>
 				}
 			</table>
-		</div>
+		</div>	
 	</body>
 </html>

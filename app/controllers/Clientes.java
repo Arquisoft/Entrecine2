@@ -243,7 +243,7 @@ public class Clientes extends Controller {
 		// Añadimos Sesiones
 
 		Sesion sesion = new Sesion();
-		sesion.setDia(new Date(113, 03, 29));
+		sesion.setDia(new Date(113, 04, 29));
 		sesion.setHora(new Time(22, 30, 00));
 		sesion.setTipo(tipoNoche);
 		sesion.setPelicula(peli);
@@ -251,7 +251,7 @@ public class Clientes extends Controller {
 		sesion.save();
 
 		Sesion sesion2 = new Sesion();
-		sesion2.setDia(new Date(113, 03, 29));
+		sesion2.setDia(new Date(113, 03, 22));
 		sesion2.setHora(new Time(22, 50, 00));
 		sesion2.setTipo(tipoNoche);
 		sesion2.setPelicula(peli2);

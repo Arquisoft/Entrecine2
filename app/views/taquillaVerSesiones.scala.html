@@ -37,7 +37,7 @@
 				<th>Sala</th>
 				<th>Tipo de sesión</th>
 			</tr>
-			@for(sesion <- pelicula.getSesiones()) {
+			@for(sesion <- pelicula.getSesionesFuturas()) {
 				<tr>
 					<td>@sesion.getHora()</td>
 					<td>@sesion.getDia()</td>

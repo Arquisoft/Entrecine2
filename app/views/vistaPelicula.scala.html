@@ -94,7 +94,7 @@
 				<th>Sala</th>
 				<th>Tipo de sesi√≥n</th>
 			</tr>
-			@for(sesion <- pelicula.getSesiones()) {
+			@for(sesion <- pelicula.getSesionesFuturas()) {
 				<tr>
 					<td>@sesion.getHora()</td>
 					<td>@sesion.getDia()</td>
@@ -102,15 +102,15 @@
 					<td>@sesion.getTipo().getNombre() - @sesion.getTipo().getPrecio()‚Ç¨</td>
 					@if(session.get("cliente") != null) {
 						<td>
-						@if(sesion.diasRestantesParaLaProyeccion() <= 5) {
+						@if(sesion.diasRestantesParaLaProyeccion() < 5) {
 							@form(routes.Clientes.verSesion(sesion.getId())) {
 								<input class="btn btn-success" type="submit" value="Ver sesi√≥n">
 							}
+							}
 						@if(sesion.diasRestantesParaLaProyeccion() > 5) {
-											<td>Faltan más de 5 días para realizar la reserva.</td> 
+							Faltan mas de 5 dias para la proyeccion.
 						
 						}	
-							}
 						</td>
 					}
 					@if(session.get("cliente") == null) {

@@ -118,6 +118,22 @@ public class Pelicula extends Model {
 	public List<Sesion> getSesiones() {
 		return Collections.unmodifiableList(sesiones);
 	}
+	public List<Sesion> getSesionesFuturas() {
+		java.util.Date today = new java.util.Date();
+		List<Sesion> nuevaLista = sesiones;
+		List<Sesion> listaEliminados = new ArrayList<Sesion>();
+
+		for(Sesion sesion: nuevaLista){
+			if(sesion.getDia().getTime() < today.getTime()){
+				listaEliminados.add(sesion);
+			}
+		}
+		for(Sesion sesion: listaEliminados){
+			nuevaLista.remove(sesion);
+		}
+		return nuevaLista;
+
+	}
 
 	public void addSesion(Sesion sesion) {
 		sesion._setPelicula(this);

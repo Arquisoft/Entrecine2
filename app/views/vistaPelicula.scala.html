@@ -107,6 +107,9 @@
 							}
 						</td>
 					}
+					@if(session.get("cliente") == null) {
+					<td>Tienes que ser un usuario registrado para poder reservar</td> 
+					}
 				</tr>
 			}
 		</table>

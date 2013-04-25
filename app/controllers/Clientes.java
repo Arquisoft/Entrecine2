@@ -14,11 +14,13 @@ import models.TipoSesion;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.With;
 import views.html.confirmacionReserva;
 import views.html.index;
 import views.html.tpvVirtual;
 import views.html.vistaPelicula;
 import views.html.vistaSesion;
+import controllers.filters.*;
 
 public class Clientes extends Controller {
 
@@ -51,6 +53,7 @@ public class Clientes extends Controller {
 		}
 	}
 
+	@With(FiltroCliente.class)
 	public static Result logout() {
 		// Sacamos a cliente de sesion
 		session().remove("cliente");
@@ -67,6 +70,7 @@ public class Clientes extends Controller {
 		}
 	}
 
+	@With(FiltroCliente.class)
 	public static Result reservarButaca() {
 		Form<Entrada> formularioRecibido = formEntrada.bindFromRequest();
 
@@ -83,6 +87,7 @@ public class Clientes extends Controller {
 		return ok(confirmacionReserva.render(entrada, formCliente));
 	}
 
+	@With(FiltroCliente.class)
 	public static Result cancelarReserva() {
 		Form<Entrada> formRecibido = formEntrada.bindFromRequest();
 
@@ -94,6 +99,7 @@ public class Clientes extends Controller {
 		return redirect(routes.Clientes.verSesion(entrada.getSesion().getId()));
 	}
 
+	@With(FiltroCliente.class)
 	public static Result verSesion(Long id) {
 		Sesion sesion = Sesion.findById(id);
 
@@ -104,6 +110,7 @@ public class Clientes extends Controller {
 		}
 	}
 
+	@With(FiltroCliente.class)
 	public static Result tpvVirtual() {
 		return ok(tpvVirtual.render());
 	}

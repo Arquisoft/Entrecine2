@@ -38,6 +38,7 @@
 					<th>Duración</th>
 					<th>Año</th>
 					<th>Género</th>
+					<th>Fecha</th>
 					<th></th>
 				</tr>
 				@for(peli <- peliculas) {
@@ -48,11 +49,9 @@
 						<td>@peli.getDuracion() min.</td>
 						<td>@peli.getAnio()</td>
 						<td>@peli.getGenero()</td>
-						<td>
 						@form(routes.Administracion.getSesionesDePelicula(peli.getId())) {
-						    <label for="fecha">Fecha: </label>
-						    <input type="date" name="fecha" id="fecha" error="Fecha no válida">
-			            	<input class="btn btn-success" type="submit" value="Ver sesiones">
+						    <td><input type="date" name="fecha" id="fecha" error="Fecha no válida"></td>
+			            	<td><input class="btn btn-success" type="submit" value="Ver sesiones"></td>
 			            }
 			            </td>
 					</tr>

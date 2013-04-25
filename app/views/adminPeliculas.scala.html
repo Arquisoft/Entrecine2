@@ -51,16 +51,12 @@
 							<td>@pelicula.getTitulo()</td>
 							<td>@pelicula.getAnio()</td>
 							<td>@pelicula.getGenero()</td>
-							<td>
 							@form(routes.Administracion.editarPelicula(pelicula.getId())) {
-				            	<input class="btn btn-warning btn-mini" type="submit" value="Editar">
+				            	<td><input class="btn btn-warning btn-mini" type="submit" value="Editar"></td>
 				            }
-				            </td>
-							<td>
 							@form(routes.Administracion.borrarPelicula(pelicula.getId())) {
-				            	<input class="btn btn-danger btn-mini" type="submit" value="Borrar">
+				            	<td><input class="btn btn-danger btn-mini" type="submit" value="Borrar"></td>
 				            }
-				            </td>
 						</tr>
 					}
 					</table>

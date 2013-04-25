@@ -53,16 +53,12 @@
 						<td>@sesion.getHora()</td>
 						<td>@sesion.getTipo().getNombre()</td>
 						<td>@sesion.getTipo().getPrecio() €</td>
-						<td>
 						@form(routes.Administracion.editarSesion(sesion.getId())) {
-			            	<input class="btn btn-warning" type="submit" value="Editar">
+			            	<td><input class="btn btn-warning" type="submit" value="Editar"></td>
 			            }
-			            </td>
-						<td>
 						@form(routes.Administracion.borrarSesion(sesion.getId())) {
-			            	<input class="btn btn-danger" type="submit" value="Borrar">
+			            	<td><input class="btn btn-danger" type="submit" value="Borrar"></td>
 			            }
-			            </td>
 					</tr>
 				}
 			</table>

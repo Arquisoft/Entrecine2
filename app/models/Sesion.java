@@ -64,6 +64,8 @@ public class Sesion extends Model {
 			butacas.remove(e.getButaca());
 		return butacas;
 	}
+	
+
 
 	public List<Boolean> getButacas() {
 		List<Boolean> butacas = new ArrayList<Boolean>();

@@ -31,16 +31,19 @@
 		<h1>Selecciona la butaca</h1>
 
 		<h1>Sesión @sesion.getId()</h1>
-
+		<h1>Estado de la sala</h1>
+		
 		<h2>@sesion.getPelicula().getTitulo()</h2>
 
 		<h2>Información de la sala</h2>
+	
 		<ul>
 			<li>Número de sala: @sesion.getSala().getId()</li>
 			<li>Capacidad: @sesion.getSala().getNumButacas() butacas</li>
 		</ul>
 
-<h2>Butacas</h2>
+		
+		<h2>Butacas</h2>
 	@for((estaReservada, butaca) <- sesion.getButacas.zipWithIndex) {
 	<div class="floatleft">
 		<div class="centertexto">
@@ -58,10 +61,7 @@
 		}
 		}
 		</div>
-}
-
-
-
+		}
 </body>
 
 </html>

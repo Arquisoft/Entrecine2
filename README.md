@@ -8,9 +8,9 @@ El sistema debe gestionar automáticamente tanto la venta de entradas a travñes
 
 ## Tecnologías utilizadas
 Para la construcción de este proyecto se han utilizado las siguientes tecnologías:
-- Play! Framework
-- JPA
-- Twitter Bootstrap
+- [Play! Framework](http://www.playframework.com/)
+- [JPA](http://www.oracle.com/technetwork/java/javaee/tech/persistence-jsp-140049.html)
+- [Twitter Bootstrap](http://twitter.github.io/bootstrap/)
 
 ## Autores
 * [Jose Emilio Labra Gayo](mailto:labra@uniovi.es)

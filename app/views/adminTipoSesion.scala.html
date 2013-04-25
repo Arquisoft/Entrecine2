@@ -1,4 +1,5 @@
-@(sesiones: List[models.Sesion], peliculas: List[Pelicula], tipos: List[TipoSesion], salas: List[Sala], sesionForm: Form[models.Sesion])
+@(tiposDeSesion: List[models.TipoSesion], tipoSesionForm: Form[models.TipoSesion])
+
 
 @import helper._
 @import helper.twitterBootstrap._
@@ -25,86 +26,5 @@
 		 </div>
 	 </div>
 	
-		<div class="container">
-			<h1>Panel de Administración</h1>
-			<div class="row">
-			
-				<div class="span7">
-					<h2>Sesiones</h2>	
-				
-					<table class="table table-hover">
-					<tr>
-						<th>ID</th>
-						<th>Película</th>
-						<th>Sala</th>
-						<th>Día</th>
-						<th>Hora</th>
-						<th>Tipo</th>
-						<th></th>
-					</tr>
-					@for(sesion <- sesiones) {
-				
-						<tr>
-							<td>@sesion.getId()</td>
-							<td>@sesion.getPelicula().getTitulo()</td>
-							<td>@sesion.getSala().getNumero()</td>
-							<td>@sesion.getDia()</td>
-							<td>@sesion.getHora()</td>
-							<td>@sesion.getTipo().getNombre() - @sesion.getTipo().getPrecio()</td>
-							<td>
-							@form(routes.Administracion.borrarSesion(sesion.getId())) {
-				            	<input class="btn btn-danger btn-mini" type="submit" value="Borrar">
-				            }
-				            </td>
-						</tr>
-					}
-					</table>
-				</div>
-				
-				<div class="span5">
-					<h2>Crear una sesión</h2>
-					@form(routes.Administracion.nuevaSesion()) {
-				        
-				        @select(
-					        field = sesionForm("pelicula"),
-					        peliculas.map{ p =>
-					            p.getId().toString() -> p.getTitulo()
-					        },
-					        args = '_label -> "Película"
-						)
-						
-						@select(
-					        field = sesionForm("tipoSesion"),
-					        tipos.map{ t =>
-					            t.getId().toString() -> t.getNombre()
-					        },
-					        args = '_label -> "Tipo de sesión"
-						)
-						
-						@select(
-					        field = sesionForm("sala"),
-					        salas.map{ s =>
-					            s.getId().toString() -> s.getNumero().toString()
-					        },
-					        args = '_label -> "Sala"
-						)
-						
-						
-						@input(sesionForm("dia"), args = '_label -> "Día") { (id, name, value, args) =>
-						    <input type="date" name="@name" id="@id" @toHtmlArgs(args)>
-						} 
-
-						@input(sesionForm("hora"), args = '_label -> "Hora") { (id, name, value, args) =>
-						    <input type="time" name="@name" id="@id" @toHtmlArgs(args)>
-						} 
-
-				        <div clas="actions">
-				        <input class="btn btn-success" type="submit" value="Crear">
-				        </div>
-				    }
-		    		
-		   		</div>
-		    </div>
-	    </div>
 	</body>
 </html>

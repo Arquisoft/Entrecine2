@@ -9,9 +9,8 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.With;
-import views.html.adminPeliculas;
-import views.html.adminSesiones;
-import views.html.adminlogin;
+import views.html.*;
+
 import controllers.filters.FiltroAdministrador;
 
 public class Administracion extends Controller {

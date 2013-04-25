@@ -5,7 +5,9 @@ import infrastructure.Factories;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -62,14 +64,14 @@ public class Sesion extends Model {
 		return butacas;
 	}
 	
-	public List<Boolean> getButacas() {
-		List<Boolean> butacas = new ArrayList<Boolean>();
+	public Map<Integer, Boolean> getButacas() {
+		Map<Integer, Boolean> butacas = new HashMap<Integer, Boolean>();
 		//Crear todas las butacas como libres
 		for (int i = 0; i < sala.getNumButacas(); i++)
-			butacas.add(true);
+			butacas.put(i, false);
 		//Cambiar aquellas que esten ocupadas
 		for (Entrada e: entradas)
-			butacas.set(e.getButaca(), false);
+			butacas.put(e.getButaca(), true);
 		return butacas;
 	}
 

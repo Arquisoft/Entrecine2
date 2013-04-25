@@ -72,7 +72,7 @@ public class Entrada extends Model {
 		this.codigo = codigo;
 	}
 
-	Sesion getSesion() {
+	public Sesion getSesion() {
 		return sesion;
 	}
 

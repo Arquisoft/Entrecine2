@@ -1,17 +1,24 @@
 package controllers;
 
+import java.sql.Date;
+import java.sql.Time;
+
 import models.Empleado;
 import models.Pelicula;
 import models.Sala;
 import models.Sesion;
 import models.TipoSesion;
 import play.data.Form;
+import play.db.ebean.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.With;
-import views.html.*;
-
+import views.html.adminPeliculas;
+import views.html.adminSesiones;
+import views.html.adminlogin;
+import views.html.adminTipoSesion;
 import controllers.filters.FiltroAdministrador;
+import controllers.forms.SesionForm;
 
 public class Administracion extends Controller {
 
@@ -21,7 +28,7 @@ public class Administracion extends Controller {
 	
 	private static Form<TipoSesion> formTipoSesion = Form.form(TipoSesion.class);
 
-	private static Form<Sesion> formSesion = Form.form(Sesion.class);
+	private static Form<SesionForm> formSesion = Form.form(SesionForm.class);
 
 	// NAVEGACION MENU SUPERIOR
 
@@ -62,7 +69,7 @@ public class Administracion extends Controller {
 					formularioRecibido));
 		} else {
 			formularioRecibido.get().save();
-			return redirect(routes.Administracion.index());
+			return redirect(routes.Administracion.adminPeliculas());
 		}
 	}
 
@@ -88,7 +95,7 @@ public class Administracion extends Controller {
 					formularioRecibido));
 		} else {
 			formularioRecibido.get().save();
-			return redirect(routes.Administracion.index());
+			return redirect(routes.Administracion.adminTipoSesion());
 		}
 	}
 
@@ -103,20 +110,41 @@ public class Administracion extends Controller {
 
 	@With(FiltroAdministrador.class)
 	public static Result borrarSesion(Long id) {
-		Pelicula.findById(id).delete();
+		Sesion.findById(id).delete();
 		return redirect(routes.Administracion.adminSesiones());
 	}
+	
+	@With(FiltroAdministrador.class)
+	public static Result editarSesion(Long id) {
+		Sesion s = Sesion.findById(id);
+		SesionForm sesionForm = new SesionForm();
+		sesionForm.setPelicula(s.getPelicula().getId());
+		sesionForm.setSala(s.getSala().getId());
+		sesionForm.setTipo(s.getTipo().getId());
+		sesionForm.setDia(s.getDia().toString());
+		sesionForm.setHora(s.getHora().toString());
+		Form<SesionForm> f = Form.form(SesionForm.class).fill(sesionForm);
+		return badRequest(adminSesiones.render(Sesion.findAll(),
+				Pelicula.findAll(), TipoSesion.findAll(), Sala.findAll(), f));
+	}
 
+	@Transactional
 	@With(FiltroAdministrador.class)
 	public static Result nuevaSesion() {
-		Form<Sesion> formularioRecibido = formSesion.bindFromRequest();
+		Form<SesionForm> formularioRecibido = formSesion.bindFromRequest();
 		if (formularioRecibido.hasErrors()) {
 			return badRequest(adminSesiones.render(Sesion.findAll(),
-					Pelicula.findAll(), TipoSesion.findAll(), Sala.findAll(),
-					formularioRecibido));
+					Pelicula.findAll(), TipoSesion.findAll(), Sala.findAll(), formularioRecibido));
 		} else {
-			formularioRecibido.get().save();
-			return redirect(routes.Administracion.index());
+			SesionForm form = formularioRecibido.get();
+			Sesion sesion = new Sesion();
+			sesion.setPelicula(Pelicula.findById(form.getPelicula()));
+			sesion.setTipo(TipoSesion.findById(form.getTipo()));
+			sesion.setSala(Sala.findById(form.getSala()));
+			sesion.setDia(Date.valueOf(form.getDia()));
+			sesion.setHora(Time.valueOf(form.getHora() + ":00"));
+			sesion.save();
+			return redirect(routes.Administracion.adminSesiones());
 		}
 	}
 

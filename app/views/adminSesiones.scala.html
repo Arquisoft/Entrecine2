@@ -1,4 +1,4 @@
-@(sesiones: List[models.Sesion], peliculas: List[Pelicula], tipos: List[TipoSesion], salas: List[Sala], sesionForm: Form[models.Sesion])
+@(sesiones: List[models.Sesion], peliculas: List[Pelicula], tipos: List[TipoSesion], salas: List[Sala], sesionForm: Form[controllers.forms.SesionForm])
 
 @import helper._
 @import helper.twitterBootstrap._
@@ -19,8 +19,9 @@
 		 <div class="navbar-inner">
 		 <a class="brand" href="#"><img src="@routes.Assets.at("images/favicon.png")"> Inicio</a>
 			 <ul class="nav">
-				 <li class="divider-vertical"><a href="/admin/adminPeliculas">Peliculas</a></li>
-				 <li class="divider-vertical"><a href="/admin/adminSesiones">Sesiones</a></li>
+				<li class="divider-vertical"><a href="/admin/adminPeliculas">Peliculas</a></li>
+				<li class="divider-vertical"><a href="/admin/adminSesiones">Sesiones</a></li>
+			 	<li class="divider-vertical"><a href="/admin/adminTipoSesion">Tipos de Sesion</a></li>
 			 </ul>
 		 </div>
 	 </div>
@@ -41,6 +42,7 @@
 						<th>Hora</th>
 						<th>Tipo</th>
 						<th></th>
+						<th></th>
 					</tr>
 					@for(sesion <- sesiones) {
 				
@@ -52,6 +54,11 @@
 							<td>@sesion.getHora()</td>
 							<td>@sesion.getTipo().getNombre() - @sesion.getTipo().getPrecio()</td>
 							<td>
+							@form(routes.Administracion.editarSesion(sesion.getId())) {
+				            	<input class="btn btn-warning btn-mini" type="submit" value="Editar">
+				            }
+				            </td>
+							<td>
 							@form(routes.Administracion.borrarSesion(sesion.getId())) {
 				            	<input class="btn btn-danger btn-mini" type="submit" value="Borrar">
 				            }
@@ -60,6 +67,7 @@
 					}
 					</table>
 				</div>
+				
 				
 				<div class="span5">
 					<h2>Crear una sesión</h2>
@@ -74,7 +82,7 @@
 						)
 						
 						@select(
-					        field = sesionForm("tipoSesion"),
+					        field = sesionForm("tipo"),
 					        tipos.map{ t =>
 					            t.getId().toString() -> t.getNombre()
 					        },
@@ -100,6 +108,7 @@
 
 				        <div clas="actions">
 				        <input class="btn btn-success" type="submit" value="Crear">
+				       	<input class="btn btn-primary" type="reset" value="Limpiar">
 				        </div>
 				    }
 		    		

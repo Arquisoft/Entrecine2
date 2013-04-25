@@ -46,14 +46,14 @@ public class Pelicula extends Model {
 	}
 
 	public void save() {
-//		Pelicula peli = null;
-//		if (id != null) {
-//			peli = Pelicula.findById(id);
-//			if (peli == null)
-//				Factories.business.getPeliculaService().save(this);
-//			else
-//				update();
-//		} else
+		Pelicula peli = null;
+		if (id != null) {
+			peli = Pelicula.findById(id);
+			if (peli == null)
+				Factories.business.getPeliculaService().save(this);
+			else
+				update();
+		} else
 			Factories.business.getPeliculaService().save(this);
 	}
 

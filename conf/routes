@@ -30,7 +30,7 @@ POST	/admin/login/dologin						controllers.Administracion.doLogin()
 
 GET		/taquilla					controllers.Taquilla.index()
 GET		/taquilla/login				controllers.Taquilla.irALogin()
-GET		/taquilla/login/dologin		controllers.Taquilla.doLogin()
+POST	/taquilla/login/dologin		controllers.Taquilla.doLogin()
 POST	/taquilla/verSesiones/:id	controllers.Taquilla.verSesiones(id: Long)
 GET		/taquilla/sesiones/:id		controllers.Taquilla.verSesionTaquilla(id: Long)
 POST	/taquilla/reservar			controllers.Taquilla.reservarButacaTaquilla()

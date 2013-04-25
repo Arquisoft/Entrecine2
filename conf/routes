@@ -22,6 +22,7 @@ POST	/admin/adminPeliculas/:id/editarPelicula	controllers.Administracion.editarP
 POST	/admin/adminPeliculas/:id/borrarPelicula	controllers.Administracion.borrarPelicula(id: Long)
 
 GET		/admin/adminTipoSesion						controllers.Administracion.adminTipoSesion()
+POST	/admin/adminPeliculas/nuevoTipoSesion		controllers.Administracion.nuevoTipoSesion()
 POST	/admin/adminPeliculas/:id/editarTipoSesion	controllers.Administracion.editarTipoSesion(id: Long)
 POST	/admin/adminPeliculas/:id/borrarTipoSesion	controllers.Administracion.borrarTipoSesion(id: Long)
 

@@ -43,6 +43,11 @@ public class Sesion extends Model {
 	public static List<Sesion> findAll() {
 		return Factories.business.getSesionService().findAll();
 	}
+	
+	public static List<Sesion> findByFecha(Date fecha) {
+		return Factories.business.getSesionService().findByFecha(fecha);
+	}
+
 
 	public void update() {
 		Factories.business.getSesionService().update(this);
@@ -190,4 +195,5 @@ public class Sesion extends Model {
 				+ "]";
 	}
 
+	
 }

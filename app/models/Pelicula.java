@@ -24,6 +24,15 @@ public class Pelicula extends Model {
 	@OneToMany(mappedBy = "pelicula")
 	private List<Sesion> sesiones = new ArrayList<Sesion>();
 	private Integer anio;
+	private Integer duracion;
+	public Integer getDuracion() {
+		return duracion;
+	}
+
+	public void setDuracion(Integer duracion) {
+		this.duracion = duracion;
+	}
+
 	private String genero;
 	private String imagenCartelera;
 	private String sinopsis;
@@ -163,10 +172,12 @@ public class Pelicula extends Model {
 
 	@Override
 	public String toString() {
-		return "Pelicula [id=" + id + ", titulo=" + titulo + ", anio=" + anio
+		return "Pelicula [id=" + id + ", titulo=" + titulo + ", sesiones="
+				+ sesiones + ", anio=" + anio + ", duracion=" + duracion
 				+ ", genero=" + genero + ", imagenCartelera=" + imagenCartelera
 				+ ", sinopsis=" + sinopsis + ", enCartelera=" + enCartelera
 				+ "]";
 	}
+
 
 }

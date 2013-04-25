@@ -64,6 +64,8 @@ public class Sesion extends Model {
 			butacas.remove(e.getButaca());
 		return butacas;
 	}
+	
+
 
 	public Map<Integer, Boolean> getButacas() {
 		Map<Integer, Boolean> butacas = new HashMap<Integer, Boolean>();

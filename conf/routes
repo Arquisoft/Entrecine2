@@ -4,7 +4,6 @@
 
 # Home page
 GET     /	                        controllers.Clientes.index()
-GET     /index                      controllers.Clientes.index()
 POST	/login						controllers.Clientes.login()
 GET		/rellenardb					controllers.Clientes.rellenarDb()
 GET		/peliculas/:id 				controllers.Clientes.verPelicula(id: Long)

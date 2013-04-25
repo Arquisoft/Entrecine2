@@ -1,5 +1,7 @@
 @(entrada: Entrada)
 
+@import helper._
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -25,6 +27,15 @@
 		<li>Código: @entrada.getCodigo()</li>
 		</ul>
 		<p>ATENCION: el código de la entrada le será requerido para su cancelación antes de entrar a la sala.</p>
+		
+		<form>
+			<input type="button" onclick="location.href='../tpvVirtual'" value="reserva">
+		</form> 
+		
+		@form(routes.Clientes.cancelarReserva()) {
+			<input type="hidden" name="entrada" value="@entrada.getId()"/>
+			<input type="submit" value="no Reservar"/>
+		}
 		
 	</body>
 </html>

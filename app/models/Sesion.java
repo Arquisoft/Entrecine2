@@ -45,7 +45,8 @@ public class Sesion extends Model {
 	}
 	
 	public static List<Sesion> findByFecha(Date fecha) {
-		return Factories.business.getSesionService().findByFecha(fecha);
+	//	return Factories.business.getSesionService().findByFecha(fecha);
+		return null;
 	}
 
 
@@ -169,6 +170,13 @@ public class Sesion extends Model {
 		int result = super.hashCode();
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
+	}
+	public int diasRestantesParaLaProyeccion(){
+		long MILLSECS_PER_DAY = 24 * 60 * 60 * 1000;
+		java.util.Date today = new java.util.Date();
+		int diferencia= (int) (( dia.getTime() - today.getTime() )/ MILLSECS_PER_DAY);
+		return diferencia;
+		
 	}
 
 	@Override

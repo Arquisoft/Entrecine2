@@ -206,6 +206,7 @@ public class Clientes extends Controller {
 		peli.setEnCartelera(true);
 		peli.setImagenCartelera("http://www.cinesa.es/Manager/peliculas/oblivion/cartelera.jpg");
 		peli.setSinopsis("En un planeta Tierra espectacular que ha evolucionado hasta ser irreconocible, un hombre se enfrenta al pasado y toma el camino de la redención mientras lucha para salvar a la raza humana");
+		peli.setDuracion(120);
 		peli.save();
 
 		Pelicula peli1 = new Pelicula();
@@ -215,6 +216,8 @@ public class Clientes extends Controller {
 		peli1.setEnCartelera(true);
 		peli1.setImagenCartelera("http://www.cinesa.es/Manager/peliculas/loscroods/cartelera.jpg");
 		peli1.setSinopsis("LOS CROODS es una aventura cÃ³mica en 3D que sigue los pasos de la primera familia moderna del mundo durante el viaje de su vida.");
+		peli1.setDuracion(120);
+
 		peli1.save();
 
 		Pelicula peli2 = new Pelicula();
@@ -224,6 +227,7 @@ public class Clientes extends Controller {
 		peli2.setEnCartelera(true);
 		peli2.setImagenCartelera("http://www.cinesa.es/Manager/peliculas/memoriasdeunzombieadolescente/cartelera.jpg");
 		peli2.setSinopsis("R (Nicholas Hoult) es un zombie que vaga perdido, solo y sin rumbo tras una plaga mundial que ha convertido a casi toda la población en muertos vivientes.");
+		peli2.setDuracion(120);
 		peli2.save();
 
 		Pelicula peli3 = new Pelicula();
@@ -233,6 +237,7 @@ public class Clientes extends Controller {
 		peli3.setEnCartelera(true);
 		peli3.setImagenCartelera("http://www.cinesa.es/Manager/peliculas/ontheroadenlacarretera/cartelera.jpg");
 		peli3.setSinopsis("Nada mÃ¡s morir su padre, Sal Paradise, un neoyorkino aspirante a escritor, conoce a Dean Moriarty, un ex-convicto de un encanto arrollador y casado con la super liberada y seductora Marylou.");
+		peli3.setDuracion(120);
 		peli3.save();
 
 		// Añadimos Sesiones

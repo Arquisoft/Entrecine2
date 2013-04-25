@@ -216,7 +216,7 @@ public class Clientes extends Controller {
 		peli1.setEnCartelera(true);
 		peli1.setImagenCartelera("http://www.cinesa.es/Manager/peliculas/loscroods/cartelera.jpg");
 		peli1.setSinopsis("LOS CROODS es una aventura cÃ³mica en 3D que sigue los pasos de la primera familia moderna del mundo durante el viaje de su vida.");
-		peli1.setDuracion(160);
+		peli1.setDuracion(130);
 
 		peli1.save();
 
@@ -227,7 +227,7 @@ public class Clientes extends Controller {
 		peli2.setEnCartelera(true);
 		peli2.setImagenCartelera("http://www.cinesa.es/Manager/peliculas/memoriasdeunzombieadolescente/cartelera.jpg");
 		peli2.setSinopsis("R (Nicholas Hoult) es un zombie que vaga perdido, solo y sin rumbo tras una plaga mundial que ha convertido a casi toda la población en muertos vivientes.");
-		peli2.setDuracion(93);
+		peli2.setDuracion(180);
 		peli2.save();
 
 		Pelicula peli3 = new Pelicula();
@@ -237,13 +237,13 @@ public class Clientes extends Controller {
 		peli3.setEnCartelera(true);
 		peli3.setImagenCartelera("http://www.cinesa.es/Manager/peliculas/ontheroadenlacarretera/cartelera.jpg");
 		peli3.setSinopsis("Nada mÃ¡s morir su padre, Sal Paradise, un neoyorkino aspirante a escritor, conoce a Dean Moriarty, un ex-convicto de un encanto arrollador y casado con la super liberada y seductora Marylou.");
-		peli3.setDuracion(143);
+		peli3.setDuracion(125);
 		peli3.save();
 
 		// Añadimos Sesiones
 
 		Sesion sesion = new Sesion();
-		sesion.setDia(new Date(2013, 04, 29));
+		sesion.setDia(new Date(113, 03, 29));
 		sesion.setHora(new Time(22, 30, 00));
 		sesion.setTipo(tipoNoche);
 		sesion.setPelicula(peli);
@@ -251,7 +251,7 @@ public class Clientes extends Controller {
 		sesion.save();
 
 		Sesion sesion2 = new Sesion();
-		sesion2.setDia(new Date(2013, 04, 29));
+		sesion2.setDia(new Date(113, 03, 29));
 		sesion2.setHora(new Time(22, 50, 00));
 		sesion2.setTipo(tipoNoche);
 		sesion2.setPelicula(peli2);
@@ -259,7 +259,7 @@ public class Clientes extends Controller {
 		sesion2.save();
 
 		Sesion sesion3 = new Sesion();
-		sesion3.setDia(new Date(2013, 04, 30));
+		sesion3.setDia(new Date(113, 03, 30));
 		sesion3.setHora(new Time(12, 15, 00));
 		sesion3.setTipo(tipoMatutina);
 		sesion3.setPelicula(peli);
@@ -267,7 +267,7 @@ public class Clientes extends Controller {
 		sesion3.save();
 
 		Sesion sesion4 = new Sesion();
-		sesion4.setDia(new Date(2013, 04, 30));
+		sesion4.setDia(new Date(113, 03, 30));
 		sesion4.setHora(new Time(12, 30, 00));
 		sesion4.setTipo(tipoMatutina);
 		sesion4.setPelicula(peli2);
@@ -275,7 +275,7 @@ public class Clientes extends Controller {
 		sesion4.save();
 
 		Sesion sesion5 = new Sesion();
-		sesion5.setDia(new Date(2013, 04, 30));
+		sesion5.setDia(new Date(113, 03, 30));
 		sesion5.setHora(new Time(13, 30, 00));
 		sesion5.setTipo(tipoMatutina);
 		sesion5.setPelicula(peli3);
@@ -283,7 +283,7 @@ public class Clientes extends Controller {
 		sesion5.save();
 
 		Sesion sesion6 = new Sesion();
-		sesion6.setDia(new Date(2013, 04, 30));
+		sesion6.setDia(new Date(113, 03, 30));
 		sesion6.setHora(new Time(17, 30, 00));
 		sesion6.setTipo(tipoEspectador);
 		sesion6.setPelicula(peli1);

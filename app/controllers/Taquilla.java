@@ -48,7 +48,7 @@ public class Taquilla extends Controller {
 		  Entrada entrada = new Entrada();
 		  entrada.setButaca(Integer.parseInt(butaca));
 		  entrada.setSesion(sesion);
-		  entrada.setCliente(Cliente.findByLogin(session().get("cliente")));
+		  entrada.setCliente(null);
 		  entrada.save();
 		  
 		  return redirect(routes.Taquilla.reservaRealizada());

@@ -1,0 +1,31 @@
+@(entrada: Entrada)
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Confirmación de reserva.</title>
+	</head>
+	<body>
+		<h1>Confirme su reserva</h1>
+		<p>Esta es la información de su reserva.</p>
+		
+		<h2>Película</h2>
+		<ul>
+		<li>Título: @entrada.getSesion().getPelicula().getTitulo()</li>
+		<li>Género: @entrada.getSesion().getPelicula().getGenero()</li>
+		<li>Año: @entrada.getSesion().getPelicula().getAnio()</li>
+		</ul>
+		
+		<h2>Entrada</h2>
+		<ul>
+		<li>Sala: @entrada.getSesion().getSala().getNumero()</li>
+		<li>Butaca: @entrada.getButaca()</li>
+		<li>Dia: @entrada.getSesion.getDia()</li>
+		<li>Hora: @entrada.getSesion().getInicio()</li>
+		<li>Código: @entrada.getCodigo()</li>
+		</ul>
+		<p>ATENCION: el código de la entrada le será requerido para su cancelación antes de entrar a la sala.</p>
+		
+		
+	</body>
+</html>

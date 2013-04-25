@@ -35,8 +35,8 @@ public class Clientes extends Controller {
 		Cliente cliente = Cliente.findByLogin(login);
 
 		if (cliente == null || !password.equals(cliente.getPassword())) {
-			//Solamente mostramos el error en login, asi no se sabe si el error lo dio porque no existe el usuario o porque la contraseña no coincide
-			formularioRecibido.reject("login", "El usuario o contraseña no es correcto");
+			//Solamente mostramos el error en login, asi no se sabe si el error lo dio porque no existe el usuario o porque la contraseÃ±a no coincide
+			formularioRecibido.reject("login", "El usuario o contraseÃ±a no es correcto");
 			return badRequest(index.render(Pelicula.findAll(), formularioRecibido));
 		} else {
 			session().put("cliente", login);
@@ -95,28 +95,28 @@ public class Clientes extends Controller {
 	@SuppressWarnings("deprecation")
 	public static Result rellenarDb() {
 		
-		// Añadir Clientes
+		// AÃ±adir Clientes
 		Cliente cliente = new Cliente();
 		cliente.setPassword("pass");
 		cliente.setNombre("Pepito");
 		cliente.setLogin("cliente");
 		cliente.save();
 		
-		// Añadir empleados
+		// AÃ±adir empleados
 		Empleado empleado = new Empleado();
 		empleado.setPassword("pass");
 		empleado.setLogin("empleado");
 		empleado.setAdmin(false);
 		empleado.save();
 		
-		// Añadir admin
+		// AÃ±adir admin
 		Empleado admin = new Empleado();
 		admin.setPassword("pass");
 		admin.setLogin("admin");
 		admin.setAdmin(true);
 		admin.save();
 		
-		// Añadimos salas
+		// AÃ±adimos salas
 		Sala sala = new Sala();
 		sala.setNumButacas(200);
 		sala.setNumero(1);
@@ -131,7 +131,7 @@ public class Clientes extends Controller {
 		sala2.setNumero(3);
 		sala2.save();
 
-		// Añadimos Tipos
+		// AÃ±adimos Tipos
 		TipoSesion tipoOrdinaria = new TipoSesion();
 		tipoOrdinaria.setNombre("Ordinaria");
 		tipoOrdinaria.setPrecio(8.60);
@@ -143,7 +143,7 @@ public class Clientes extends Controller {
 		tipoMatutina.save();
 
 		TipoSesion tipoEspectador = new TipoSesion();
-		tipoEspectador.setNombre("Día del Espectador");
+		tipoEspectador.setNombre("DÃ­a del Espectador");
 		tipoEspectador.setPrecio(5.60);
 		tipoEspectador.save();
 
@@ -153,24 +153,24 @@ public class Clientes extends Controller {
 		tipoNoche.setPrecio(7.80);
 		tipoNoche.save();
 
-		// Añadimos Películas
+		// AÃ±adimos PelÃ­culas
 		Pelicula peli = new Pelicula();
 		peli.setTitulo("Oblivion");
 		peli.setAnio(2013);
 		peli.setGenero("Accion");
 		peli.setEnCartelera(true);
 		peli.setImagenCartelera("http://www.cinesa.es/Manager/peliculas/oblivion/cartelera.jpg");
-		peli.setSinopsis("En un planeta Tierra espectacular que ha evolucionado hasta ser irreconocible, un hombre se enfrenta al pasado y toma el camino de la redención mientras lucha para salvar a la raza humana");
+		peli.setSinopsis("En un planeta Tierra espectacular que ha evolucionado hasta ser irreconocible, un hombre se enfrenta al pasado y toma el camino de la redenciÃ³n mientras lucha para salvar a la raza humana");
 		peli.save();
 		
 		
 		Pelicula peli1 = new Pelicula();
 		peli1.setTitulo("Los Croods");
 		peli1.setAnio(2013);
-		peli1.setGenero("Animación");
+		peli1.setGenero("AnimaciÃ³n");
 		peli1.setEnCartelera(true);
 		peli1.setImagenCartelera("http://www.cinesa.es/Manager/peliculas/loscroods/cartelera.jpg");
-		peli1.setSinopsis("LOS CROODS es una aventura cómica en 3D que sigue los pasos de la primera familia moderna del mundo durante el viaje de su vida.");
+		peli1.setSinopsis("LOS CROODS es una aventura cÃ³mica en 3D que sigue los pasos de la primera familia moderna del mundo durante el viaje de su vida.");
 		peli1.save();
 
 		Pelicula peli2 = new Pelicula();
@@ -179,7 +179,7 @@ public class Clientes extends Controller {
 		peli2.setGenero("Comedia");
 		peli2.setEnCartelera(true);
 		peli2.setImagenCartelera("http://www.cinesa.es/Manager/peliculas/memoriasdeunzombieadolescente/cartelera.jpg");
-		peli2.setSinopsis("R (Nicholas Hoult) es un zombie que vaga perdido, solo y sin rumbo tras una plaga mundial que ha convertido a casi toda la población en muertos vivientes.");
+		peli2.setSinopsis("R (Nicholas Hoult) es un zombie que vaga perdido, solo y sin rumbo tras una plaga mundial que ha convertido a casi toda la poblaciÃ³n en muertos vivientes.");
 		peli2.save();
 
 		Pelicula peli3 = new Pelicula();
@@ -188,11 +188,11 @@ public class Clientes extends Controller {
 		peli3.setGenero("Drama");
 		peli3.setEnCartelera(true);
 		peli3.setImagenCartelera("http://www.cinesa.es/Manager/peliculas/ontheroadenlacarretera/cartelera.jpg");
-		peli3.setSinopsis("Nada más morir su padre, Sal Paradise, un neoyorkino aspirante a escritor, conoce a Dean Moriarty, un ex-convicto de un encanto arrollador y casado con la súper liberada y seductora Marylou.");
+		peli3.setSinopsis("Nada mÃ¡s morir su padre, Sal Paradise, un neoyorkino aspirante a escritor, conoce a Dean Moriarty, un ex-convicto de un encanto arrollador y casado con la sÃºper liberada y seductora Marylou.");
 		peli3.save();
 
 		
-		// Añadimos Sesiones
+		// AÃ±adimos Sesiones
 		
 		Sesion sesion = new Sesion();
 		sesion.setDia(new Date(2013,04,29));

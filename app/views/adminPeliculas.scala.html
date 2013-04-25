@@ -19,7 +19,7 @@
 	
 	 <div class="navbar">
 		 <div class="navbar-inner">
-		 <a class="brand" href="#"><img src="@routes.Assets.at("images/favicon.png")"> Inicio</a>
+		 <a class="brand" href="/"><img src="@routes.Assets.at("images/logo.png")"> Inicio</a>
 			 <ul class="nav">
 				 <li class="divider-vertical"><a href="/admin/adminPeliculas">Peliculas</a></li>
 				 <li class="divider-vertical"><a href="/admin/adminSesiones">Sesiones</a></li>
@@ -32,10 +32,10 @@
 			<h1>Panel de Administración</h1>
 			<div class="row">
 			
-				<div class="span6">
+				<div class="span7">
 					<h2>Peliculas</h2>	
 				
-					<table class="table table-hover">
+					<table class="table table-striped">
 					<tr>
 						<th>ID</th>
 						<th>Título</th>
@@ -66,7 +66,7 @@
 					</table>
 				</div>
 				
-				<div class="span6">
+				<div class="span4 offset1">
 					<h2>Crear una película</h2>
 					@form(routes.Administracion.nuevaPelicula()) {
 				        

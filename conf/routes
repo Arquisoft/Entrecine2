@@ -22,9 +22,13 @@ POST	/admin/adminPeliculas/:id/editarPelicula	controllers.Administracion.editarP
 POST	/admin/adminPeliculas/:id/borrarPelicula	controllers.Administracion.borrarPelicula(id: Long)
 
 GET		/admin/adminTipoSesion						controllers.Administracion.adminTipoSesion()
+POST	/admin/adminTipoSesion/nuevoTipoSesion		controllers.Administracion.nuevoTipoSesion()
+POST	/admin/adminTipoSesion/:id/editarTipoSesion	controllers.Administracion.editarTipoSesion(id: Long)
+POST	/admin/adminTipoSesion/:id/borrarTipoSesion	controllers.Administracion.borrarTipoSesion(id: Long)
 
 GET		/admin/adminSesiones						controllers.Administracion.adminSesiones()
 POST	/admin/adminSesiones/nuevaSesion			controllers.Administracion.nuevaSesion()
+POST	/admin/adminSesiones/:id/editarTipoSesion	controllers.Administracion.editarSesion(id: Long)
 POST	/admin/adminSesiones/:id/borrarSesion	    controllers.Administracion.borrarSesion(id: Long)
 
 GET		/admin/login								controllers.Administracion.irALogin()

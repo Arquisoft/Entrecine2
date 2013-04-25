@@ -19,6 +19,8 @@ public class Administracion extends Controller {
 	private static Form<Pelicula> formPelicula = Form.form(Pelicula.class);
 
 	private static Form<Empleado> formEmpleado = Form.form(Empleado.class);
+	
+	private static Form<TipoSesion> formTipoSesion = Form.form(TipoSesion.class);
 
 	private static Form<Sesion> formSesion = Form.form(Sesion.class);
 
@@ -31,6 +33,11 @@ public class Administracion extends Controller {
 
 	@With(FiltroAdministrador.class)
 	public static Result adminPeliculas() {
+		return ok(adminPeliculas.render(Pelicula.findAll(), formPelicula));
+	}
+	
+	@With(FiltroAdministrador.class)
+	public static Result adminTipoSesion() {
 		return ok(adminPeliculas.render(Pelicula.findAll(), formPelicula));
 	}
 
@@ -65,6 +72,32 @@ public class Administracion extends Controller {
 		Pelicula p = Pelicula.findById(id);
 		Form<Pelicula> f = Form.form(Pelicula.class).fill(p);
 		return badRequest(adminPeliculas.render(Pelicula.findAll(), f));
+	}
+	
+	// CRUD TIPOS DE SESION
+	@With(FiltroAdministrador.class)
+	public static Result borrarTipoSesion(Long id) {
+		TipoSesion.findById(id).delete();
+		return redirect(routes.Administracion.adminTipoSesion());
+	}
+
+	@With(FiltroAdministrador.class)
+	public static Result nuevoTipoSesion() {
+		Form<TipoSesion> formularioRecibido = formTipoSesion.bindFromRequest();
+		if (formularioRecibido.hasErrors()) {
+			return badRequest(adminTipoSesion.render(TipoSesion.findAll(),
+					formularioRecibido));
+		} else {
+			formularioRecibido.get().save();
+			return redirect(routes.Administracion.index());
+		}
+	}
+
+	@With(FiltroAdministrador.class)
+	public static Result editarTipoSesion(Long id) {
+		TipoSesion t = TipoSesion.findById(id);
+		Form<TipoSesion> f = Form.form(TipoSesion.class).fill(t);
+		return badRequest(adminTipoSesion.render(TipoSesion.findAll(), f));
 	}
 
 	// CRUD SESIONES

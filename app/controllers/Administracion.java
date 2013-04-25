@@ -37,7 +37,7 @@ public class Administracion extends Controller {
 	
 	@With(FiltroAdministrador.class)
 	public static Result adminTipoSesion() {
-		return ok(adminPeliculas.render(Pelicula.findAll(), formPelicula));
+		return ok(adminTipoSesion.render(TipoSesion.findAll(), formTipoSesion));
 	}
 
 	@With(FiltroAdministrador.class)

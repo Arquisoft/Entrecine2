@@ -19,6 +19,7 @@ import play.mvc.With;
 import views.html.adminPeliculas;
 import views.html.adminSesiones;
 import views.html.adminSesionesDePelicula;
+import views.html.adminSesionesDeSala;
 import views.html.adminTipoSesion;
 import views.html.adminlogin;
 import controllers.filters.FiltroAdministrador;
@@ -112,7 +113,7 @@ public class Administracion extends Controller {
 	// ADMIN SESIONES
 	
 	@With(FiltroAdministrador.class)
-	public static Result getSesionesDePelicula(Long id) { //TODO falta mirar la fecha
+	public static Result getSesionesDePelicula(Long id) {
 		Pelicula peli = Pelicula.findById(id);
 		DynamicForm formularioRecibido = Form.form().bindFromRequest();
 		if (formularioRecibido.hasErrors()) {
@@ -124,6 +125,25 @@ public class Administracion extends Controller {
 				if (sesiones == null)
 					sesiones = new ArrayList<Sesion>();
 				return ok(adminSesionesDePelicula.render(peli, sesiones));
+			} catch (IllegalArgumentException e) {
+				return badRequest(adminSesiones.render(Pelicula.findAll(), Sala.findAll())); 
+			}
+		}
+	}
+	
+	@With(FiltroAdministrador.class)
+	public static Result getSesionesDeSala(Long id) {
+		Sala sala = Sala.findById(id);
+		DynamicForm formularioRecibido = Form.form().bindFromRequest();
+		if (formularioRecibido.hasErrors()) {
+			return badRequest(adminSesiones.render(Pelicula.findAll(), Sala.findAll()));
+		} else {
+			try {
+				Date fecha = Date.valueOf(formularioRecibido.data().get("fechaSala"));
+				List<Sesion> sesiones = Sesion.findByFecha(fecha);
+				if (sesiones == null)
+					sesiones = new ArrayList<Sesion>();
+				return ok(adminSesionesDeSala.render(sala, sesiones));
 			} catch (IllegalArgumentException e) {
 				return badRequest(adminSesiones.render(Pelicula.findAll(), Sala.findAll())); 
 			}

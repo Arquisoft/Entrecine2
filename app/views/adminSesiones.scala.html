@@ -44,7 +44,7 @@
 						<td>@sala.getId()</td>
 						<td>@sala.getNumero()</td>
 						<td>@sala.getNumButacas()</td>
-						@form(routes.Administracion.getSesionesDePelicula(sala.getId())) {
+						@form(routes.Administracion.getSesionesDeSala(sala.getId())) {
 						    <td><input type="date" name="fechaSala" id="fechaSala" error="Fecha no válida"></td>
 			            	<td><input class="btn btn-success" type="submit" value="Ver sesiones"></td>
 			            }

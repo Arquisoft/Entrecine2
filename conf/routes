@@ -28,6 +28,8 @@ POST	/admin/adminTipoSesion/:id/borrarTipoSesion	controllers.Administracion.borr
 
 GET		/admin/adminSesiones						controllers.Administracion.adminSesiones()
 GET		/admin/adminSesiones/:id/verSesionesPelicula	controllers.Administracion.getSesionesDePelicula(id: Long)
+GET		/admin/adminSesiones/:id/verSesionesSala	controllers.Administracion.getSesionesDeSala(id: Long)
+
 POST	/admin/adminSesiones/nuevaSesion			controllers.Administracion.nuevaSesion()
 POST	/admin/adminSesiones/:id/editarTipoSesion	controllers.Administracion.editarSesion(id: Long)
 POST	/admin/adminSesiones/:id/borrarSesion	    controllers.Administracion.borrarSesion(id: Long)

@@ -1,4 +1,4 @@
-@(peli: Pelicula, sesiones: List[Sesion])
+@(sala: Sala, sesiones: List[Sesion])
 
 @import helper._
 @import helper.twitterBootstrap._
@@ -29,14 +29,14 @@
 		 	</div>
 		
 			<h1>Panel de Administración</h1>
-			<h2>Administrar sesiones de películas</h2>	
-			<h3>Pelicula: @peli.getTitulo() - Fecha: @sesiones.get(0).getDia()</h3>
-			<h4>Duración: @peli.getDuracion() min. - Año: @peli.getAnio() - Genero: @peli.getGenero()</h4>
+			<h2>Administrar sesiones de salas</h2>	
+			<h3>Sala: @sala.getNumero()  - Fecha: @sesiones.get(0).getDia()</h3>
+			<h4>Número de butacas: @sala.getNumButacas()</h4>
 			
 			<table class="table table-striped">
 				<tr>
 					<th>ID</th>
-					<th>Sala</th>
+					<th>Pelicula</th>
 					<th>Hora</th>
 					<th>Tipo</th>
 					<th>Precio</th>
@@ -47,7 +47,7 @@
 			
 					<tr>
 						<td>@sesion.getId()</td>
-						<td>@sesion.getSala().getNumero()</td>
+						<td>@sesion.getPelicula().getTitulo()</td>
 						<td>@sesion.getHora()</td>
 						<td>@sesion.getTipo().getNombre()</td>
 						<td>@sesion.getTipo().getPrecio() €</td>

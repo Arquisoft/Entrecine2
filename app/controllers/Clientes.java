@@ -20,7 +20,7 @@ import views.html.index;
 import views.html.tpvVirtual;
 import views.html.vistaPelicula;
 import views.html.vistaSesion;
-import controllers.filters.*;
+import controllers.filters.FiltroCliente;
 
 public class Clientes extends Controller {
 

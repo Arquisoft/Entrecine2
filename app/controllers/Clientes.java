@@ -239,6 +239,26 @@ public class Clientes extends Controller {
 		peli3.setSinopsis("Nada mÃ¡s morir su padre, Sal Paradise, un neoyorkino aspirante a escritor, conoce a Dean Moriarty, un ex-convicto de un encanto arrollador y casado con la super liberada y seductora Marylou.");
 		peli3.setDuracion(125);
 		peli3.save();
+		
+		Pelicula peli4 = new Pelicula();
+		peli4.setTitulo("Iron Man 3");
+		peli4.setAnio(2013);
+		peli4.setGenero("Accion");
+		peli4.setEnCartelera(true);
+		peli4.setImagenCartelera("http://www.cinesa.es/Manager/peliculas/ironman3/cartelera.jpg");
+		peli4.setSinopsis("En Iron Man 3 de Marvel, el descarado pero brillante empresario Tony Stark/Iron Man se enfrentará a un enemigo cuyo poder no conoce límites. ");
+		peli4.setDuracion(130);
+		peli4.save();
+		
+		Pelicula peli5 = new Pelicula();
+		peli5.setTitulo("Combustión");
+		peli5.setAnio(2013);
+		peli5.setGenero("Thriller");
+		peli5.setEnCartelera(true);
+		peli5.setImagenCartelera("http://www.cinesa.es/Manager/peliculas/combustin/cartelera.jpg");
+		peli5.setSinopsis("Mikel (Alex Gonzalez) está a punto de casarse con Julia (María Castro), dueña de una importante joyería heredada de sus padres.  ");
+		peli5.setDuracion(114);
+		peli5.save();
 
 		// Añadimos Sesiones
 
@@ -286,10 +306,49 @@ public class Clientes extends Controller {
 		sesion6.setDia(new Date(113, 03, 30));
 		sesion6.setHora(new Time(17, 30, 00));
 		sesion6.setTipo(tipoEspectador);
-		sesion6.setPelicula(peli1);
+		sesion6.setPelicula(peli4);
 		sesion6.setSala(sala);
 		sesion6.save();
 		
+		Sesion sesion7 = new Sesion();
+		sesion7.setDia(new Date(113, 03, 30));
+		sesion7.setHora(new Time(10, 30, 00));
+		sesion7.setTipo(tipoMatutina);
+		sesion7.setPelicula(peli4);
+		sesion7.setSala(sala1);
+		sesion7.save();
+		
+		Sesion sesion8 = new Sesion();
+		sesion8.setDia(new Date(113, 03, 31));
+		sesion8.setHora(new Time(16, 30, 00));
+		sesion8.setTipo(tipoEspectador);
+		sesion8.setPelicula(peli4);
+		sesion8.setSala(sala);
+		sesion8.save();
+		
+		Sesion sesion9 = new Sesion();
+		sesion9.setDia(new Date(113, 03, 31));
+		sesion9.setHora(new Time(22, 30, 00));
+		sesion9.setTipo(tipoNoche);
+		sesion9.setPelicula(peli4);
+		sesion9.setSala(sala2);
+		sesion9.save();
+		
+		Sesion sesion10 = new Sesion();
+		sesion10.setDia(new Date(113, 03, 30));
+		sesion10.setHora(new Time(17, 30, 00));
+		sesion10.setTipo(tipoEspectador);
+		sesion10.setPelicula(peli5);
+		sesion10.setSala(sala2);
+		sesion10.save();
+		
+		Sesion sesion11 = new Sesion();
+		sesion11.setDia(new Date(113, 03, 30));
+		sesion11.setHora(new Time(17, 30, 00));
+		sesion11.setTipo(tipoEspectador);
+		sesion11.setPelicula(peli5);
+		sesion11.setSala(sala1);
+		sesion11.save();
 		
 		// Añadimos entradas
 		// El cliente Oblivion tiene 3 entradas a la peli Oblivion
@@ -326,7 +385,7 @@ public class Clientes extends Controller {
 		entrada5.setCodigo(14L);
 		entrada5.save();
 		Entrada entrada6 = new Entrada();
-		entrada6.setSesion(sesion6);
+		entrada6.setSesion(sesion7);
 		entrada6.setCliente(cliente);
 		entrada6.setButaca(21);
 		entrada6.setCodigo(15L);
@@ -334,13 +393,13 @@ public class Clientes extends Controller {
 		
 		//El cliente Taquilla tiene 2 entradas a The Croods y una a The Road
 		Entrada entrada7 = new Entrada();
-		entrada4.setSesion(sesion6);
+		entrada4.setSesion(sesion7);
 		entrada4.setCliente(clienteTaquilla);
 		entrada4.setButaca(19);
 		entrada4.setCodigo(16L);
 		entrada4.save();
 		Entrada entrada8 = new Entrada();
-		entrada5.setSesion(sesion6);
+		entrada5.setSesion(sesion7);
 		entrada5.setCliente(clienteTaquilla);
 		entrada5.setButaca(23);
 		entrada5.setCodigo(17L);

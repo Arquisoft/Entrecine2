@@ -12,6 +12,7 @@ import models.Sala;
 import models.Sesion;
 import models.TipoSesion;
 import play.data.Form;
+import play.data.validation.ValidationError;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.With;
@@ -22,10 +23,12 @@ import views.html.vistaPelicula;
 import views.html.vistaSesion;
 import views.html.clienteRegistro;
 import controllers.filters.FiltroCliente;
+import controllers.filters.FiltroNoLogueado;
 
 public class Clientes extends Controller {
 
 	private static Form<Cliente> formCliente = Form.form(Cliente.class);
+	private static Form<Cliente> formRegistro = Form.form(Cliente.class);
 	private static Form<Entrada> formEntrada = Form.form(Entrada.class);
 
 	public static Result index() {
@@ -126,16 +129,22 @@ public class Clientes extends Controller {
 		return ok(tpvVirtual.render());
 	}
 	
+	@With(FiltroNoLogueado.class)
 	public static Result doRegister() {
-		Form<Cliente> formularioRecibido = formCliente.bindFromRequest();
+		Form<Cliente> formularioRecibido = formRegistro.bindFromRequest();
 
 		String nombre = formularioRecibido.field("nombre").value();
 		String login = formularioRecibido.field("login").value();
 		String password = formularioRecibido.field("password").value();
 		String confirmPassword = formularioRecibido.field("confirmPassword").value();
 		
-		if(Cliente.findByLogin(login) != null || !password.equals(confirmPassword)) {
-		    return badRequest(clienteRegistro.render(formularioRecibido));
+		if(Cliente.findByLogin(login) != null) {
+			formularioRecibido.reject("login", "Ya existe un usuario" +
+					" registrado con el mismo nombre.");
+		    return badRequest(clienteRegistro.render(formularioRecibido, formCliente));
+		} else if (!password.equals(confirmPassword)) {
+			formularioRecibido.reject("confirmPassword", "Las contraseñas no coinciden.");
+		    return badRequest(clienteRegistro.render(formularioRecibido, formCliente));
 		} else {
 		    Cliente c = new Cliente();
 		    c.setLogin(login);
@@ -147,8 +156,9 @@ public class Clientes extends Controller {
 		}
 	}
 	
+	@With(FiltroNoLogueado.class)
 	public static Result vistaRegistro() {
-		return ok(clienteRegistro.render(formCliente));
+		return ok(clienteRegistro.render(formRegistro, formCliente));
 	}
 
 	@SuppressWarnings("deprecation")

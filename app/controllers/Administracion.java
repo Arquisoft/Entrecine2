@@ -3,7 +3,9 @@ package controllers;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import models.Empleado;
 import models.Pelicula;
@@ -16,8 +18,7 @@ import play.db.ebean.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.With;
-import views.html.adminPeliculas;
-import views.html.adminSesiones;
+import views.html.admin;
 import views.html.adminSesionesDePelicula;
 import views.html.adminSesionesDeSala;
 import views.html.adminTipoSesion;
@@ -42,12 +43,8 @@ public class Administracion extends Controller {
 
 	@With(FiltroAdministrador.class)
 	public static Result index() {
-		return ok(adminPeliculas.render(Pelicula.findAll(), formPelicula));
-	}
-
-	@With(FiltroAdministrador.class)
-	public static Result adminPeliculas() {
-		return ok(adminPeliculas.render(Pelicula.findAll(), formPelicula));
+		return ok(admin.render(Pelicula.findAll(), Sala.findAll(),
+				formPelicula, formSala));
 	}
 
 	@With(FiltroAdministrador.class)
@@ -55,33 +52,27 @@ public class Administracion extends Controller {
 		return ok(adminTipoSesion.render(TipoSesion.findAll(), formTipoSesion));
 	}
 
-	@With(FiltroAdministrador.class)
-	public static Result adminSesiones() {
-		return ok(adminSesiones.render(Pelicula.findAll(),
-				Sala.findAll(), formPelicula, formSala));
-	}
-
 	// CRUD PELICULAS
 
 	@With(FiltroAdministrador.class)
 	public static Result borrarPelicula(Long id) {
 		Pelicula.findById(id).delete();
-		return redirect(routes.Administracion.adminPeliculas());
+		return redirect(routes.Administracion.index());
 	}
 
 	@With(FiltroAdministrador.class)
 	public static Result nuevaPelicula() {
 		Form<Pelicula> formularioRecibido = formPelicula.bindFromRequest();
 		if (formularioRecibido.hasErrors()) {
-			return badRequest(adminPeliculas.render(Pelicula.findAll(),
-					formularioRecibido));
+			return badRequest(admin.render(Pelicula.findAll(), Sala.findAll(),
+					formularioRecibido, formSala));
 		} else {
 			Pelicula p = formularioRecibido.get();
 			String id = formularioRecibido.data().get("id");
 			if (!id.isEmpty())
 				p.setId(Long.parseLong(id));
 			p.save();
-			return redirect(routes.Administracion.adminPeliculas());
+			return redirect(routes.Administracion.index());
 		}
 	}
 
@@ -89,7 +80,8 @@ public class Administracion extends Controller {
 	public static Result editarPelicula(Long id) {
 		Pelicula p = Pelicula.findById(id);
 		Form<Pelicula> f = Form.form(Pelicula.class).fill(p);
-		return badRequest(adminPeliculas.render(Pelicula.findAll(), f));
+		return badRequest(admin.render(Pelicula.findAll(), Sala.findAll(), f,
+				formSala));
 	}
 
 	// CRUD TIPOS DE SESION
@@ -118,15 +110,89 @@ public class Administracion extends Controller {
 		return badRequest(adminTipoSesion.render(TipoSesion.findAll(), f));
 	}
 
-	// ADMIN SESIONES
+	// CRUD SESIONES
+	@With(FiltroAdministrador.class)
+	public static Result borrarSesion(Long id) {
+		Sesion s = Sesion.findById(id);
+		Sala sala = s.getSala();
+		s.delete();
+		return redirect(routes.Administracion.index());
+	}
+
+	@With(FiltroAdministrador.class)
+	public static Result editarSesion(Long id) {
+		Sesion s = Sesion.findById(id);
+		DynamicForm formularioRecibido = Form.form();
+		Map<String, String> datos = new HashMap<String, String>();
+		datos.put("hora", s.getHora().toString());
+		datos.put("tipo", s.getTipo().getId().toString());
+		formularioRecibido.bind(datos);
+		return badRequest(adminSesionesDeSala.render(s.getSala(), s.getSala().getSesiones()));
+	}
+
+	@Transactional
+	@With(FiltroAdministrador.class)
+	public static Result nuevaSesion(Long s, String fecha_s) {
+		Date fecha = Date.valueOf(fecha_s);
+		List<Sesion> sesiones = Sesion.findByFecha(fecha);
+		Sala sala = Sala.findById(s);
+		DynamicForm formularioRecibido = Form.form().bindFromRequest();
+		if (formularioRecibido.hasErrors()) {
+			return badRequest(adminSesionesDeSala.render(sala, sesiones));
+		} else {
+			Map<String, String> form = formularioRecibido.get().getData();
+			Sesion sesion = new Sesion();
+			sesion.setTipo(TipoSesion.findById(Long.parseLong(form.get("tipo"))));
+			sesion.setSala(sala);
+			sesion.setDia(fecha);
+			sesion.setHora(Time.valueOf(form.get("hora") + ":00"));
+			sesion.save();
+			return redirect(routes.Administracion.index());
+		}
+	}
+
+	// CRUD SALAS
+
+	@With(FiltroAdministrador.class)
+	public static Result nuevaSala() {
+		Form<Sala> formularioRecibido = formSala.bindFromRequest();
+		if (formularioRecibido.hasErrors()) {
+			return badRequest(admin.render(Pelicula.findAll(), Sala.findAll(),
+					formPelicula, formSala));
+		} else {
+			Sala s = formularioRecibido.get();
+			String id = formularioRecibido.data().get("id");
+			if (!id.isEmpty())
+				s.setId(Long.parseLong(id));
+			s.save();
+			return redirect(routes.Administracion.index());
+		}
+	}
+	
+	@With(FiltroAdministrador.class)
+	public static Result editarSala(Long id) {
+		Sala s = Sala.findById(id);
+		Form<Sala> f = Form.form(Sala.class).fill(s);
+		return badRequest(admin.render(Pelicula.findAll(), Sala.findAll(), formPelicula,
+				f));
+	}
+	
+	@With(FiltroAdministrador.class)
+	public static Result borrarSala(Long id) {
+		Sala.findById(id).delete();
+		return redirect(routes.Administracion.index());
+	}
+
+
+	// VISTA SESIONES
 
 	@With(FiltroAdministrador.class)
 	public static Result getSesionesDePelicula(Long id) {
 		Pelicula peli = Pelicula.findById(id);
 		DynamicForm formularioRecibido = Form.form().bindFromRequest();
 		if (formularioRecibido.hasErrors()) {
-			return badRequest(adminSesiones.render(Pelicula.findAll(),
-					Sala.findAll(), formPelicula, formSala));
+			return badRequest(admin.render(Pelicula.findAll(), Sala.findAll(),
+					formPelicula, formSala));
 		} else {
 			try {
 				Date fecha = Date.valueOf(formularioRecibido.data().get(
@@ -136,7 +202,7 @@ public class Administracion extends Controller {
 					sesiones = new ArrayList<Sesion>();
 				return ok(adminSesionesDePelicula.render(peli, sesiones));
 			} catch (IllegalArgumentException e) {
-				return badRequest(adminSesiones.render(Pelicula.findAll(),
+				return badRequest(admin.render(Pelicula.findAll(),
 						Sala.findAll(), formPelicula, formSala));
 			}
 		}
@@ -147,8 +213,8 @@ public class Administracion extends Controller {
 		Sala sala = Sala.findById(id);
 		DynamicForm formularioRecibido = Form.form().bindFromRequest();
 		if (formularioRecibido.hasErrors()) {
-			return badRequest(adminSesiones.render(Pelicula.findAll(),
-					Sala.findAll(), formPelicula, formSala));
+			return badRequest(admin.render(Pelicula.findAll(), Sala.findAll(),
+					formPelicula, formSala));
 		} else {
 			try {
 				Date fecha = Date.valueOf(formularioRecibido.data().get(
@@ -158,67 +224,9 @@ public class Administracion extends Controller {
 					sesiones = new ArrayList<Sesion>();
 				return ok(adminSesionesDeSala.render(sala, sesiones));
 			} catch (IllegalArgumentException e) {
-				return badRequest(adminSesiones.render(Pelicula.findAll(),
+				return badRequest(admin.render(Pelicula.findAll(),
 						Sala.findAll(), formPelicula, formSala));
 			}
-		}
-	}
-
-	@With(FiltroAdministrador.class)
-	public static Result borrarSesion(Long id) {
-		Sesion.findById(id).delete();
-		return redirect(routes.Administracion.adminSesiones());
-	}
-
-	@With(FiltroAdministrador.class)
-	public static Result editarSesion(Long id) {
-		Sesion s = Sesion.findById(id);
-		SesionForm sesionForm = new SesionForm();
-		sesionForm.setPelicula(s.getPelicula().getId());
-		sesionForm.setSala(s.getSala().getId());
-		sesionForm.setTipo(s.getTipo().getId());
-		sesionForm.setDia(s.getDia().toString());
-		sesionForm.setHora(s.getHora().toString());
-		Form<SesionForm> f = Form.form(SesionForm.class).fill(sesionForm);
-		return badRequest(adminSesiones.render(Pelicula.findAll(),
-				Sala.findAll(), formPelicula, formSala));
-	}
-
-	@Transactional
-	@With(FiltroAdministrador.class)
-	public static Result nuevaSesion() {
-		Form<SesionForm> formularioRecibido = formSesion.bindFromRequest();
-		if (formularioRecibido.hasErrors()) {
-			return badRequest(adminSesiones.render(Pelicula.findAll(),
-					Sala.findAll(), formPelicula, formSala));
-		} else {
-			SesionForm form = formularioRecibido.get();
-			Sesion sesion = new Sesion();
-			sesion.setPelicula(Pelicula.findById(form.getPelicula()));
-			sesion.setTipo(TipoSesion.findById(form.getTipo()));
-			sesion.setSala(Sala.findById(form.getSala()));
-			sesion.setDia(Date.valueOf(form.getDia()));
-			sesion.setHora(Time.valueOf(form.getHora() + ":00"));
-			sesion.save();
-			return redirect(routes.Administracion.adminSesiones());
-		}
-	}
-
-	// SALAS
-
-	@With(FiltroAdministrador.class)
-	public static Result nuevaSala() {
-		Form<Sala> formularioRecibido = formSala.bindFromRequest();
-		if (formularioRecibido.hasErrors()) {
-			return badRequest(adminSesiones.render(Pelicula.findAll(),
-					Sala.findAll(), formPelicula, formSala));
-		} else {
-			Sala s = formularioRecibido.get();
-			String id = formularioRecibido.data().get("id");
-			if (!id.isEmpty())
-				s.setId(Long.parseLong(id));
-			s.save();
-			return redirect(routes.Administracion.adminSesiones());
 		}
 	}
 

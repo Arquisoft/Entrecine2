@@ -18,25 +18,25 @@ POST	/registro/doRegister		controllers.Clientes.doRegister()
 #Administracion
 
 GET		/admin										controllers.Administracion.index()
-GET		/admin/adminPeliculas						controllers.Administracion.adminPeliculas()
-POST	/admin/adminPeliculas/nuevaPelicula			controllers.Administracion.nuevaPelicula()
-POST	/admin/adminPeliculas/:id/editarPelicula	controllers.Administracion.editarPelicula(id: Long)
-POST	/admin/adminPeliculas/:id/borrarPelicula	controllers.Administracion.borrarPelicula(id: Long)
+POST	/admin/nuevaPelicula						controllers.Administracion.nuevaPelicula()
+POST	/admin/:id/editarPelicula					controllers.Administracion.editarPelicula(id: Long)
+POST	/admin/:id/borrarPelicula					controllers.Administracion.borrarPelicula(id: Long)
 
 POST	/admin/nuevaSala							controllers.Administracion.nuevaSala()
+POST	/admin/:id/editarSala						controllers.Administracion.editarSala(id: Long)
+POST	/admin/:id/borrarSala						controllers.Administracion.borrarSala(id: Long)
 
 GET		/admin/adminTipoSesion						controllers.Administracion.adminTipoSesion()
 POST	/admin/adminTipoSesion/nuevoTipoSesion		controllers.Administracion.nuevoTipoSesion()
 POST	/admin/adminTipoSesion/:id/editarTipoSesion	controllers.Administracion.editarTipoSesion(id: Long)
 POST	/admin/adminTipoSesion/:id/borrarTipoSesion	controllers.Administracion.borrarTipoSesion(id: Long)
 
-GET		/admin/adminSesiones						controllers.Administracion.adminSesiones()
-GET		/admin/adminSesiones/:id/verSesionesPelicula	controllers.Administracion.getSesionesDePelicula(id: Long)
-GET		/admin/adminSesiones/:id/verSesionesSala	controllers.Administracion.getSesionesDeSala(id: Long)
+GET		/admin/:id/verSesionesPelicula				controllers.Administracion.getSesionesDePelicula(id: Long)
+GET		/admin/:id/verSesionesSala					controllers.Administracion.getSesionesDeSala(id: Long)
 
-POST	/admin/adminSesiones/nuevaSesion			controllers.Administracion.nuevaSesion()
-POST	/admin/adminSesiones/:id/editarTipoSesion	controllers.Administracion.editarSesion(id: Long)
-POST	/admin/adminSesiones/:id/borrarSesion	    controllers.Administracion.borrarSesion(id: Long)
+POST	/admin/:sala/:fecha/nuevaSesion				controllers.Administracion.nuevaSesion(sala: Long, fecha: String)
+POST	/admin/:id/editarTipoSesion					controllers.Administracion.editarSesion(id: Long)
+POST	/admin/:id/borrarSesion						controllers.Administracion.borrarSesion(id: Long)
 
 GET		/admin/login								controllers.Administracion.irALogin()
 POST	/admin/login/dologin						controllers.Administracion.doLogin()

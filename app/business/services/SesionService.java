@@ -3,6 +3,7 @@ package business.services;
 import java.sql.Date;
 import java.util.List;
 
+import models.Pelicula;
 import models.Sala;
 import models.Sesion;
 
@@ -14,7 +15,7 @@ public interface SesionService {
 
 	public List<Sesion> findBySalaAndFecha(Sala sala, Date fecha);
 
-	public List<Sesion> findByFechaAndSinAsignar(Date fecha);
+	public List<Sesion> findByPeliculaAndFecha(Pelicula pelicula, Date fecha);
 
 	public void update(Sesion s);
 

@@ -21,8 +21,7 @@
 				<div class="navbar-inner">
 					<a class="brand" href="/"><img src="@routes.Assets.at("images/logo.png")"> Inicio</a>
 				 	<ul class="nav">
-						<li class="divider-vertical"><a href="/admin">Principal</a></li>
-					 	<li class="divider-vertical"><a href="/admin/adminTipoSesion">Tipos de Sesion</a></li>
+						<li class="divider-vertical"><a href="/admin">Administración</a></li>
 				 	</ul>
 			 	</div>
 		 	</div>
@@ -50,12 +49,12 @@
 							<td><input type="date" name="fechaSala" id="fechaSala" error="Fecha no válida"></td>
 			            	<td><input class="btn btn-primary btn-small" type="submit" value="Ver sesiones"></td>
 			            }
-			            <form>
+			            @form(routes.Administracion.editarSala(sala.getId())) {
 				            <td><input class="btn btn-warning btn-small" type="submit" value="Editar"></td>
-			            </form>
-						<form>
+			            }
+						@form(routes.Administracion.borrarSala(sala.getId())) {
 			            	<td><input class="btn btn-danger btn-small" type="submit" value="Borrar"></td>
-			            </form>		            	
+			            }	            	
 					</tr>
 				}
 			</table>

@@ -1,4 +1,4 @@
-@(peli: Pelicula, fecha: Date, sesiones: List[Sesion])
+@(peli: Pelicula, fecha: Date, sesiones: List[Sesion], sesionesLibres: List[Sesion])
 
 @import helper._
 @import helper.twitterBootstrap._
@@ -21,9 +21,7 @@
 				<div class="navbar-inner">
 					<a class="brand" href="/"><img src="@routes.Assets.at("images/logo.png")"> Inicio</a>
 				 	<ul class="nav">
-						<li class="divider-vertical"><a href="/admin/adminPeliculas">Peliculas</a></li>
-						<li class="divider-vertical"><a href="/admin/adminSesiones">Sesiones</a></li>
-					 	<li class="divider-vertical"><a href="/admin/adminTipoSesion">Tipos de Sesion</a></li>
+						<li class="divider-vertical"><a href="/admin">Administración</a></li>
 				 	</ul>
 			 	</div>
 		 	</div>
@@ -32,7 +30,7 @@
 			<h2>Administrar sesiones de película</h2>	
 			<h4>Pelicula: @peli.getTitulo() - Fecha: @fecha.toString()</h4>
 			<h5>Duración: @peli.getDuracion() min. - Año: @peli.getAnio() - Genero: @peli.getGenero()</h5>
-			<h3>Sesiones:</h3>
+			<h3>Sesiones de la película:</h3>
 			<table class="table table-striped">
 				<tr>
 					<th>ID</th>
@@ -52,6 +50,30 @@
 						<td>@sesion.getTipo().getPrecio() €</td>
 						@form(routes.Administracion.borrarSesion(sesion.getId())) {
 			            	<td><input class="btn btn-danger" type="submit" value="Borrar"></td>
+			            }
+					</tr>
+				}
+			</table>
+			<h3>Sesiones sin asignar película:</h3>
+			<table class="table table-striped">
+				<tr>
+					<th>ID</th>
+					<th>Sala</th>
+					<th>Hora</th>
+					<th>Tipo</th>
+					<th>Precio</th>
+					<th></th>
+				</tr>
+				@for(sesion <- sesiones) {
+			
+					<tr>
+						<td>@sesion.getId()</td>
+						<td>@sesion.getSala().getNumero()</td>
+						<td>@sesion.getHora()</td>
+						<td>@sesion.getTipo().getNombre()</td>
+						<td>@sesion.getTipo().getPrecio() €</td>
+						@form(routes.Administracion.asignarPelicula(peli.getId(), sesion.getId())) {
+			            	<td><input class="btn btn-sucess btn-small" type="submit" value="Asignar"></td>
 			            }
 					</tr>
 				}

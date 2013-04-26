@@ -51,8 +51,8 @@ public class Sesion extends Model {
 				fecha);
 	}
 	
-	public static List<Sesion> findByFechaAndSinAsignar(Date fecha) {
-		return Factories.business.getSesionService().findByFechaAndSinAsignar(fecha);
+	public static List<Sesion> findByPeliculaAndFecha(Pelicula pelicula, Date fecha) {
+		return Factories.business.getSesionService().findByPeliculaAndFecha(pelicula, fecha);
 	}
 
 	public void update() {

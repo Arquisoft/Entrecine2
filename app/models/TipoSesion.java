@@ -38,7 +38,15 @@ public class TipoSesion extends Model {
 	}
 
 	public void save() {
-		Factories.business.getTipoSesionService().save(this);
+		TipoSesion tipoSesion = null;
+		if (id != null) {
+			tipoSesion = TipoSesion.findById(id);
+			if (tipoSesion == null)
+				Factories.business.getTipoSesionService().save(this);
+			else
+				update();
+		} else
+			Factories.business.getTipoSesionService().save(this);
 	}
 
 	public void delete() {
@@ -67,6 +75,10 @@ public class TipoSesion extends Model {
 
 	public Long getId() {
 		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public List<Sesion> getSesiones() {

@@ -3,6 +3,7 @@ package business.services.impl;
 import java.sql.Date;
 import java.util.List;
 
+import models.Pelicula;
 import models.Sala;
 import models.Sesion;
 import play.db.ebean.Model.Finder;
@@ -34,10 +35,10 @@ public class SesionServiceImpl implements SesionService {
 	public List<Sesion> findBySalaAndFecha(Sala sala, Date fecha) {
 		return find.where().eq("fecha", fecha).eq("sala", sala).findList();
 	}
-
+	
 	@Override
-	public List<Sesion> findByFechaAndSinAsignar(Date fecha) {
-		return find.where().eq("pelicula", null).eq("fecha", fecha).findList();
+	public List<Sesion> findByPeliculaAndFecha(Pelicula pelicula, Date fecha) {
+		return find.where().eq("pelicula", pelicula).eq("fecha", fecha).findList();
 	}
 
 	@Override
@@ -54,5 +55,7 @@ public class SesionServiceImpl implements SesionService {
 	public void delete(Sesion s) {
 		Ebean.delete(s);
 	}
+
+	
 
 }

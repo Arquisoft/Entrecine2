@@ -40,7 +40,15 @@ public class Sala extends Model {
 	}
 
 	public void save() {
-		Factories.business.getSalaService().save(this);
+		Sala sala = null;
+		if (id != null) {
+			sala = Sala.findById(id);
+			if (sala == null)
+				Factories.business.getSalaService().save(this);
+			else
+				update();
+		} else
+			Factories.business.getSalaService().save(this);
 	}
 
 	public void delete() {

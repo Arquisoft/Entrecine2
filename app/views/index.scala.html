@@ -80,33 +80,18 @@ $('.dropdown-toggle').dropdown();
 		<h1>¡Bienvenido @session().get("cliente")!</h1>
 		<h2>Sugerencias</h2>
 		
-		 <table class="table table-striped">
-		<tr>
-			<th>Imágen</th>
-			<th>Título</th>
-			<th>Año</th>
-			<th>Género</th>
-			<th>Duracion</th>
-			
-		</tr>
+		<ul class="thumbnails">
 		@for(pelicula <- sugerencias) {
-	
-			<tr>
-				<td width="100" height="140"><a href="/peliculas/@pelicula.getId()"><img src="@pelicula.getImagenCartelera()" width="100" height="140"/></a></td>
-				<td>
-					<p><a href="/peliculas/@pelicula.getId()">@pelicula.getTitulo()</a></p>
-					<p>@pelicula.getSinopsis()</p>
-				</td>
-				<td>@pelicula.getAnio()</td>
-				<td>@pelicula.getGenero()</td>
-				<td>@pelicula.getDuracion()</td>
-				
-			</tr>
+		
+		
+			<li class="span3">  
+			<h3 class="centertexto">@pelicula.getTitulo()</h3>
+          		<a href="/peliculas/@pelicula.getId()" class="thumbnail">  
+					<img width="150" height="210" src="@pelicula.getImagenCartelera()" width="100" height="140"/>
+				</a>				
+        	</li>		
 		}
-		</table>
-		
-		
-		
+		</ul>
 	}
 
     <h2>Películas en cartelera</h2>

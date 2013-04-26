@@ -30,6 +30,10 @@
 		
 			<h1>Panel de Administración</h1>
 			<h2>Crear sesiones en salas</h2>
+			<h3>
+				Salas:
+				<button type="button" class="btn btn-primary" onclick="location.href='#'">Añadir</button>
+			</h3>
 			<table class="table table-striped">
 				<tr>
 					<th>ID</th>
@@ -45,7 +49,7 @@
 						<td>@sala.getNumero()</td>
 						<td>@sala.getNumButacas()</td>
 						@form(routes.Administracion.getSesionesDeSala(sala.getId())) {
-						    <td><input type="date" name="fechaSala" id="fechaSala" error="Fecha no válida"></td>
+							<td><input type="date" name="fechaSala" id="fechaSala" error="Fecha no válida"></td>
 			            	<td><input class="btn btn-success" type="submit" value="Ver sesiones"></td>
 			            }
 			            </td>
@@ -54,7 +58,10 @@
 			</table>
 			
 			<h2>Asignar/Eliminar sesiones de películas</h2>	
-			<h3>Peliculas:</h3>
+			<h3>
+				Peliculas:
+				<button type="button" class="btn btn-primary" onclick="location.href='#'">Añadir</button>
+			</h3>
 			<table class="table table-striped">
 				<tr>
 					<th>ID</th>

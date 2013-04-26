@@ -41,6 +41,8 @@
 					<th>Número de butacas</th>
 					<th>Fecha</th>
 					<th></th>
+					<th></th>
+					<th></th>
 				</tr>
 				@for(sala <- salas) {
 			
@@ -50,9 +52,14 @@
 						<td>@sala.getNumButacas()</td>
 						@form(routes.Administracion.getSesionesDeSala(sala.getId())) {
 							<td><input type="date" name="fechaSala" id="fechaSala" error="Fecha no válida"></td>
-			            	<td><input class="btn btn-success" type="submit" value="Ver sesiones"></td>
+			            	<td><input class="btn btn-success btn-small" type="submit" value="Ver sesiones"></td>
 			            }
-			            </td>
+			            <form>
+				            <td><input class="btn btn-warning btn-small" type="submit" value="Editar"></td>
+			            </form>
+						<form>
+			            	<td><input class="btn btn-danger btn-small" type="submit" value="Borrar"></td>
+			            </form>		            	
 					</tr>
 				}
 			</table>
@@ -71,6 +78,8 @@
 					<th>Género</th>
 					<th>Fecha</th>
 					<th></th>
+					<th></th>
+					<th></th>
 				</tr>
 				@for(peli <- peliculas) {
 			
@@ -82,9 +91,14 @@
 						<td>@peli.getGenero()</td>
 						@form(routes.Administracion.getSesionesDePelicula(peli.getId())) {
 						    <td><input type="date" name="fechaPeli" id="fechaPeli" error="Fecha no válida"></td>
-			            	<td><input class="btn btn-success" type="submit" value="Ver sesiones"></td>
+			            	<td><input class="btn btn-success btn-small" type="submit" value="Ver sesiones"></td>
 			            }
-			            </td>
+			            @form(routes.Administracion.editarPelicula(peli.getId())) {
+				            <td><input class="btn btn-warning btn-small" type="submit" value="Editar"></td>
+			            }
+						@form(routes.Administracion.borrarPelicula(peli.getId())) {
+			            	<td><input class="btn btn-danger btn-small" type="submit" value="Borrar"></td>
+			            }
 					</tr>
 				}
 			</table>

@@ -1,4 +1,4 @@
-@(formRegistro: Form[Cliente])
+@(formRegistro: Form[Cliente], formCliente: Form[Cliente])
 
 @import helper._
 
@@ -6,26 +6,89 @@
 
 <html>
 <head>
- <title>Entrecine - Registrar nuevo usuario</title>
- </head>
- <body>
+	<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")">
+	<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+	<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+	<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+ 	<title>Entrecine - Registrar nuevo usuario</title>
+</head>
+<body>
+	<div class="container">
+	<div class="navbar">
+ <div class="navbar-inner">
+ <a class="brand" href="#"><img src="@routes.Assets.at("images/logo.png")"> Inicio</a>
+ <ul class="nav">
+ <li class="divider-vertical"><a href="/admin">Panel de Administrador</a></li>
+ <li class="divider-vertical"><a href="/taquilla">Panel de Empleado</a></li>
+</ul>
+<ul class="nav pull-right">
+ @if(session.get("cliente") == null) {
+ <li class="dropdown">
+    <a class="dropdown-toggle"
+       data-toggle="dropdown"
+       href="#">
+        Login
+        <b class="caret"></b>
+      </a>
+    <ul class="dropdown-menu">
+          <li>	    @form(action = routes.Clientes.login()) {
+	        <fieldset>
+	            @inputText(
+	                formCliente("login"),
+	                '_label -> "Login",
+	                '_error -> formCliente.globalError)
+	            @inputPassword(
+	                formCliente("password"), 
+	                '_label -> "Password")
+	        </fieldset>
+	        
+	        <div class="actions">
+	        <input type="submit" class="btn primary" value="Login">
+	        </div>
+	    }
+	    </li>
+
+    </ul>
+  </li>
+  } else{
+  <li class="dropdown">
+    <a class="dropdown-toggle"
+       data-toggle="dropdown"
+       href="#">
+        @session.get("cliente")
+        <b class="caret"></b>
+      </a>
+    <ul class="dropdown-menu">
+          <li><a href="/logout">Logout</a></li>
+    </ul>
+  </li>
+  }
+</ul>
+ </div> 
+</div>
 	<h1>Registrarse en Entrecine</h1>
+	<p>¿Quieres formar parte de Entrecine?</p>
+	<p>Si eres un usuario registrado podrás realizar reservas a través de nuestra web y recibir recomendaciones de películas que podrían interesarte.</p>
+	<hr>
 	@form(routes.Clientes.doRegister()) {
-		<label for="nombre">Nombre real</label>
-		<input type="text" name="nombre" id="nombre" required/>
-		<br>
-		<label for="login">Nombre de usuario</label>
-		<input type="text" name="login"  id="login" required/>
-		<br>
-		<label for="password">Contraseña</label>
-		<input type="password" name="password" id="pasword" required/>
-		<br>
-		<label for="confirmPassword">Confirma la contraseña</label>
-		<input type="password" name="confirmPassword" id="confirmPassword" required/>
-		<br>
+		@inputText(
+			formRegistro("nombre"),
+			'_label -> "Nombre real")
+		@inputText(
+			formRegistro("login"),
+			'_label -> "Nombre de usuario",
+			'_error -> formRegistro.globalError)
+		@inputPassword(
+			formRegistro("password"),
+			'_label -> "Contraseña")
+		@inputPassword(
+			formRegistro("confirmPassword"),
+			'_label -> "Confirma la contraseña",
+			'_error -> formRegistro.globalError)
 		<div class="actions">
 	        <input type="submit" class="btn primary" value="Registrarme">
         </div>
 	}
+	</div>
 </body>
 </html>

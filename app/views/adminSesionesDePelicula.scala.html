@@ -29,10 +29,10 @@
 		 	</div>
 		
 			<h1>Panel de Administración</h1>
-			<h2>Administrar sesiones de películas</h2>	
-			<h3>Pelicula: @peli.getTitulo() - Fecha: @sesiones.get(0).getDia()</h3>
-			<h4>Duración: @peli.getDuracion() min. - Año: @peli.getAnio() - Genero: @peli.getGenero()</h4>
-			
+			<h2>Administrar sesiones de película</h2>	
+			<h4>Pelicula: @peli.getTitulo() - Fecha: @sesiones.get(0).getDia()</h4>
+			<h5>Duración: @peli.getDuracion() min. - Año: @peli.getAnio() - Genero: @peli.getGenero()</h5>
+			<h3>Sesiones:</h3>
 			<table class="table table-striped">
 				<tr>
 					<th>ID</th>
@@ -40,7 +40,6 @@
 					<th>Hora</th>
 					<th>Tipo</th>
 					<th>Precio</th>
-					<th></th>
 					<th></th>
 				</tr>
 				@for(sesion <- sesiones) {
@@ -51,9 +50,6 @@
 						<td>@sesion.getHora()</td>
 						<td>@sesion.getTipo().getNombre()</td>
 						<td>@sesion.getTipo().getPrecio() €</td>
-						@form(routes.Administracion.editarSesion(sesion.getId())) {
-			            	<td><input class="btn btn-warning" type="submit" value="Editar"></td>
-			            }
 						@form(routes.Administracion.borrarSesion(sesion.getId())) {
 			            	<td><input class="btn btn-danger" type="submit" value="Borrar"></td>
 			            }

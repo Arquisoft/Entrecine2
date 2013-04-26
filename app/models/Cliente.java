@@ -88,8 +88,12 @@ public class Cliente extends Model {
 						if (random < cliente.getValue()) {
 							// Sacamos una de las que tiene al azar
 							random = rnd.nextInt(cliente.getKey().getPeliculasVistas().size());
-							sugerencias.add((cliente.getKey()
-									.getPeliculasVistas().get(random)));
+							Pelicula pelicula = cliente.getKey()
+									.getPeliculasVistas().get(random);
+							//La metemos solo si no la teniamos ya
+							if(!sugerencias.contains(pelicula))
+								sugerencias.add(pelicula);
+							// La metamos o no la contamos como sacada(a veces nos dara mas sugerencias de peliculas)
 							peliculasSacadas++;
 						}
 					}

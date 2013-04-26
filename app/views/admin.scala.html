@@ -1,4 +1,4 @@
-@(peliculas: List[Pelicula], salas: List[Sala], peliculaForm: Form[Pelicula], salaForm: Form[Sala])
+@(peliculas: List[Pelicula], salas: List[Sala], tiposDeSesion: List[TipoSesion], peliculaForm: Form[Pelicula], salaForm: Form[Sala], tipoSesionForm: Form[TipoSesion])
 
 @import helper._
 @import helper.twitterBootstrap._
@@ -28,7 +28,7 @@
 		 	</div>
 		
 			<h1>Panel de Administración</h1>
-			<h2>Crear sesiones en salas</h2>
+			<h2>Administrar salas y sus sesiones</h2>
 			<h3>Salas:</h3>
 			<table class="table table-striped">
 				<tr>
@@ -60,8 +60,8 @@
 				}
 			</table>
 			
-			<h2>Asignar/Eliminar sesiones de películas</h2>	
-			<h3>Peliculas:</h3>
+			<h2>Administrar peliculas y las sesiones asignadas</h2>	
+			<h3>Películas:</h3>
 			<table class="table table-striped">
 				<tr>
 					<th>ID</th>
@@ -95,8 +95,35 @@
 				}
 			</table>
 			
-			<div class="row offset2">
-				<div class="span4">
+			<h2>Administrar tipos de sesiones</h2>
+			<h3>Tipos de Sesion</h2>	
+				
+			<table class="table table-striped">
+			<tr>
+				<th>ID</th>
+				<th>Nombre</th>
+				<th>Precio</th>
+				<th></th>
+				<th></th>
+			</tr>
+			@for(tipoSesion <- tiposDeSesion) {
+		
+				<tr>
+					<td>@tipoSesion.getId()</td>
+					<td>@tipoSesion.getNombre()</td>
+					<td>@tipoSesion.getPrecio() €</td>
+					@form(routes.Administracion.editarTipoSesion(tipoSesion.getId())) {
+		            	<td><input class="btn btn-warning btn-small" type="submit" value="Editar"></td>
+		            }   
+					@form(routes.Administracion.borrarTipoSesion(tipoSesion.getId())) {
+		            	<td><input class="btn btn-danger btn-small" type="submit" value="Borrar"></td>
+		            }
+				</tr>
+			}
+			</table>
+			
+			<div class="row offset1">
+				<div class="span3">
 					<h2>Añadir sala</h2>
 				
 					@form(routes.Administracion.nuevaSala(), 'class -> ".form-horizontal") {
@@ -116,7 +143,7 @@
 				        </div>
 			    	}
 		    	</div>
-				<div class="span4">
+				<div class="span3">
 					<h2>Añadir película</h2>
 		
 					@form(routes.Administracion.nuevaPelicula(), 'class -> ".form-horizontal") {
@@ -147,6 +174,25 @@
 				        	<input class="btn btn-success" type="submit" value="Guardar">
 				        </div>
 			    	}
+			    </div>
+			    <div class="span4">
+			    	<h2>Añadir tipo sesion</h2>
+					@form(routes.Administracion.nuevoTipoSesion()) {
+				        
+				        @inputText(	tipoSesionForm("nombre"),
+				        			'_label -> "Nombre") 
+				                	
+				        @inputText( tipoSesionForm("precio"),
+				        			'_label -> "precio")
+				        			
+				        @defining(tipoSesionForm("id")) { uidField =>
+						    <input type="hidden" name="@uidField.name" id="@uidField.id" value="@uidField.value">
+						} 
+				        
+				        <div clas="actions">
+				        	<input class="btn btn-success" type="submit" value="Guardar">
+				        </div>
+				    }
 			    </div>
 			</div>
 		</div>

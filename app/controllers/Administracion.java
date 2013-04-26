@@ -24,7 +24,6 @@ import views.html.adminSesionesDeSala;
 import views.html.adminTipoSesion;
 import views.html.adminlogin;
 import controllers.filters.FiltroAdministrador;
-import controllers.forms.SesionForm;
 
 public class Administracion extends Controller {
 
@@ -37,14 +36,12 @@ public class Administracion extends Controller {
 
 	private static Form<Sala> formSala = Form.form(Sala.class);
 
-	private static Form<SesionForm> formSesion = Form.form(SesionForm.class);
-
 	// NAVEGACION MENU SUPERIOR
 
 	@With(FiltroAdministrador.class)
 	public static Result index() {
 		return ok(admin.render(Pelicula.findAll(), Sala.findAll(),
-				formPelicula, formSala));
+				TipoSesion.findAll(), formPelicula, formSala, formTipoSesion));
 	}
 
 	@With(FiltroAdministrador.class)
@@ -65,7 +62,7 @@ public class Administracion extends Controller {
 		Form<Pelicula> formularioRecibido = formPelicula.bindFromRequest();
 		if (formularioRecibido.hasErrors()) {
 			return badRequest(admin.render(Pelicula.findAll(), Sala.findAll(),
-					formularioRecibido, formSala));
+					TipoSesion.findAll(), formularioRecibido, formSala, formTipoSesion));
 		} else {
 			Pelicula p = formularioRecibido.get();
 			String id = formularioRecibido.data().get("id");
@@ -80,8 +77,8 @@ public class Administracion extends Controller {
 	public static Result editarPelicula(Long id) {
 		Pelicula p = Pelicula.findById(id);
 		Form<Pelicula> f = Form.form(Pelicula.class).fill(p);
-		return badRequest(admin.render(Pelicula.findAll(), Sala.findAll(), f,
-				formSala));
+		return badRequest(admin.render(Pelicula.findAll(), Sala.findAll(),
+				TipoSesion.findAll(), f, formSala, formTipoSesion));
 	}
 
 	// CRUD TIPOS DE SESION
@@ -131,7 +128,8 @@ public class Administracion extends Controller {
 		datos.put("hora", s.getHora().toString());
 		datos.put("tipo", s.getTipo().toString());
 		formularioRecibido.bind(datos);
-		return badRequest(adminSesionesDeSala.render(s.getSala(), fecha, Sesion.findBySalaAndFecha(sala, fecha)));
+		return badRequest(adminSesionesDeSala.render(s.getSala(), fecha,
+				Sesion.findBySalaAndFecha(sala, fecha)));
 	}
 
 	@Transactional
@@ -164,7 +162,7 @@ public class Administracion extends Controller {
 		Form<Sala> formularioRecibido = formSala.bindFromRequest();
 		if (formularioRecibido.hasErrors()) {
 			return badRequest(admin.render(Pelicula.findAll(), Sala.findAll(),
-					formPelicula, formSala));
+					TipoSesion.findAll(), formPelicula, formSala, formTipoSesion));
 		} else {
 			Sala s = formularioRecibido.get();
 			String id = formularioRecibido.data().get("id");
@@ -174,21 +172,20 @@ public class Administracion extends Controller {
 			return redirect(routes.Administracion.index());
 		}
 	}
-	
+
 	@With(FiltroAdministrador.class)
 	public static Result editarSala(Long id) {
 		Sala s = Sala.findById(id);
 		Form<Sala> f = Form.form(Sala.class).fill(s);
-		return badRequest(admin.render(Pelicula.findAll(), Sala.findAll(), formPelicula,
-				f));
+		return badRequest(admin.render(Pelicula.findAll(), Sala.findAll(),
+				TipoSesion.findAll(), formPelicula, f, formTipoSesion));
 	}
-	
+
 	@With(FiltroAdministrador.class)
 	public static Result borrarSala(Long id) {
 		Sala.findById(id).delete();
 		return redirect(routes.Administracion.index());
 	}
-
 
 	// VISTA SESIONES
 
@@ -198,7 +195,7 @@ public class Administracion extends Controller {
 		DynamicForm formularioRecibido = Form.form().bindFromRequest();
 		if (formularioRecibido.hasErrors()) {
 			return badRequest(admin.render(Pelicula.findAll(), Sala.findAll(),
-					formPelicula, formSala));
+					TipoSesion.findAll(), formPelicula, formSala, formTipoSesion));
 		} else {
 			try {
 				Date fecha = Date.valueOf(formularioRecibido.data().get(
@@ -208,8 +205,8 @@ public class Administracion extends Controller {
 					sesiones = new ArrayList<Sesion>();
 				return ok(adminSesionesDePelicula.render(peli, fecha, sesiones));
 			} catch (IllegalArgumentException e) {
-				return badRequest(admin.render(Pelicula.findAll(),
-						Sala.findAll(), formPelicula, formSala));
+				return badRequest(admin.render(Pelicula.findAll(), Sala.findAll(),
+						TipoSesion.findAll(), formPelicula, formSala, formTipoSesion));
 			}
 		}
 	}
@@ -220,7 +217,7 @@ public class Administracion extends Controller {
 		DynamicForm formularioRecibido = Form.form().bindFromRequest();
 		if (formularioRecibido.hasErrors()) {
 			return badRequest(admin.render(Pelicula.findAll(), Sala.findAll(),
-					formPelicula, formSala));
+					TipoSesion.findAll(), formPelicula, formSala, formTipoSesion));
 		} else {
 			try {
 				Date fecha = Date.valueOf(formularioRecibido.data().get(
@@ -230,8 +227,8 @@ public class Administracion extends Controller {
 					sesiones = new ArrayList<Sesion>();
 				return ok(adminSesionesDeSala.render(sala, fecha, sesiones));
 			} catch (IllegalArgumentException e) {
-				return badRequest(admin.render(Pelicula.findAll(),
-						Sala.findAll(), formPelicula, formSala));
+				return badRequest(admin.render(Pelicula.findAll(), Sala.findAll(),
+						TipoSesion.findAll(), formPelicula, formSala, formTipoSesion));
 			}
 		}
 	}

@@ -29,37 +29,65 @@
 		 	</div>
 		
 			<h1>Panel de Administración</h1>
-			<h2>Administrar sesiones de salas</h2>	
-			<h3>Sala: @sala.getNumero()  - Fecha: @sesiones.get(0).getDia()</h3>
-			<h4>Número de butacas: @sala.getNumButacas()</h4>
+			<h2>Administrar sesiones de sala</h2>
+			<h4>Sala: @sala.getNumero() - Número de butacas: @sala.getNumButacas() - Fecha: @sesiones.get(0).getDia()</h4>
+			<div class="row">
+				<div class="span7">
+					<h3>Sesiones:</h3>
+					<table class="table table-striped">
+						<tr>
+							<th>ID</th>
+							<th>Pelicula</th>
+							<th>Hora</th>
+							<th>Tipo</th>
+							<th>Precio</th>
+							<th></th>
+							<th></th>
+						</tr>
+						@for(sesion <- sesiones) {
+					
+							<tr>
+								<td>@sesion.getId()</td>
+								@if(sesion.getPelicula() == null) {
+									<td class="text-success">LIBRE</td>
+								} else {
+									<td>@sesion.getPelicula().getTitulo()</td>
+								}
+								<td>@sesion.getHora()</td>
+								<td>@sesion.getTipo().getNombre()</td>
+								<td>@sesion.getTipo().getPrecio() €</td>
+								@form(routes.Administracion.editarSesion(sesion.getId())) {
+					            	<td><input class="btn btn-warning btn-small" type="submit" value="Editar"></td>
+					            }
+								@form(routes.Administracion.borrarSesion(sesion.getId())) {
+					            	<td><input class="btn btn-danger btn-small" type="submit" value="Borrar"></td>
+					            }
+							</tr>
+						}
+					</table>
+				</div>
 			
-			<table class="table table-striped">
-				<tr>
-					<th>ID</th>
-					<th>Pelicula</th>
-					<th>Hora</th>
-					<th>Tipo</th>
-					<th>Precio</th>
-					<th></th>
-					<th></th>
-				</tr>
-				@for(sesion <- sesiones) {
-			
-					<tr>
-						<td>@sesion.getId()</td>
-						<td>@sesion.getPelicula().getTitulo()</td>
-						<td>@sesion.getHora()</td>
-						<td>@sesion.getTipo().getNombre()</td>
-						<td>@sesion.getTipo().getPrecio() €</td>
-						@form(routes.Administracion.editarSesion(sesion.getId())) {
-			            	<td><input class="btn btn-warning" type="submit" value="Editar"></td>
-			            }
-						@form(routes.Administracion.borrarSesion(sesion.getId())) {
-			            	<td><input class="btn btn-danger" type="submit" value="Borrar"></td>
-			            }
-					</tr>
-				}
-			</table>
+				<div class="span4 offset1">
+					<h3>Crear sesión:</h3>
+					<form class="form-horizontal">
+						<div class="control-group">
+					 		<label for="tipo">Tipo de sesión:</label>
+						 	<select multiple="multiple" name="tipo" id="tipo">
+						 		@for(tipo <- TipoSesion.findAll()) {
+						 			<option value="@tipo.getId()">@tipo.getNombre() - @tipo.getPrecio() €</option>
+						 		}
+						 	</select>
+					 	</div>
+					 	<div class="control-group">
+					 		<label for="hora">Hora de la sesión:</label>
+					 		<input type="time" name="hora" id="hora">
+					 	</div>
+					 	<div class="control-group">
+				 			<input class="btn btn-success" type="submit" value="Crear">
+						</div>
+					</form>
+				</div>
+			</div>	
 		</div>	
 	</body>
 </html>

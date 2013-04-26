@@ -62,6 +62,10 @@ public class Sala extends Model {
 	public Long getId() {
 		return id;
 	}
+	
+	public Long setId(Long id) {
+		return id;
+	}
 
 	public void addSesion(Sesion sesion) {
 		sesion._setSala(this);

@@ -1,4 +1,4 @@
-@(peliculas: List[Pelicula], salas: List[Sala])
+@(peliculas: List[Pelicula], salas: List[Sala], peliculaForm: Form[Pelicula], salaForm: Form[Sala])
 
 @import helper._
 @import helper.twitterBootstrap._
@@ -82,7 +82,6 @@
 					<th></th>
 				</tr>
 				@for(peli <- peliculas) {
-			
 					<tr>
 						<td>@peli.getId()</td>
 						<td>@peli.getTitulo()</td>
@@ -90,7 +89,7 @@
 						<td>@peli.getAnio()</td>
 						<td>@peli.getGenero()</td>
 						@form(routes.Administracion.getSesionesDePelicula(peli.getId())) {
-						    <td><input type="date" name="fechaPeli" id="fechaPeli" error="Fecha no válida"></td>
+						    <td><input type="date" name="fechaPeli" id="fechaPeli"></td>
 			            	<td><input class="btn btn-success btn-small" type="submit" value="Ver sesiones"></td>
 			            }
 			            @form(routes.Administracion.editarPelicula(peli.getId())) {
@@ -102,6 +101,58 @@
 					</tr>
 				}
 			</table>
+			
+			<div class="row offset2">
+				<div class="span4">
+					<h2>Añadir sala</h2>
+				
+					@form(routes.Administracion.nuevaSala(), 'class -> ".form-horizontal") {
+				
+				        @inputText(	salaForm("numero"), 'class -> ".control-group",
+				        			'_label -> "Número de sala") 
+				                	
+				        @inputText( salaForm("numButacas"), 'class -> ".control-group",
+				        			'_label -> "Número de butacas")
+						
+						@defining(salaForm("id")) { uidField =>
+						  <input type="hidden" name="@uidField.name" id="@uidField.id" value="@uidField.value">
+						}
+						
+						<div class=".control-group">
+				        	<input class="btn btn-success" type="submit" value="Guardar">
+				        </div>
+			    	}
+		    	</div>
+				<div class="span4">
+					<h2>Añadir película</h2>
+		
+					@form(routes.Administracion.nuevaPelicula(), 'class -> ".form-horizontal") {
+					
+				        @inputText(	peliculaForm("titulo"), 'class -> ".control-group",
+				        			'_label -> "Titulo") 
+				                	
+				        @inputText( peliculaForm("anio"), 'class -> ".control-group",
+				        			'_label -> "Año")
+				                	
+				        @inputText( peliculaForm("genero"), 'class -> ".control-group",
+				        			'_label -> "Género")
+				        
+				        @textarea( peliculaForm("sinopsis"), 'class -> ".control-group",
+				        			'_label -> "Sinopsis")
+				        		
+				        @inputText( peliculaForm("imagenCartelera"), 'class -> ".control-group",
+				        			'_label -> "Imagen de la cartelera")
+						
+						@defining(peliculaForm("id")) { uidField =>
+						  <input type="hidden" name="@uidField.name" id="@uidField.id" value="@uidField.value">
+						}
+						
+						<div class=".control-group">
+				        	<input class="btn btn-success" type="submit" value="Guardar">
+				        </div>
+			    	}
+			    </div>
+			</div>
 		</div>
 	</body>
 </html>

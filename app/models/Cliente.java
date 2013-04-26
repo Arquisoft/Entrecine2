@@ -87,13 +87,15 @@ public class Cliente extends Model {
 
 						if (random < cliente.getValue()) {
 							// Sacamos una de las que tiene al azar
-							random = rnd.nextInt(cliente.getKey().getPeliculasVistas().size());
+							random = rnd.nextInt(cliente.getKey()
+									.getPeliculasVistas().size());
 							Pelicula pelicula = cliente.getKey()
 									.getPeliculasVistas().get(random);
-							//La metemos solo si no la teniamos ya
-							if(!sugerencias.contains(pelicula))
+							// La metemos solo si no la teniamos ya
+							if (!sugerencias.contains(pelicula))
 								sugerencias.add(pelicula);
-							// La metamos o no la contamos como sacada(a veces nos dara mas sugerencias de peliculas)
+							// La metamos o no la contamos como sacada(a veces
+							// nos dara mas sugerencias de peliculas)
 							peliculasSacadas++;
 						}
 					}
@@ -124,9 +126,9 @@ public class Cliente extends Model {
 		// Si quisiesmo realizarlo con varios servidores esta seria la parte que
 		// deberiamos de tener en cuenta para repartir el map entre los
 		// servidores esclavos
-		// Lo bueno es que este metodo mapPelicula trabaja con datos
-		// independientes(una de las cualidades de la transparencia
-		// referencial), lo que la hace propicio para ejecutarse en varios hilos
+		// Lo bueno es que este metodo mapPelicula no tiene efectos colaterales
+		// (una de las cualidades de la transparencia referencial), lo que la
+		// hace propicio para ejecutarse en varios hilos
 		// en diferentes servidores esclavos
 		for (Pelicula pelicula : peliculasCliente)
 			clientes.addAll(mapPelicula(pelicula));

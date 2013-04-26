@@ -67,18 +67,18 @@ public class Cliente extends Model {
 
 		// Solo hacemos esto si tiene algun usuario parecido
 		if (usuariosParecidos.size() > 0) {
-			// Sacamos 5 peliculas solo, con mayor probabilidad que sean de los
+			// Sacamos 4 peliculas solo, con mayor probabilidad que sean de los
 			// usuarios que mas comparten, y tambien las pelis que mas se
 			// repitan ya que las tienen mas usuarios
 			Random rnd = new Random();
 
 			int peliculasSacadas = 0;
 
-			while (peliculasSacadas < 5) {
+			while (peliculasSacadas < 4) {
 				for (Entry<Cliente, Integer> cliente : usuariosParecidos
 						.entrySet()) {
-					// No seguimos si ya sacamos 5
-					if (peliculasSacadas < 5) {
+					// No seguimos si ya sacamos 4
+					if (peliculasSacadas < 4) {
 						// Siempre añado 10. Cuantas menos pelis comparta mas
 						// dificil sera(es mas dificil que salga un 1 entre 11
 						// posibilidades que un numero del 1 al 100 entre 111

@@ -12,6 +12,8 @@ GET		/logout						controllers.Clientes.logout()
 POST	/reservar					controllers.Clientes.reservarButaca()
 GET		/tpvVirtual					controllers.Clientes.tpvVirtual()
 POST	/cancelar					controllers.Clientes.cancelarReserva()
+GET		/registro					controllers.Clientes.vistaRegistro()
+POST	/registro/doRegister		controllers.Clientes.doRegister()
 
 #Administracion
 

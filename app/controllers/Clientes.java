@@ -20,6 +20,7 @@ import views.html.index;
 import views.html.tpvVirtual;
 import views.html.vistaPelicula;
 import views.html.vistaSesion;
+import views.html.clienteRegistro;
 import controllers.filters.FiltroCliente;
 
 public class Clientes extends Controller {
@@ -123,6 +124,31 @@ public class Clientes extends Controller {
 	@With(FiltroCliente.class)
 	public static Result tpvVirtual() {
 		return ok(tpvVirtual.render());
+	}
+	
+	public static Result doRegister() {
+		Form<Cliente> formularioRecibido = formCliente.bindFromRequest();
+
+		String nombre = formularioRecibido.field("nombre").value();
+		String login = formularioRecibido.field("login").value();
+		String password = formularioRecibido.field("password").value();
+		String confirmPassword = formularioRecibido.field("confirmPassword").value();
+		
+		if(Cliente.findByLogin(login) != null || !password.equals(confirmPassword)) {
+		    return badRequest(clienteRegistro.render(formularioRecibido));
+		} else {
+		    Cliente c = new Cliente();
+		    c.setLogin(login);
+		    c.setNombre(nombre);
+		    c.setPassword(password);
+		    c.save();
+		    session().put("cliente", login);
+			return redirect(routes.Clientes.index());
+		}
+	}
+	
+	public static Result vistaRegistro() {
+		return ok(clienteRegistro.render(formCliente));
 	}
 
 	@SuppressWarnings("deprecation")

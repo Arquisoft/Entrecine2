@@ -24,15 +24,20 @@ public class SesionServiceImpl implements SesionService {
 	public List<Sesion> findAll() {
 		return find.all();
 	}
-	
+
 	@Override
 	public List<Sesion> findByFecha(Date fecha) {
 		return find.where().eq("fecha", fecha).findList();
 	}
-	
+
 	@Override
 	public List<Sesion> findBySalaAndFecha(Sala sala, Date fecha) {
 		return find.where().eq("fecha", fecha).eq("sala", sala).findList();
+	}
+
+	@Override
+	public List<Sesion> findByFechaAndSinAsignar(Date fecha) {
+		return find.where().eq("pelicula", null).eq("fecha", fecha).findList();
 	}
 
 	@Override
@@ -49,7 +54,5 @@ public class SesionServiceImpl implements SesionService {
 	public void delete(Sesion s) {
 		Ebean.delete(s);
 	}
-
-	
 
 }

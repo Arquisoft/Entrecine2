@@ -11,8 +11,10 @@ public interface SesionService {
 	public Sesion findById(Long id);
 
 	public List<Sesion> findAll();
-	
+
 	public List<Sesion> findBySalaAndFecha(Sala sala, Date fecha);
+
+	public List<Sesion> findByFechaAndSinAsignar(Date fecha);
 
 	public void update(Sesion s);
 

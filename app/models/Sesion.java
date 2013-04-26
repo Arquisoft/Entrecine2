@@ -50,6 +50,10 @@ public class Sesion extends Model {
 		return Factories.business.getSesionService().findBySalaAndFecha(sala,
 				fecha);
 	}
+	
+	public static List<Sesion> findByFechaAndSinAsignar(Date fecha) {
+		return Factories.business.getSesionService().findByFechaAndSinAsignar(fecha);
+	}
 
 	public void update() {
 		Factories.business.getSesionService().update(this);

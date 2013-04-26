@@ -72,7 +72,12 @@ public class Administracion extends Controller {
 			return badRequest(adminPeliculas.render(Pelicula.findAll(),
 					formularioRecibido));
 		} else {
-			formularioRecibido.get().save();
+			Pelicula p = formularioRecibido.get();
+			String id = formularioRecibido.data().get("id");
+			System.out.println("Recibido el id["+id+"]");
+			if (id.length()>0)
+				p.setId(Long.parseLong(id));
+			p.save();
 			return redirect(routes.Administracion.adminPeliculas());
 		}
 	}

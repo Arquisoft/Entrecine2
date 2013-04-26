@@ -75,7 +75,7 @@ public class Sesion extends Model {
 	public List<Boolean> getButacas() {
 		List<Boolean> butacas = new ArrayList<Boolean>();
 		// Crear todas las butacas como libres
-		for (int i = 0; i <= sala.getNumButacas(); i++)
+		for (int i = 0; i < sala.getNumButacas(); i++)
 			butacas.add(false);
 		// Cambiar aquellas que esten ocupadas
 		for (Entrada e : entradas)

@@ -45,8 +45,7 @@ public class Sesion extends Model {
 	}
 	
 	public static List<Sesion> findByFecha(Date fecha) {
-	//	return Factories.business.getSesionService().findByFecha(fecha);
-		return null;
+		return Factories.business.getSesionService().findByFecha(fecha);
 	}
 
 

@@ -1,4 +1,4 @@
-@(peliculas: List[Pelicula])
+@(peliculas: List[Pelicula], salas: List[Sala])
 
 @import helper._
 @import helper.twitterBootstrap._
@@ -29,8 +29,32 @@
 		 	</div>
 		
 			<h1>Panel de Administración</h1>
-			<h2>Administrar sesiones de películas</h2>	
-	
+			<h2>Crear sesiones en salas</h2>
+			<table class="table table-striped">
+				<tr>
+					<th>ID</th>
+					<th>Numero de sala</th>
+					<th>Número de butacas</th>
+					<th>Fecha</th>
+					<th></th>
+				</tr>
+				@for(sala <- salas) {
+			
+					<tr>
+						<td>@sala.getId()</td>
+						<td>@sala.getNumero()</td>
+						<td>@sala.getNumButacas()</td>
+						@form(routes.Administracion.getSesionesDePelicula(sala.getId())) {
+						    <td><input type="date" name="fechaSala" id="fechaSala" error="Fecha no válida"></td>
+			            	<td><input class="btn btn-success" type="submit" value="Ver sesiones"></td>
+			            }
+			            </td>
+					</tr>
+				}
+			</table>
+			
+			<h2>Asignar/Eliminar sesiones de películas</h2>	
+			<h3>Peliculas:</h3>
 			<table class="table table-striped">
 				<tr>
 					<th>ID</th>
@@ -50,7 +74,7 @@
 						<td>@peli.getAnio()</td>
 						<td>@peli.getGenero()</td>
 						@form(routes.Administracion.getSesionesDePelicula(peli.getId())) {
-						    <td><input type="date" name="fecha" id="fecha" error="Fecha no válida"></td>
+						    <td><input type="date" name="fechaPeli" id="fechaPeli" error="Fecha no válida"></td>
 			            	<td><input class="btn btn-success" type="submit" value="Ver sesiones"></td>
 			            }
 			            </td>

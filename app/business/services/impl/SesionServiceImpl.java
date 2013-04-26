@@ -3,9 +3,9 @@ package business.services.impl;
 import java.sql.Date;
 import java.util.List;
 
+import models.Sala;
 import models.Sesion;
 import play.db.ebean.Model.Finder;
-
 import business.services.SesionService;
 
 import com.avaje.ebean.Ebean;
@@ -27,7 +27,12 @@ public class SesionServiceImpl implements SesionService {
 	
 	@Override
 	public List<Sesion> findByFecha(Date fecha) {
-		return find.where().eq("dia", fecha).findList();
+		return find.where().eq("fecha", fecha).findList();
+	}
+	
+	@Override
+	public List<Sesion> findBySalaAndFecha(Sala sala, Date fecha) {
+		return find.where().eq("fecha", fecha).eq("sala", sala).findList();
 	}
 
 	@Override

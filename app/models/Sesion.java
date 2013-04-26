@@ -32,7 +32,7 @@ public class Sesion extends Model {
 	@OneToMany(mappedBy = "sesion")
 	private List<Entrada> entradas = new ArrayList<Entrada>();
 	private Time hora;
-	private Date dia;
+	private Date fecha;
 
 	public static Sesion findById(Long id) {
 		return Factories.business.getSesionService().findById(id);
@@ -41,11 +41,15 @@ public class Sesion extends Model {
 	public static List<Sesion> findAll() {
 		return Factories.business.getSesionService().findAll();
 	}
-	
+
 	public static List<Sesion> findByFecha(Date fecha) {
 		return Factories.business.getSesionService().findByFecha(fecha);
 	}
 
+	public static List<Sesion> findBySalaAndFecha(Sala sala, Date fecha) {
+		return Factories.business.getSesionService().findBySalaAndFecha(sala,
+				fecha);
+	}
 
 	public void update() {
 		Factories.business.getSesionService().update(this);
@@ -67,8 +71,6 @@ public class Sesion extends Model {
 			butacas.remove(e.getButaca());
 		return butacas;
 	}
-	
-
 
 	public List<Boolean> getButacas() {
 		List<Boolean> butacas = new ArrayList<Boolean>();
@@ -85,12 +87,12 @@ public class Sesion extends Model {
 		super();
 	}
 
-	public Date getDia() {
-		return dia;
+	public Date getFecha() {
+		return fecha;
 	}
 
-	public void setDia(Date dia) {
-		this.dia = dia;
+	public void setFecha(Date dia) {
+		this.fecha = dia;
 	}
 
 	public Long getId() {
@@ -168,12 +170,13 @@ public class Sesion extends Model {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-	public int diasRestantesParaLaProyeccion(){
+
+	public int diasRestantesParaLaProyeccion() {
 		long MILLSECS_PER_DAY = 24 * 60 * 60 * 1000;
 		java.util.Date today = new java.util.Date();
-		int diferencia= (int) (( dia.getTime() - today.getTime() )/ MILLSECS_PER_DAY);
+		int diferencia = (int) ((fecha.getTime() - today.getTime()) / MILLSECS_PER_DAY);
 		return diferencia;
-		
+
 	}
 
 	@Override
@@ -196,9 +199,8 @@ public class Sesion extends Model {
 	@Override
 	public String toString() {
 		return "Sesion [id=" + id + ", tipo=" + tipo + ", sala=" + sala
-				+ ", pelicula=" + pelicula + ", hora=" + hora + ", dia=" + dia
+				+ ", pelicula=" + pelicula + ", hora=" + hora + ", dia=" + fecha
 				+ "]";
 	}
 
-	
 }

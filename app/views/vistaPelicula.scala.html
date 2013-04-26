@@ -97,7 +97,7 @@
 			@for(sesion <- pelicula.getSesionesFuturas()) {
 				<tr>
 					<td>@sesion.getHora()</td>
-					<td>@sesion.getDia()</td>
+					<td>@sesion.getFecha()</td>
 					<td>@sesion.getSala().getNumero()</td>
 					<td>@sesion.getTipo().getNombre() - @sesion.getTipo().getPrecio()€</td>
 					@if(session.get("cliente") != null) {

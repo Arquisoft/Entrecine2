@@ -1,4 +1,4 @@
-@(peli: Pelicula, sesiones: List[Sesion])
+@(peli: Pelicula, fecha: Date, sesiones: List[Sesion])
 
 @import helper._
 @import helper.twitterBootstrap._
@@ -30,7 +30,7 @@
 		
 			<h1>Panel de Administración</h1>
 			<h2>Administrar sesiones de película</h2>	
-			<h4>Pelicula: @peli.getTitulo() - Fecha: @sesiones.get(0).getDia()</h4>
+			<h4>Pelicula: @peli.getTitulo() - Fecha: @fecha.toString()</h4>
 			<h5>Duración: @peli.getDuracion() min. - Año: @peli.getAnio() - Genero: @peli.getGenero()</h5>
 			<h3>Sesiones:</h3>
 			<table class="table table-striped">

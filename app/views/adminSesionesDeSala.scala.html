@@ -1,4 +1,4 @@
-@(sala: Sala, sesiones: List[Sesion])
+@(sala: Sala, fecha: Date, sesiones: List[Sesion])
 
 @import helper._
 @import helper.twitterBootstrap._
@@ -30,7 +30,7 @@
 		
 			<h1>Panel de Administración</h1>
 			<h2>Administrar sesiones de sala</h2>
-			<h4>Sala: @sala.getNumero() - Número de butacas: @sala.getNumButacas() - Fecha: @sesiones.get(0).getDia()</h4>
+			<h4>Sala: @sala.getNumero() - Número de butacas: @sala.getNumButacas() - Fecha: @fecha.toString()</h4>
 			<div class="row">
 				<div class="span7">
 					<h3>Sesiones:</h3>
@@ -69,7 +69,7 @@
 			
 				<div class="span4 offset1">
 					<h3>Crear sesión:</h3>
-					<form class="form-horizontal">
+					<form class="form-horizontal" action="@routes.Administracion.nuevaSesion(sala.getId(), fecha.toString())" method="post">
 						<div class="control-group">
 					 		<label for="tipo">Tipo de sesión:</label>
 						 	<select multiple="multiple" name="tipo" id="tipo">

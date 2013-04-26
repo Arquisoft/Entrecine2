@@ -31,8 +31,8 @@ POST	/admin/adminTipoSesion/nuevoTipoSesion		controllers.Administracion.nuevoTip
 POST	/admin/adminTipoSesion/:id/editarTipoSesion	controllers.Administracion.editarTipoSesion(id: Long)
 POST	/admin/adminTipoSesion/:id/borrarTipoSesion	controllers.Administracion.borrarTipoSesion(id: Long)
 
-GET		/admin/:id/verSesionesPelicula				controllers.Administracion.getSesionesDePelicula(id: Long)
-GET		/admin/:id/verSesionesSala					controllers.Administracion.getSesionesDeSala(id: Long)
+GET		/admin/:peli/verSesionesPelicula			controllers.Administracion.getSesionesDePelicula(peli: Long)
+GET		/admin/:sala/verSesionesSala				controllers.Administracion.getSesionesDeSala(sala: Long)
 
 POST	/admin/:sala/:fecha/nuevaSesion				controllers.Administracion.nuevaSesion(sala: Long, fecha: String)
 POST	/admin/:id/editarTipoSesion					controllers.Administracion.editarSesion(id: Long)

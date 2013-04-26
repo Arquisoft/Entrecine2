@@ -115,39 +115,45 @@ public class Administracion extends Controller {
 	public static Result borrarSesion(Long id) {
 		Sesion s = Sesion.findById(id);
 		Sala sala = s.getSala();
+		Date fecha = s.getFecha();
 		s.delete();
-		return redirect(routes.Administracion.index());
+		List<Sesion> sesiones = Sesion.findBySalaAndFecha(sala, fecha);
+		return redirect(routes.Administracion.getSesionesDeSala(sala.getId()));
 	}
 
 	@With(FiltroAdministrador.class)
 	public static Result editarSesion(Long id) {
 		Sesion s = Sesion.findById(id);
+		Sala sala = s.getSala();
+		Date fecha = s.getFecha();
 		DynamicForm formularioRecibido = Form.form();
 		Map<String, String> datos = new HashMap<String, String>();
 		datos.put("hora", s.getHora().toString());
-		datos.put("tipo", s.getTipo().getId().toString());
+		datos.put("tipo", s.getTipo().toString());
 		formularioRecibido.bind(datos);
-		return badRequest(adminSesionesDeSala.render(s.getSala(), s.getSala().getSesiones()));
+		return badRequest(adminSesionesDeSala.render(s.getSala(), fecha, Sesion.findBySalaAndFecha(sala, fecha)));
 	}
 
 	@Transactional
 	@With(FiltroAdministrador.class)
-	public static Result nuevaSesion(Long s, String fecha_s) {
+	public static Result nuevaSesion(Long sala_id, String fecha_s) {
 		Date fecha = Date.valueOf(fecha_s);
-		List<Sesion> sesiones = Sesion.findByFecha(fecha);
-		Sala sala = Sala.findById(s);
+		Sala sala = Sala.findById(sala_id);
+		List<Sesion> sesiones = Sesion.findBySalaAndFecha(sala, fecha);
+		if (sesiones == null)
+			sesiones = new ArrayList<Sesion>();
 		DynamicForm formularioRecibido = Form.form().bindFromRequest();
 		if (formularioRecibido.hasErrors()) {
-			return badRequest(adminSesionesDeSala.render(sala, sesiones));
+			return badRequest(adminSesionesDeSala.render(sala, fecha, sesiones));
 		} else {
 			Map<String, String> form = formularioRecibido.get().getData();
 			Sesion sesion = new Sesion();
 			sesion.setTipo(TipoSesion.findById(Long.parseLong(form.get("tipo"))));
 			sesion.setSala(sala);
-			sesion.setDia(fecha);
+			sesion.setFecha(fecha);
 			sesion.setHora(Time.valueOf(form.get("hora") + ":00"));
 			sesion.save();
-			return redirect(routes.Administracion.index());
+			return redirect(routes.Administracion.getSesionesDeSala(sala_id));
 		}
 	}
 
@@ -187,8 +193,8 @@ public class Administracion extends Controller {
 	// VISTA SESIONES
 
 	@With(FiltroAdministrador.class)
-	public static Result getSesionesDePelicula(Long id) {
-		Pelicula peli = Pelicula.findById(id);
+	public static Result getSesionesDePelicula(Long peli_id) {
+		Pelicula peli = Pelicula.findById(peli_id);
 		DynamicForm formularioRecibido = Form.form().bindFromRequest();
 		if (formularioRecibido.hasErrors()) {
 			return badRequest(admin.render(Pelicula.findAll(), Sala.findAll(),
@@ -200,7 +206,7 @@ public class Administracion extends Controller {
 				List<Sesion> sesiones = Sesion.findByFecha(fecha);
 				if (sesiones == null)
 					sesiones = new ArrayList<Sesion>();
-				return ok(adminSesionesDePelicula.render(peli, sesiones));
+				return ok(adminSesionesDePelicula.render(peli, fecha, sesiones));
 			} catch (IllegalArgumentException e) {
 				return badRequest(admin.render(Pelicula.findAll(),
 						Sala.findAll(), formPelicula, formSala));
@@ -209,8 +215,8 @@ public class Administracion extends Controller {
 	}
 
 	@With(FiltroAdministrador.class)
-	public static Result getSesionesDeSala(Long id) {
-		Sala sala = Sala.findById(id);
+	public static Result getSesionesDeSala(Long sala_id) {
+		Sala sala = Sala.findById(sala_id);
 		DynamicForm formularioRecibido = Form.form().bindFromRequest();
 		if (formularioRecibido.hasErrors()) {
 			return badRequest(admin.render(Pelicula.findAll(), Sala.findAll(),
@@ -219,10 +225,10 @@ public class Administracion extends Controller {
 			try {
 				Date fecha = Date.valueOf(formularioRecibido.data().get(
 						"fechaSala"));
-				List<Sesion> sesiones = Sesion.findByFecha(fecha);
+				List<Sesion> sesiones = Sesion.findBySalaAndFecha(sala, fecha);
 				if (sesiones == null)
 					sesiones = new ArrayList<Sesion>();
-				return ok(adminSesionesDeSala.render(sala, sesiones));
+				return ok(adminSesionesDeSala.render(sala, fecha, sesiones));
 			} catch (IllegalArgumentException e) {
 				return badRequest(admin.render(Pelicula.findAll(),
 						Sala.findAll(), formPelicula, formSala));

@@ -128,7 +128,7 @@ public class Pelicula extends Model {
 		List<Sesion> listaEliminados = new ArrayList<Sesion>();
 
 		for(Sesion sesion: nuevaLista){
-			if(sesion.getDia().getTime() < today.getTime()){
+			if(sesion.getFecha().getTime() < today.getTime()){
 				listaEliminados.add(sesion);
 			}
 		}

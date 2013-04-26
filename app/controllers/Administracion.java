@@ -74,8 +74,7 @@ public class Administracion extends Controller {
 		} else {
 			Pelicula p = formularioRecibido.get();
 			String id = formularioRecibido.data().get("id");
-			System.out.println("Recibido el id["+id+"]");
-			if (id.length()>0)
+			if (!id.isEmpty())
 				p.setId(Long.parseLong(id));
 			p.save();
 			return redirect(routes.Administracion.adminPeliculas());

@@ -4,6 +4,7 @@ import infrastructure.Factories;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -135,9 +136,15 @@ public class Pelicula extends Model {
 		for(Sesion sesion: listaEliminados){
 			nuevaLista.remove(sesion);
 		}
-		return nuevaLista;
+		Collections.sort(nuevaLista, new Comparator<Sesion>() {
+		    public int compare(Sesion m1, Sesion m2) {
+		        return m1.getFecha().compareTo(m2.getFecha());
+		    }
+		});		return nuevaLista;
 
 	}
+	
+	
 
 	public void addSesion(Sesion sesion) {
 		sesion._setPelicula(this);

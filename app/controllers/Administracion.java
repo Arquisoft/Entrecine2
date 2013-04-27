@@ -23,6 +23,7 @@ import views.html.adminSesionesDePelicula;
 import views.html.adminSesionesDeSala;
 import views.html.adminlogin;
 import controllers.filters.FiltroAdministrador;
+import controllers.filters.FiltroCliente;
 
 public class Administracion extends Controller {
 
@@ -249,7 +250,13 @@ public class Administracion extends Controller {
 	}
 
 	// LOGIN Y REDIRECCIONES EN SEGUNDO PLANO
-
+	@With(FiltroAdministrador.class)
+	public static Result logout() {
+		// Sacamos a cliente de sesion
+		session().remove("empleado");
+		return redirect(routes.Clientes.index());
+	}
+	
 	public static Result irALogin() {
 		return ok(adminlogin.render(formEmpleado));
 	}

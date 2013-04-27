@@ -16,7 +16,7 @@ GET		/registro					controllers.Clientes.vistaRegistro()
 POST	/registro/doRegister		controllers.Clientes.doRegister()
 
 #Administracion
-
+GET		/admin/logout								controllers.Administracion.logout()
 GET		/admin										controllers.Administracion.index()
 POST	/admin/nuevaPelicula						controllers.Administracion.nuevaPelicula()
 POST	/admin/:id/editarPelicula					controllers.Administracion.editarPelicula(id: Long)

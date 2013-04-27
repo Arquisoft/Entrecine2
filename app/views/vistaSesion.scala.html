@@ -18,15 +18,18 @@
 
 
  </script>
-  <title>Entrecine - Inicio</title>
+  <title>Entrecine - Sesion</title>
   </head>
   
   <body>
   <div class="container">
- <div class="navbar">
+<div class="navbar navbar-fixed-top">
  <div class="navbar-inner">
- <a class="brand" href="/"><img src="@routes.Assets.at("images/favicon.png")"> Inicio</a>
+ <a class="brand" href="#">
+ <img src="@routes.Assets.at("images/logo.png")"> 
+ </a>
  <ul class="nav">
+ <li class="divider-vertical active"><a href="/">Inicio</a></li>
  <li class="divider-vertical"><a href="/admin">Panel de Administrador</a></li>
  <li class="divider-vertical"><a href="/taquilla">Panel de Empleado</a></li>
 </ul>
@@ -74,7 +77,7 @@
   }
 </ul>
  </div> 
-</div>
+ </div>
 	<h1>Sesión @sesion.getId()</h1>
 	
 	<h2>@sesion.getPelicula().getTitulo()</h2>
@@ -105,5 +108,5 @@
 		</div>
 	
 }
-
+</div>
 </body>

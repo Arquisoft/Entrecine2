@@ -18,53 +18,60 @@
 <title>Entrecine - Película</title>
 </head>
 <body>
-	<div class="container">
-		<div class="navbar">
-	 		<div class="navbar-inner">
-	 			<a class="brand" href="..\"><img src="@routes.Assets.at("images/favicon.png")"> Inicio</a>
-	 			<ul class="nav">
-	 				<li class="divider-vertical"><a href="/admin">Panel de Administrador</a></li>
-					<li class="divider-vertical"><a href="/taquilla">Panel de Empleado</a></li>
-				</ul>
-				<ul class="nav pull-right">
-	 			@if(session.get("cliente") == null) {
-	 				<li class="dropdown">
-	   					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	   						Login
-	        				<b class="caret"></b>
-	      				</a>
-	    				<ul class="dropdown-menu">
-	          				<li>@form(action = routes.Clientes.login()) {
-		        				<fieldset>
-						            @inputText(
-						                formCliente("login"),
-						                '_label -> "Login",
-						                '_error -> formCliente.globalError)
-						            @inputPassword(
-						                formCliente("password"), 
-						                '_label -> "Password")
-						        </fieldset>
-		        				<div class="actions">
-		        					<input type="submit" class="btn primary" value="Login">
-		        				</div>
-		   					}
-		   					</li>
-	    				</ul>
-	  				</li>
-	  			} else {
-	 				<li class="dropdown">
-	    				<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	        				@session.get("cliente")
-	        				<b class="caret"></b>
-	      				</a>
-		    			<ul class="dropdown-menu">
-		          			<li><a href="/logout">Logout</a></li>
-		    			</ul>
-	  				</li>
-	  			}
-				</ul>
-			</div> 
-		</div>
+	<div class="navbar navbar-fixed-top">
+ <div class="navbar-inner">
+ <a class="brand" href="#">
+ <img src="@routes.Assets.at("images/logo.png")"> 
+ </a>
+ <ul class="nav">
+ <li class="divider-vertical active"><a href="/">Inicio</a></li>
+ <li class="divider-vertical"><a href="/admin">Panel de Administrador</a></li>
+ <li class="divider-vertical"><a href="/taquilla">Panel de Empleado</a></li>
+</ul>
+<ul class="nav pull-right">
+ @if(session.get("cliente") == null) {
+ <li class="dropdown">
+    <a class="dropdown-toggle"
+       data-toggle="dropdown"
+       href="#">
+        Login
+        <b class="caret"></b>
+      </a>
+    <ul class="dropdown-menu">
+          <li>	    @form(action = routes.Clientes.login()) {
+	        <fieldset>
+	            @inputText(
+	                formCliente("login"),
+	                '_label -> "Login",
+	                '_error -> formCliente.globalError)
+	            @inputPassword(
+	                formCliente("password"), 
+	                '_label -> "Password")
+	        </fieldset>
+	        
+	        <div class="actions">
+	        <input type="submit" class="btn primary" value="Login">
+	        </div>
+	    }
+	    </li>
+
+    </ul>
+  </li>
+  } else{
+  <li class="dropdown">
+    <a class="dropdown-toggle"
+       data-toggle="dropdown"
+       href="#">
+        @session.get("cliente")
+        <b class="caret"></b>
+      </a>
+    <ul class="dropdown-menu">
+          <li><a href="/logout">Logout</a></li>
+    </ul>
+  </li>
+  }
+</ul>
+ </div> 
 
 	<div class="container">
 		<h1>¡Bienvenido a Entrecine!</h1>

@@ -88,7 +88,9 @@
 		<li>Número de sala: @sesion.getSala().getId()</li>
 		<li>Capacidad: @sesion.getSala().getNumButacas() butacas</li>
 	</ul>
-	
+	<div id="bar">
+<span class="expand"></span>
+</div>
 	<h2>Butacas</h2>
 	@for((estaReservada, butaca) <- sesion.getButacas.zipWithIndex) {
 	<div class="floatleft">

@@ -77,8 +77,8 @@ public class Cliente extends Model {
 			while (peliculasSacadas < 4) {
 				for (Entry<Cliente, Integer> cliente : usuariosParecidos
 						.entrySet()) {
-					// No seguimos si ya sacamos 4
-					if (peliculasSacadas < 4) {
+					// No seguimos si ya sacamos 6
+					if (peliculasSacadas < 6) {
 						// Siempre añado 10. Cuantas menos pelis comparta mas
 						// dificil sera(es mas dificil que salga un 1 entre 11
 						// posibilidades que un numero del 1 al 100 entre 111

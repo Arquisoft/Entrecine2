@@ -33,3 +33,20 @@
 .actions{
 	text-align:center;
 }
+
+#bar {
+    /* Full Width */
+	height: 5px;
+    margin: 5px auto;
+    background: #000;
+}
+
+.expand {
+    width: 66%;
+    height: 1px;
+    margin: 2px 0;
+    background: #2187e7;
+    position: absolute;
+    box-shadow: 0px 0px 10px 1px rgba(0,198,255,0.7);
+   
+}

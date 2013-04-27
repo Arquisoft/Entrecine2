@@ -88,8 +88,8 @@ $('.dropdown-toggle').dropdown();
 		@for(pelicula <- sugerencias) {
 		
 		
-			<li class="span3">  
-			<h3 class="centertexto">@pelicula.getTitulo()</h3>
+			<li class="span2">  
+			<a href="/peliculas/@pelicula.getId()"><h3 class="centertexto">@pelicula.getTitulo()</h3></a>
           		<a href="/peliculas/@pelicula.getId()" class="thumbnail">  
 					<img width="150" height="210" src="@pelicula.getImagenCartelera()" width="100" height="140"/>
 				</a>				
@@ -97,7 +97,9 @@ $('.dropdown-toggle').dropdown();
 		}
 		</ul>
 	}
-
+<div id="bar">
+<span class="expand"></span>
+</div>
     <h2>Películas en cartelera</h2>
     <table class="table table-striped">
 		<tr>

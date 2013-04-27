@@ -14,6 +14,7 @@ import views.html.taquillaVerSesiones;
 import views.html.taquillalogin;
 import views.html.taquillaVerSesion;
 import views.html.reservaRealizadaTaquilla;
+import controllers.filters.FiltroAdministrador;
 import controllers.filters.FiltroTaquilla;;
 
 public class Taquilla extends Controller {
@@ -59,10 +60,19 @@ public class Taquilla extends Controller {
 	 return ok(reservaRealizadaTaquilla.render());
 	}
 	// LOGIN Y REDIRECCIONES EN SEGUNDO PLANO
-
+	// LOGIN Y REDIRECCIONES EN SEGUNDO PLANO
+		@With(FiltroTaquilla.class)
+		public static Result logout() {
+			// Sacamos a cliente de sesion
+			session().remove("empleado");
+			return redirect(routes.Clientes.index());
+		}
+	
 	public static Result irALogin() {
 		return ok(taquillalogin.render(formEmpleado));
 	}
+	
+
 
 	public static Result doLogin() {
 		Form<Empleado> formularioRecibido = formEmpleado.bindFromRequest();

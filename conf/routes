@@ -42,7 +42,7 @@ GET		/admin/login								controllers.Administracion.irALogin()
 POST	/admin/login/dologin						controllers.Administracion.doLogin()
 
 #Taquilla
-
+GET		/taquilla/logout			controllers.Taquilla.logout()
 GET		/taquilla					controllers.Taquilla.index()
 GET		/taquilla/login				controllers.Taquilla.irALogin()
 POST	/taquilla/login/dologin		controllers.Taquilla.doLogin()

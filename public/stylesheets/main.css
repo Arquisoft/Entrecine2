@@ -4,6 +4,13 @@
 	left: 37%;
 	top: 20%;
 }
+.centerpanel2 {
+	width: 500px;
+	position: absolute;
+	left: 40%;
+	top: 25%;
+}
+
 
 .centertexto {
 	text-align: center;

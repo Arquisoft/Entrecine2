@@ -1,28 +1,41 @@
 @(formRegistro: Form[Cliente], formCliente: Form[Cliente])
 
+
 @import helper._
 
 <!DOCTYPE html>
 
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")">
-	<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
-	<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
-	<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
- 	<title>Entrecine - Registrar nuevo usuario</title>
-</head>
-<body>
-	<div class="container">
-	<div class="navbar">
+<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")">
+<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.min.css")">
+<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+<script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")"></script>
+<script type="text/javascript" src="@routes.Assets.at("javascripts/bootstrap.js")"></script>
+ <script>
+
+ $('.dropdown-toggle').dropdown();
+
+
+ </script>
+  <title>Entrecine - Registrarse</title>
+  </head>
+  
+  <body>
+ <div class="navbar navbar-fixed-top">
  <div class="navbar-inner">
- <a class="brand" href=".."><img src="@routes.Assets.at("images/logo.png")"> Inicio</a>
+ <a class="brand" href="#">
+ <img src="@routes.Assets.at("images/logo.png")"> 
+ </a>
  <ul class="nav">
+ <li class="divider-vertical active"><a href="/">Inicio</a></li>
  <li class="divider-vertical"><a href="/admin">Panel de Administrador</a></li>
  <li class="divider-vertical"><a href="/taquilla">Panel de Empleado</a></li>
 </ul>
 <ul class="nav pull-right">
  @if(session.get("cliente") == null) {
+  <li class="divider-vertical active"><a href="/registro">Registrarse</a></li> 
  <li class="dropdown">
     <a class="dropdown-toggle"
        data-toggle="dropdown"
@@ -41,7 +54,7 @@
 	                formCliente("password"), 
 	                '_label -> "Password")
 	        </fieldset>
-	        
+	        ¿No estás registrado? <a href="/registro">Registrarse</a>
 	        <div class="actions">
 	        <input type="submit" class="btn primary" value="Login">
 	        </div>
@@ -66,10 +79,14 @@
 </ul>
  </div> 
 </div>
+	<div class="container">
+	<h2>-</h2>
+
 	<h1>Registrarse en Entrecine</h1>
 	<p>¿Quieres formar parte de Entrecine?</p>
 	<p>Si eres un usuario registrado podrás realizar reservas a través de nuestra web y recibir recomendaciones de películas que podrían interesarte.</p>
 	<hr>
+ <div class="container centerpanel2">
 	@form(routes.Clientes.doRegister()) {
 		@inputText(
 			formRegistro("nombre"),
@@ -85,8 +102,7 @@
 			formRegistro("confirmPassword"),
 			'_label -> "Confirma la contraseña",
 			'_error -> formRegistro.globalError)
-		<div class="actions">
-	        <input type="submit" class="btn primary" value="Registrarme">
+	        <input type="submit" class="btn btn-success" value="Registrarme">
         </div>
 	}
 	</div>

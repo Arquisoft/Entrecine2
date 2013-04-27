@@ -143,6 +143,9 @@ public class Pelicula extends Model {
 		});		return nuevaLista;
 
 	}
+	public int numeroSesionesFuturas(){
+		return getSesionesFuturas().size();
+	}
 	
 	
 

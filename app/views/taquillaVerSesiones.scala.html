@@ -40,6 +40,13 @@
 				<th>Sala</th>
 				<th>Tipo de sesión</th>
 			</tr>
+			@if(pelicula.numeroSesionesFuturas() == 0) {
+			<td>
+			<p>No Hay ninguna sesión programada.</p>
+			</td>	
+			</tr>
+			}
+			@if(pelicula.numeroSesionesFuturas() != 0) {
 			@for(sesion <- pelicula.getSesionesFuturas()) {
 				<tr>
 					<td>@sesion.getHora()</td>
@@ -53,6 +60,7 @@
 						</td>
 					
 				</tr>
+				}
 			}
 		</table>
 		

@@ -12,16 +12,15 @@ import models.Sala;
 import models.Sesion;
 import models.TipoSesion;
 import play.data.Form;
-import play.data.validation.ValidationError;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.With;
+import views.html.clienteRegistro;
 import views.html.confirmacionReserva;
 import views.html.index;
 import views.html.tpvVirtual;
 import views.html.vistaPelicula;
 import views.html.vistaSesion;
-import views.html.clienteRegistro;
 import controllers.filters.FiltroCliente;
 import controllers.filters.FiltroNoLogueado;
 
@@ -161,7 +160,7 @@ public class Clientes extends Controller {
 		return ok(clienteRegistro.render(formRegistro, formCliente));
 	}
 
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings({ "deprecation", "unused" })
 	public static Result rellenarDb() {
 
 		// Añadir Clientes

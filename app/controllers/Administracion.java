@@ -107,6 +107,7 @@ public class Administracion extends Controller {
 	}
 
 	// CRUD SESIONES
+	@SuppressWarnings("unused")
 	@With(FiltroAdministrador.class)
 	public static Result borrarSesion(Long id) {
 		Sesion s = Sesion.findById(id);
@@ -131,6 +132,7 @@ public class Administracion extends Controller {
 				Sesion.findBySalaAndFecha(sala, fecha)));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Transactional
 	@With(FiltroAdministrador.class)
 	public static Result nuevaSesion(Long sala_id, String fecha_s) {

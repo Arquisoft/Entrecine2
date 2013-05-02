@@ -56,8 +56,8 @@
 						<td>@sesion.getHora()</td>
 						<td>@sesion.getTipo().getNombre()</td>
 						<td>@sesion.getTipo().getPrecio() €</td>
-						@form(routes.Administracion.borrarSesion(sesion.getId())) {
-			            	<td><input class="btn btn-danger" type="submit" value="Borrar"></td>
+						@form(routes.Administracion.desasignarPelicula(peli.getId(), sesion.getId())) {
+			            	<td><input class="btn btn-danger btn-small" type="submit" value="Desasignar"></td>
 			            }
 					</tr>
 				}
@@ -72,7 +72,7 @@
 					<th>Precio</th>
 					<th></th>
 				</tr>
-				@for(sesion <- sesiones) {
+				@for(sesion <- sesionesLibres) {
 			
 					<tr>
 						<td>@sesion.getId()</td>

@@ -160,10 +160,20 @@ public class Administracion extends Controller {
 	
 	@With(FiltroAdministrador.class)
 	public static Result asignarPelicula(Long pelicula_id, Long sesion_id) {
-		Pelicula peli = Pelicula.findById(sesion_id);
+		Pelicula peli = Pelicula.findById(pelicula_id);
 		Sesion sesion = Sesion.findById(sesion_id);
 		sesion.setPelicula(peli);
 		peli.setEnCartelera(true);
+		return redirect(routes.Administracion.index());
+	}
+	
+	@With(FiltroAdministrador.class)
+	public static Result desasignarPelicula(Long pelicula_id, Long sesion_id) {
+		Pelicula peli = Pelicula.findById(pelicula_id);
+		Sesion sesion = Sesion.findById(sesion_id);
+		peli.removeSesion(sesion);
+		if (peli.getSesionesFuturas().isEmpty())
+			peli.setEnCartelera(false);
 		return redirect(routes.Administracion.index());
 	}
 

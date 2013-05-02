@@ -37,6 +37,8 @@ POST	/admin/:sala/:fecha/nuevaSesion				controllers.Administracion.nuevaSesion(s
 POST	/admin/:id/editarTipoSesion					controllers.Administracion.editarSesion(id: Long)
 POST	/admin/:id/borrarSesion						controllers.Administracion.borrarSesion(id: Long)
 POST	/admin/:peli/:sesion/asignarPelicula		controllers.Administracion.asignarPelicula(peli: Long, sesion: Long)
+POST	/admin/:peli/:sesion/desasignarPelicula		controllers.Administracion.desasignarPelicula(peli: Long, sesion: Long)
+
 
 GET		/admin/login								controllers.Administracion.irALogin()
 POST	/admin/login/dologin						controllers.Administracion.doLogin()

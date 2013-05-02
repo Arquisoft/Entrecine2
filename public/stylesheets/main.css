@@ -42,8 +42,7 @@
 }
 
 .expand {
-    width: 66
-    %;
+    width: 67em;
     height: 1px;
     margin: 2px 0;
     background: #2187e7;

@@ -18,18 +18,23 @@
 <body>
 	<div class="container">
 
-	<div class="navbar">
-		<div class="navbar-inner">
-			<a class="brand" href="/"><img src="@routes.Assets.at("images/favicon.png")">
-				Inicio</a>
-			<ul class="nav">
-				<li class="divider-vertical"><a href="/taquilla">Reservas</a></li>
-			</ul>
-				<ul class="nav pull-right">
-          <li><a href="taquilla/logout">Logout</a></li>
-    </ul>
+		<div class="navbar navbar-fixed-top">
+				<div class="navbar-inner">
+					<a class="brand" href="#">
+					<img src="@routes.Assets.at("images/logo.png")"> 
+					</a>
+					<ul class="nav">
+					<li class="divider-vertical"><a href="/">Inicio</a></li>
+					<li class="divider-vertical"><a href="/admin">Panel de Administrador</a></li>
+					<li class="divider-vertical active"><a href="/taquilla">Panel de Empleado</a></li>
+					</ul>
+		
+				 	<ul class="nav pull-right">
+		          		<li><a href="/taquilla/logout">Logout</a></li>
+		    		</ul>
+				</div>
 		</div>
-	</div>
+	
 		<h1>Panel de Empleado</h1>
 		<h1>Selecciona una Sesion</h1>
 		<h2>Sesiones</h2>

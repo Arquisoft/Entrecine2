@@ -14,7 +14,6 @@ import models.Sesion;
 import models.TipoSesion;
 import play.data.DynamicForm;
 import play.data.Form;
-import play.db.ebean.Transactional;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.With;
@@ -113,14 +112,11 @@ public class Administracion extends Controller {
 	}
 
 	// CRUD SESIONES
-	@SuppressWarnings("unused")
 	@With(FiltroAdministrador.class)
 	public static Result borrarSesion(Long id) {
 		Sesion s = Sesion.findById(id);
 		Sala sala = s.getSala();
-		Date fecha = s.getFecha();
 		s.delete();
-		List<Sesion> sesiones = Sesion.findBySalaAndFecha(sala, fecha);
 		return redirect(routes.Administracion.getSesionesDeSala(sala.getId()));
 	}
 
@@ -131,15 +127,16 @@ public class Administracion extends Controller {
 		Date fecha = s.getFecha();
 		DynamicForm formularioRecibido = Form.form();
 		Map<String, String> datos = new HashMap<String, String>();
-		datos.put("hora", s.getHora().toString());
-		datos.put("tipo", s.getTipo().toString());
+		String hora = s.getHora().toString();
+		String[] horaPartida = hora.split(":");
+		datos.put("hora", horaPartida[0] + ":" + horaPartida[1]);
+		datos.put("tipo", s.getTipo().getId().toString());
 		formularioRecibido.bind(datos);
 		return badRequest(adminSesionesDeSala.render(s.getSala(), fecha,
 				Sesion.findBySalaAndFecha(sala, fecha)));
 	}
 
 	@SuppressWarnings("unchecked")
-	@Transactional
 	@With(FiltroAdministrador.class)
 	public static Result nuevaSesion(Long sala_id, String fecha_s) {
 		Date fecha = Date.valueOf(fecha_s);

@@ -34,7 +34,7 @@ GET		/admin/:peli/verSesionesPelicula			controllers.Administracion.getSesionesDe
 GET		/admin/:sala/verSesionesSala				controllers.Administracion.getSesionesDeSala(sala: Long)
 
 POST	/admin/:sala/:fecha/nuevaSesion				controllers.Administracion.nuevaSesion(sala: Long, fecha: String)
-POST	/admin/:id/editarTipoSesion					controllers.Administracion.editarSesion(id: Long)
+POST	/admin/:id/editarSesion						controllers.Administracion.editarSesion(id: Long)
 POST	/admin/:id/borrarSesion						controllers.Administracion.borrarSesion(id: Long)
 POST	/admin/:peli/:sesion/asignarPelicula		controllers.Administracion.asignarPelicula(peli: Long, sesion: Long)
 POST	/admin/:peli/:sesion/desasignarPelicula		controllers.Administracion.desasignarPelicula(peli: Long, sesion: Long)

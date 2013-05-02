@@ -23,7 +23,6 @@ import views.html.adminSesionesDePelicula;
 import views.html.adminSesionesDeSala;
 import views.html.adminlogin;
 import controllers.filters.FiltroAdministrador;
-import controllers.filters.FiltroCliente;
 
 public class Administracion extends Controller {
 

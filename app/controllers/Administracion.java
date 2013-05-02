@@ -3,9 +3,7 @@ package controllers;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import models.Empleado;
 import models.Pelicula;
@@ -21,6 +19,7 @@ import views.html.admin;
 import views.html.adminSesionesDePelicula;
 import views.html.adminSesionesDeSala;
 import views.html.adminlogin;
+import controllers.customForms.SesionForm;
 import controllers.filters.FiltroAdministrador;
 
 public class Administracion extends Controller {
@@ -33,6 +32,8 @@ public class Administracion extends Controller {
 			.form(TipoSesion.class);
 
 	private static Form<Sala> formSala = Form.form(Sala.class);
+	
+	private static Form<SesionForm> formSesion = Form.form(SesionForm.class);
 
 	// NAVEGACION MENU SUPERIOR
 
@@ -125,36 +126,42 @@ public class Administracion extends Controller {
 		Sesion s = Sesion.findById(id);
 		Sala sala = s.getSala();
 		Date fecha = s.getFecha();
-		DynamicForm formularioRecibido = Form.form();
-		Map<String, String> datos = new HashMap<String, String>();
-		String hora = s.getHora().toString();
-		String[] horaPartida = hora.split(":");
-		datos.put("hora", horaPartida[0] + ":" + horaPartida[1]);
-		datos.put("tipo", s.getTipo().getId().toString());
-		formularioRecibido.bind(datos);
+		SesionForm form = new SesionForm();
+		String[] horaTrozos = s.getHora().toString().split(":");
+		form.setHora(horaTrozos[0] + ":" + horaTrozos[1]);
+		form.setTipoSesionId(s.getTipo().getId().toString());
+		form.setSesionId(s.getId());
+		Form<SesionForm> f = Form.form(SesionForm.class).fill(form);
 		return badRequest(adminSesionesDeSala.render(s.getSala(), fecha,
-				Sesion.findBySalaAndFecha(sala, fecha)));
+				Sesion.findBySalaAndFecha(sala, fecha), TipoSesion.findAll(), f));
 	}
 
-	@SuppressWarnings("unchecked")
 	@With(FiltroAdministrador.class)
 	public static Result nuevaSesion(Long sala_id, String fecha_s) {
 		Date fecha = Date.valueOf(fecha_s);
 		Sala sala = Sala.findById(sala_id);
 		List<Sesion> sesiones = Sesion.findBySalaAndFecha(sala, fecha);
-		if (sesiones == null)
-			sesiones = new ArrayList<Sesion>();
-		DynamicForm formularioRecibido = Form.form().bindFromRequest();
+		Form<SesionForm> formularioRecibido = formSesion.bindFromRequest();
 		if (formularioRecibido.hasErrors()) {
-			return badRequest(adminSesionesDeSala.render(sala, fecha, sesiones));
+			return badRequest(adminSesionesDeSala.render(sala, fecha, sesiones, TipoSesion.findAll(), formularioRecibido));
 		} else {
-			Map<String, String> form = formularioRecibido.get().getData();
-			Sesion sesion = new Sesion();
-			sesion.setTipo(TipoSesion.findById(Long.parseLong(form.get("tipo"))));
-			sesion.setSala(sala);
-			sesion.setFecha(fecha);
-			sesion.setHora(Time.valueOf(form.get("hora") + ":00"));
-			sesion.save();
+			SesionForm form = formularioRecibido.get();
+			String id = formularioRecibido.data().get("sesionId");
+			if (!id.isEmpty()) {
+				Sesion sesion = Sesion.findById(Long.parseLong(id));
+				sesion.setTipo(TipoSesion.findById(Long.parseLong(form.getTipoSesionId())));
+				sesion.setHora(Time.valueOf(form.getHora() + ":00"));
+				sesion.update();
+			}
+			else {
+				Sesion sesion = new Sesion();
+				sesion.setFecha(fecha);
+				sesion.setHora(Time.valueOf(form.getHora()));
+				sesion.setSala(sala);
+				sesion.setTipo(TipoSesion.findById(Long.parseLong(form.getTipoSesionId())));
+				sesion.save();
+			}
+
 			return redirect(routes.Administracion.getSesionesDeSala(sala_id));
 		}
 	}
@@ -255,7 +262,7 @@ public class Administracion extends Controller {
 				List<Sesion> sesiones = Sesion.findBySalaAndFecha(sala, fecha);
 				if (sesiones == null)
 					sesiones = new ArrayList<Sesion>();
-				return ok(adminSesionesDeSala.render(sala, fecha, sesiones));
+				return ok(adminSesionesDeSala.render(sala, fecha, sesiones, TipoSesion.findAll(), formSesion));
 			} catch (IllegalArgumentException e) {
 				return badRequest(admin.render(Pelicula.findAll(), Sala.findAll(),
 						TipoSesion.findAll(), formPelicula, formSala, formTipoSesion));

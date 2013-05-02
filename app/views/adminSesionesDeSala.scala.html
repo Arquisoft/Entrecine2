@@ -1,4 +1,4 @@
-@(sala: Sala, fecha: Date, sesiones: List[Sesion])
+@(sala: Sala, fecha: Date, sesiones: List[Sesion], tipos: List[TipoSesion], sesionForm: Form[controllers.customForms.SesionForm])
 
 @import helper._
 @import helper.twitterBootstrap._
@@ -74,24 +74,28 @@
 				</div>
 			
 				<div class="span4 offset1">
-					<h3>Crear sesión:</h3>
-					<form class="form-horizontal" action="@routes.Administracion.nuevaSesion(sala.getId(), fecha.toString())" method="post">
-						<div class="control-group">
-					 		<label for="tipo">Tipo de sesión:</label>
-						 	<select multiple="multiple" name="tipo" id="tipo">
-						 		@for(tipo <- TipoSesion.findAll()) {
-						 			<option value="@tipo.getId()">@tipo.getNombre() - @tipo.getPrecio() €</option>
-						 		}
-						 	</select>
-					 	</div>
-					 	<div class="control-group">
-					 		<label for="hora">Hora de la sesión:</label>
-					 		<input type="time" name="hora" id="hora">
-					 	</div>
-					 	<div class="control-group">
-				 			<input class="btn btn-success" type="submit" value="Crear">
-						</div>
-					</form>
+					<h3>Añadir sesión:</h3>
+					@form(routes.Administracion.nuevaSesion(sala.getId(), fecha.toString())) {			   
+				        			
+				        @select(
+							field = sesionForm("tipoSesionId"),
+							tipos.map{ t =>
+								t.getId().toString() -> t.getNombre()
+		                   	},
+		                   	'_label -> "Tipo de sesión")
+				                	
+				        @input(sesionForm("hora"), args = '_label -> "Hora") { (id, name, value, args) =>
+			            	<input type="time" name="@name" id="@id" @toHtmlArgs(args)>
+			            }
+				        			
+				        @defining(sesionForm("sesionId")) { uidField =>
+						    <input type="hidden" name="@uidField.name" id="@uidField.id" value="@uidField.value">
+						} 
+				        
+				        <div clas="actions">
+				        	<input class="btn btn-success" type="submit" value="Guardar">
+				        </div>
+				    }
 				</div>
 			</div>	
 		</div>	

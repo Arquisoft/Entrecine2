@@ -16,18 +16,27 @@
 	<body>
 	
 		<div class="container">
-			
-			<div class="navbar">
+			<div class="navbar navbar-fixed-top">
 				<div class="navbar-inner">
-					<a class="brand" href="/"><img src="@routes.Assets.at("images/logo.png")"> Inicio</a>
-				 	<ul class="nav">
-						<li class="divider-vertical"><a href="/admin">Administración</a></li>
-				 	</ul>
-				 	 	<ul class="nav pull-right">
-          <li><a href="admin/logout">Logout</a></li>
-    </ul>
-			 	</div>
-		 	</div>
+					<a class="brand" href="#">
+					<img src="@routes.Assets.at("images/logo.png")"> 
+					</a>
+					<ul class="nav">
+					<li class="divider-vertical active"><a href="/">Inicio</a></li>
+					<li class="divider-vertical"><a href="/admin">Panel de Administrador</a></li>
+					<li class="divider-vertical"><a href="/taquilla">Panel de Empleado</a></li>
+					</ul>
+		
+				 	<ul class="nav pull-right">
+		          		<li><a href="admin/logout">Logout</a></li>
+		    		</ul>
+				</div>
+			</div>
+		</div>
+	
+		<div class="container">
+			
+			
 		
 			<h1>Panel de Administración</h1>
 			<h2>Administrar sesiones de sala</h2>

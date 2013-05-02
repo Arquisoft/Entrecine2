@@ -41,7 +41,15 @@ public class Entrada extends Model {
 	}
 
 	public void save() {
-		Factories.business.getEntradaService().save(this);
+		Entrada entrada = null;
+		if (id != null) {
+			entrada = Entrada.findById(id);
+			if (entrada == null)
+				Factories.business.getEntradaService().save(this);
+			else
+				update();
+		} else
+			Factories.business.getEntradaService().save(this);
 	}
 
 	public void delete() {

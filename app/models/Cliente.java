@@ -49,7 +49,15 @@ public class Cliente extends Model {
 	}
 
 	public void save() {
-		Factories.business.getClienteService().save(this);
+		Cliente cliente = null;
+		if (id != null) {
+			cliente = Cliente.findById(id);
+			if (cliente == null)
+				Factories.business.getClienteService().save(this);
+			else
+				update();
+		} else
+			Factories.business.getClienteService().save(this);
 	}
 
 	public void delete() {

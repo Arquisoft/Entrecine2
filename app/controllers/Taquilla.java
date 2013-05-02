@@ -14,7 +14,6 @@ import views.html.taquillaVerSesiones;
 import views.html.taquillalogin;
 import views.html.taquillaVerSesion;
 import views.html.reservaRealizadaTaquilla;
-import controllers.filters.FiltroAdministrador;
 import controllers.filters.FiltroTaquilla;;
 
 public class Taquilla extends Controller {

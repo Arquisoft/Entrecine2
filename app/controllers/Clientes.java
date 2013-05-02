@@ -306,7 +306,7 @@ public class Clientes extends Controller {
 		sesion.save();
 
 		Sesion sesion2 = new Sesion();
-		sesion2.setFecha(new Date(113, 03, 22));
+		sesion2.setFecha(new Date(113, 04, 4));
 		sesion2.setHora(new Time(22, 50, 00));
 		sesion2.setTipo(tipoNoche);
 		sesion2.setPelicula(peli2);
@@ -314,7 +314,7 @@ public class Clientes extends Controller {
 		sesion2.save();
 
 		Sesion sesion3 = new Sesion();
-		sesion3.setFecha(new Date(113, 03, 30));
+		sesion3.setFecha(new Date(113, 04, 5));
 		sesion3.setHora(new Time(12, 15, 00));
 		sesion3.setTipo(tipoMatutina);
 		sesion3.setPelicula(peli);
@@ -322,7 +322,7 @@ public class Clientes extends Controller {
 		sesion3.save();
 
 		Sesion sesion4 = new Sesion();
-		sesion4.setFecha(new Date(113, 03, 30));
+		sesion4.setFecha(new Date(113, 04, 5));
 		sesion4.setHora(new Time(12, 30, 00));
 		sesion4.setTipo(tipoMatutina);
 		sesion4.setPelicula(peli2);
@@ -330,7 +330,7 @@ public class Clientes extends Controller {
 		sesion4.save();
 
 		Sesion sesion5 = new Sesion();
-		sesion5.setFecha(new Date(113, 03, 30));
+		sesion5.setFecha(new Date(113, 04, 5));
 		sesion5.setHora(new Time(13, 30, 00));
 		sesion5.setTipo(tipoMatutina);
 		sesion5.setPelicula(peli3);
@@ -338,7 +338,7 @@ public class Clientes extends Controller {
 		sesion5.save();
 
 		Sesion sesion6 = new Sesion();
-		sesion6.setFecha(new Date(113, 03, 30));
+		sesion6.setFecha(new Date(113, 04, 6));
 		sesion6.setHora(new Time(17, 30, 00));
 		sesion6.setTipo(tipoEspectador);
 		sesion6.setPelicula(peli4);
@@ -346,7 +346,7 @@ public class Clientes extends Controller {
 		sesion6.save();
 		
 		Sesion sesion7 = new Sesion();
-		sesion7.setFecha(new Date(113, 03, 30));
+		sesion7.setFecha(new Date(113, 04, 7));
 		sesion7.setHora(new Time(10, 30, 00));
 		sesion7.setTipo(tipoMatutina);
 		sesion7.setPelicula(peli4);
@@ -354,7 +354,7 @@ public class Clientes extends Controller {
 		sesion7.save();
 		
 		Sesion sesion8 = new Sesion();
-		sesion8.setFecha(new Date(113, 03, 31));
+		sesion8.setFecha(new Date(113, 04, 6));
 		sesion8.setHora(new Time(16, 30, 00));
 		sesion8.setTipo(tipoEspectador);
 		sesion8.setPelicula(peli4);
@@ -362,7 +362,7 @@ public class Clientes extends Controller {
 		sesion8.save();
 		
 		Sesion sesion9 = new Sesion();
-		sesion9.setFecha(new Date(113, 03, 31));
+		sesion9.setFecha(new Date(113, 04, 5));
 		sesion9.setHora(new Time(22, 30, 00));
 		sesion9.setTipo(tipoNoche);
 		sesion9.setPelicula(peli4);
@@ -370,7 +370,7 @@ public class Clientes extends Controller {
 		sesion9.save();
 		
 		Sesion sesion10 = new Sesion();
-		sesion10.setFecha(new Date(113, 03, 30));
+		sesion10.setFecha(new Date(113, 04, 5));
 		sesion10.setHora(new Time(17, 30, 00));
 		sesion10.setTipo(tipoEspectador);
 		sesion10.setPelicula(peli5);
@@ -378,7 +378,7 @@ public class Clientes extends Controller {
 		sesion10.save();
 		
 		Sesion sesion11 = new Sesion();
-		sesion11.setFecha(new Date(113, 03, 30));
+		sesion11.setFecha(new Date(113, 03, 5));
 		sesion11.setHora(new Time(17, 30, 00));
 		sesion11.setTipo(tipoEspectador);
 		sesion11.setPelicula(peli5);

@@ -60,9 +60,12 @@ public class Administracion extends Controller {
 		} else {
 			Pelicula p = formularioRecibido.get();
 			String id = formularioRecibido.data().get("id");
-			if (!id.isEmpty())
+			if (!id.isEmpty()) {
 				p.setId(Long.parseLong(id));
-			p.save();
+				p.update();
+			}
+			else
+				p.save();
 			return redirect(routes.Administracion.index());
 		}
 	}
@@ -91,9 +94,12 @@ public class Administracion extends Controller {
 		} else {
 			TipoSesion tp = formularioRecibido.get();
 			String id = formularioRecibido.data().get("id");
-			if (!id.isEmpty())
+			if (!id.isEmpty()) {
 				tp.setId(Long.parseLong(id));
-			tp.save();
+				tp.update();
+			}
+			else
+				tp.save();
 			return redirect(routes.Administracion.index());
 		}
 	}
@@ -163,7 +169,7 @@ public class Administracion extends Controller {
 		Pelicula peli = Pelicula.findById(pelicula_id);
 		Sesion sesion = Sesion.findById(sesion_id);
 		sesion.setPelicula(peli);
-		peli.setEnCartelera(true);
+		sesion.save();
 		return redirect(routes.Administracion.index());
 	}
 	
@@ -172,8 +178,7 @@ public class Administracion extends Controller {
 		Pelicula peli = Pelicula.findById(pelicula_id);
 		Sesion sesion = Sesion.findById(sesion_id);
 		peli.removeSesion(sesion);
-		if (peli.getSesionesFuturas().isEmpty())
-			peli.setEnCartelera(false);
+		sesion.save();
 		return redirect(routes.Administracion.index());
 	}
 
@@ -188,9 +193,12 @@ public class Administracion extends Controller {
 		} else {
 			Sala s = formularioRecibido.get();
 			String id = formularioRecibido.data().get("id");
-			if (!id.isEmpty())
+			if (!id.isEmpty()) {
 				s.setId(Long.parseLong(id));
-			s.save();
+				s.update();
+			}
+			else
+				s.save();
 			return redirect(routes.Administracion.index());
 		}
 	}

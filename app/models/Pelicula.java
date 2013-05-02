@@ -56,15 +56,7 @@ public class Pelicula extends Model {
 	}
 
 	public void save() {
-		Pelicula peli = null;
-		if (id != null) {
-			peli = Pelicula.findById(id);
-			if (peli == null)
-				Factories.business.getPeliculaService().save(this);
-			else
-				update();
-		} else
-			Factories.business.getPeliculaService().save(this);
+		Factories.business.getPeliculaService().save(this);
 	}
 
 	public void delete() {
@@ -152,11 +144,14 @@ public class Pelicula extends Model {
 	public void addSesion(Sesion sesion) {
 		sesion._setPelicula(this);
 		sesiones.add(sesion);
+		enCartelera = true;
 	}
 
 	public void removeSesion(Sesion sesion) {
 		sesion._setPelicula(null);
 		sesiones.remove(sesion);
+		if (getSesionesFuturas().isEmpty())
+			enCartelera = false;
 	}
 
 	public String getImagenCartelera() {

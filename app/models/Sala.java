@@ -40,15 +40,7 @@ public class Sala extends Model {
 	}
 
 	public void save() {
-		Sala sala = null;
-		if (id != null) {
-			sala = Sala.findById(id);
-			if (sala == null)
-				Factories.business.getSalaService().save(this);
-			else
-				update();
-		} else
-			Factories.business.getSalaService().save(this);
+		Factories.business.getSalaService().save(this);
 	}
 
 	public void delete() {
@@ -71,8 +63,8 @@ public class Sala extends Model {
 		return id;
 	}
 	
-	public Long setId(Long id) {
-		return id;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public void addSesion(Sesion sesion) {

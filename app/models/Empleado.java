@@ -41,15 +41,7 @@ public class Empleado extends Model {
 	}
 
 	public void save() {
-		Empleado empleado = null;
-		if (id != null) {
-			empleado = Empleado.findById(id);
-			if (empleado == null)
-				Factories.business.getEmpleadoService().save(this);
-			else
-				update();
-		} else
-			Factories.business.getEmpleadoService().save(this);
+		Factories.business.getEmpleadoService().save(this);
 	}
 
 	public void delete() {

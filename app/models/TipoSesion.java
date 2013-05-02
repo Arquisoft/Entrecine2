@@ -38,14 +38,6 @@ public class TipoSesion extends Model {
 	}
 
 	public void save() {
-		TipoSesion tipoSesion = null;
-		if (id != null) {
-			tipoSesion = TipoSesion.findById(id);
-			if (tipoSesion == null)
-				Factories.business.getTipoSesionService().save(this);
-			else
-				update();
-		} else
 			Factories.business.getTipoSesionService().save(this);
 	}
 

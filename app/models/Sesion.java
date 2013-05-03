@@ -180,7 +180,12 @@ public class Sesion extends Model {
 		java.util.Date today = new java.util.Date();
 		int diferencia = (int) ((fecha.getTime() - today.getTime()) / MILLSECS_PER_DAY);
 		return diferencia;
-
+	}
+	
+	public int minutosDeDiferencia(Sesion sesion) {
+		long MILLSECS_PER_MINUTO = 60 * 1000;
+		int diferencia = (int) ((hora.getTime() - sesion.getHora().getTime()) / MILLSECS_PER_MINUTO);
+		return Math.abs(diferencia);
 	}
 
 	@Override

@@ -26,6 +26,7 @@ public class Pelicula extends Model {
 	private List<Sesion> sesiones = new ArrayList<Sesion>();
 	private Integer anio;
 	private Integer duracion;
+
 	public Integer getDuracion() {
 		return duracion;
 	}
@@ -62,8 +63,8 @@ public class Pelicula extends Model {
 	public void delete() {
 		Factories.business.getPeliculaService().delete(this);
 	}
-	
-	public List<Cliente> getEspectadores(){
+
+	public List<Cliente> getEspectadores() {
 		return Factories.business.getPeliculaService().getEspectadores(this);
 	}
 
@@ -96,10 +97,10 @@ public class Pelicula extends Model {
 		this.genero = genero;
 	}
 
-	public void setId(Long id){
+	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -115,31 +116,31 @@ public class Pelicula extends Model {
 	public List<Sesion> getSesiones() {
 		return Collections.unmodifiableList(sesiones);
 	}
+
 	public List<Sesion> getSesionesFuturas() {
 		java.util.Date today = new java.util.Date();
 		List<Sesion> nuevaLista = sesiones;
 		List<Sesion> listaEliminados = new ArrayList<Sesion>();
 
-		for(Sesion sesion: nuevaLista){
-			if(sesion.getFecha().getTime() < today.getTime()){
+		for (Sesion sesion : nuevaLista) {
+			if (sesion.getFecha().getTime() < today.getTime()) {
 				listaEliminados.add(sesion);
 			}
 		}
-		for(Sesion sesion: listaEliminados){
+		for (Sesion sesion : listaEliminados) {
 			nuevaLista.remove(sesion);
 		}
 		Collections.sort(nuevaLista, new Comparator<Sesion>() {
-		    public int compare(Sesion m1, Sesion m2) {
-		        return m1.getFecha().compareTo(m2.getFecha());
-		    }
-		});		return nuevaLista;
-
+			public int compare(Sesion m1, Sesion m2) {
+				return m1.getFecha().compareTo(m2.getFecha());
+			}
+		});
+		return nuevaLista;
 	}
-	public int numeroSesionesFuturas(){
+
+	public int numeroSesionesFuturas() {
 		return getSesionesFuturas().size();
 	}
-	
-	
 
 	public void addSesion(Sesion sesion) {
 		sesion._setPelicula(this);
@@ -203,6 +204,5 @@ public class Pelicula extends Model {
 				+ ", sinopsis=" + sinopsis + ", enCartelera=" + enCartelera
 				+ "]";
 	}
-
 
 }

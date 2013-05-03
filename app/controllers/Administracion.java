@@ -151,14 +151,22 @@ public class Administracion extends Controller {
 				Sesion sesion = Sesion.findById(Long.parseLong(id));
 				sesion.setTipo(TipoSesion.findById(Long.parseLong(form.getTipoSesionId())));
 				sesion.setHora(Time.valueOf(form.getHora() + ":00"));
+				for (Sesion s : sesiones) {
+					if (!sesion.equals(s) && sesion.minutosDeDiferencia(s) < 30)
+						return badRequest(adminSesionesDeSala.render(sala, fecha, sesiones, TipoSesion.findAll(), formularioRecibido));
+				}
 				sesion.update();
 			}
 			else {
 				Sesion sesion = new Sesion();
 				sesion.setFecha(fecha);
-				sesion.setHora(Time.valueOf(form.getHora()));
+				sesion.setHora(Time.valueOf(form.getHora() + ":00"));
 				sesion.setSala(sala);
 				sesion.setTipo(TipoSesion.findById(Long.parseLong(form.getTipoSesionId())));
+				for (Sesion s : sesiones) {
+					if (sesion.minutosDeDiferencia(s) < 30)
+						return badRequest(adminSesionesDeSala.render(sala, fecha, sesiones, TipoSesion.findAll(), formularioRecibido));
+				}
 				sesion.save();
 			}
 

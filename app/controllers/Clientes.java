@@ -250,7 +250,7 @@ public class Clientes extends Controller {
 		peli1.setGenero("Animación");
 		peli1.setEnCartelera(true);
 		peli1.setImagenCartelera("http://www.cinesa.es/Manager/peliculas/loscroods/cartelera.jpg");
-		peli1.setSinopsis("LOS CROODS es una aventura cÃ³mica en 3D que sigue los pasos de la primera familia moderna del mundo durante el viaje de su vida.");
+		peli1.setSinopsis("LOS CROODS es una aventura cómica en 3D que sigue los pasos de la primera familia moderna del mundo durante el viaje de su vida.");
 		peli1.setDuracion(130);
 
 		peli1.save();
@@ -271,7 +271,7 @@ public class Clientes extends Controller {
 		peli3.setGenero("Drama");
 		peli3.setEnCartelera(true);
 		peli3.setImagenCartelera("http://www.cinesa.es/Manager/peliculas/ontheroadenlacarretera/cartelera.jpg");
-		peli3.setSinopsis("Nada mÃ¡s morir su padre, Sal Paradise, un neoyorkino aspirante a escritor, conoce a Dean Moriarty, un ex-convicto de un encanto arrollador y casado con la super liberada y seductora Marylou.");
+		peli3.setSinopsis("Nada más morir su padre, Sal Paradise, un neoyorkino aspirante a escritor, conoce a Dean Moriarty, un ex-convicto de un encanto arrollador y casado con la super liberada y seductora Marylou.");
 		peli3.setDuracion(125);
 		peli3.save();
 		

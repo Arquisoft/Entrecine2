@@ -25,4 +25,6 @@ public interface SesionService {
 
 	public List<Sesion> findByFecha(Date fecha);
 
+	public List<Sesion> findByFechaAndDisponible(Date fecha);
+
 }

@@ -40,6 +40,11 @@ public class SesionServiceImpl implements SesionService {
 	public List<Sesion> findByPeliculaAndFecha(Pelicula pelicula, Date fecha) {
 		return find.where().eq("pelicula", pelicula).eq("fecha", fecha).findList();
 	}
+	
+	@Override
+	public List<Sesion> findByFechaAndDisponible(Date fecha) {
+		return find.where().eq("fecha", fecha).eq("disponible", true).findList();
+	}
 
 	@Override
 	public void update(Sesion s) {

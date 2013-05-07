@@ -163,6 +163,7 @@ public class Administracion extends Controller {
 				sesion.setHora(Time.valueOf(form.getHora() + ":00"));
 				sesion.setSala(sala);
 				sesion.setTipo(TipoSesion.findById(Long.parseLong(form.getTipoSesionId())));
+				sesion.calcularDisponibilidad();
 				for (Sesion s : sesiones) {
 					if (sesion.minutosDeDiferencia(s) < 30)
 						return badRequest(adminSesionesDeSala.render(sala, fecha, sesiones, TipoSesion.findAll(), formularioRecibido));
@@ -182,6 +183,17 @@ public class Administracion extends Controller {
 		Sesion sesion = Sesion.findById(sesion_id);
 		sesion.setPelicula(peli);
 		sesion.save();
+		List<Sesion> sesionesDia = Sesion.findByFecha(sesion.getFecha());;
+		for (Sesion s : sesionesDia) {
+			if (s.getSala().equals(sesion.getSala())) {
+				int duracion = 30 + peli.getDuracion();
+				int diferencia = sesion.minutosDeDiferencia(s);
+				if (diferencia < duracion) {
+					s.setDisponible(false);
+					s.update();
+				}
+			}
+		}
 		return redirect(routes.Administracion.index());
 	}
 	
@@ -191,6 +203,17 @@ public class Administracion extends Controller {
 		Sesion sesion = Sesion.findById(sesion_id);
 		peli.removeSesion(sesion);
 		sesion.save();
+		List<Sesion> sesionesDia = Sesion.findByFecha(sesion.getFecha());
+		for (Sesion s : sesionesDia) {
+			if (s.getSala().equals(sesion.getSala())) {
+				int duracion = 30 + peli.getDuracion();
+				int diferencia = sesion.minutosDeDiferencia(s);
+				if (diferencia < duracion) {
+					s.calcularDisponibilidad();
+					s.update();
+				}
+			}
+		}
 		return redirect(routes.Administracion.index());
 	}
 
@@ -245,10 +268,11 @@ public class Administracion extends Controller {
 				List<Sesion> sesionesDePeli = Sesion.findByPeliculaAndFecha(peli, fecha);
 				if (sesionesDePeli == null)
 					sesionesDePeli = new ArrayList<Sesion>();
-				List<Sesion> sesionesLibres = Sesion.findByPeliculaAndFecha(null, fecha);
-				if (sesionesLibres == null)
-					sesionesLibres = new ArrayList<Sesion>();
-				return ok(adminSesionesDePelicula.render(peli, fecha, sesionesDePeli, sesionesLibres));
+				List<Sesion> sesionesDisponibles = Sesion.findByFechaAndDisponible(fecha);
+				if (sesionesDisponibles == null)
+					sesionesDisponibles = new ArrayList<Sesion>();
+				
+				return ok(adminSesionesDePelicula.render(peli, fecha, sesionesDePeli, sesionesDisponibles));
 			} catch (IllegalArgumentException e) {
 				return badRequest(admin.render(Pelicula.findAll(), Sala.findAll(),
 						TipoSesion.findAll(), formPelicula, formSala, formTipoSesion));

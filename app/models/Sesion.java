@@ -33,6 +33,7 @@ public class Sesion extends Model {
 	private List<Entrada> entradas = new ArrayList<Entrada>();
 	private Time hora;
 	private Date fecha;
+	private boolean disponible;
 
 	public static Sesion findById(Long id) {
 		return Factories.business.getSesionService().findById(id);
@@ -50,9 +51,16 @@ public class Sesion extends Model {
 		return Factories.business.getSesionService().findBySalaAndFecha(sala,
 				fecha);
 	}
-	
-	public static List<Sesion> findByPeliculaAndFecha(Pelicula pelicula, Date fecha) {
-		return Factories.business.getSesionService().findByPeliculaAndFecha(pelicula, fecha);
+
+	public static List<Sesion> findByPeliculaAndFecha(Pelicula pelicula,
+			Date fecha) {
+		return Factories.business.getSesionService().findByPeliculaAndFecha(
+				pelicula, fecha);
+	}
+
+	public static List<Sesion> findByFechaAndDisponible(Date fecha) {
+		return Factories.business.getSesionService().findByFechaAndDisponible(
+				fecha);
 	}
 
 	public void update() {
@@ -89,6 +97,7 @@ public class Sesion extends Model {
 
 	public Sesion() {
 		super();
+		disponible = true;
 	}
 
 	public Date getFecha() {
@@ -153,6 +162,14 @@ public class Sesion extends Model {
 		this.hora = hora;
 	}
 
+	public boolean isDisponible() {
+		return disponible;
+	}
+
+	public void setDisponible(boolean disponible) {
+		this.disponible = disponible;
+	}
+
 	public void addEntrada(Entrada entrada) {
 		entrada._setSesion(this);
 		entradas.add(entrada);
@@ -181,11 +198,25 @@ public class Sesion extends Model {
 		int diferencia = (int) ((fecha.getTime() - today.getTime()) / MILLSECS_PER_DAY);
 		return diferencia;
 	}
-	
+
 	public int minutosDeDiferencia(Sesion sesion) {
 		long MILLSECS_PER_MINUTO = 60 * 1000;
 		int diferencia = (int) ((hora.getTime() - sesion.getHora().getTime()) / MILLSECS_PER_MINUTO);
 		return Math.abs(diferencia);
+	}
+
+	public void calcularDisponibilidad() {
+		disponible = true;
+		List<Sesion> sesionesDia = Sesion.findByFecha(fecha);
+		;
+		for (Sesion s : sesionesDia) {
+			if (s.getSala().equals(sala) && s.getPelicula() != null) {
+				int duracion = 30 + s.getPelicula().getDuracion();
+				int diferencia = minutosDeDiferencia(s);
+				if (diferencia < duracion)
+					disponible = false;
+			}
+		}
 	}
 
 	@Override
@@ -208,8 +239,8 @@ public class Sesion extends Model {
 	@Override
 	public String toString() {
 		return "Sesion [id=" + id + ", tipo=" + tipo + ", sala=" + sala
-				+ ", pelicula=" + pelicula + ", hora=" + hora + ", dia=" + fecha
-				+ "]";
+				+ ", pelicula=" + pelicula + ", hora=" + hora + ", fecha="
+				+ fecha + ", disponible=" + disponible + "]";
 	}
 
 }

@@ -138,5 +138,6 @@ body {
    .reveal section img.logo{
    border:none;
    background: none;
+   box-shadow:none;
 }
   

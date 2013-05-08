@@ -38,71 +38,106 @@
 			<div class="slides">
 
 				<section>
-										<p><img src="img/logo1.png" class='logo' /></p>
+					<p><img src="img/logo1.png" class='logo' /></p>
 				
 					<h1>Entrecine</h1>
 					<h2>Sistema de gestión de entradas de cine</h2>
 					<p>
-						<small>Creado por <a href="https://github.com/danynab">Daniel Meana Llorián</a>, <a href="https://github.com/zumacaya">Eduardo Parrado Puente</a>, <a href="https://github.com/BrunoLopezGarcia">Bruno López García</a>, <a href="https://github.com/marcosrgz">Marcos Rodríguez Martínez</a> y <a href="https://github.com/belaustegui">Cristian Álvarez Belaustegui</a></small>
+						<small>Creado por 
+							<a href="https://github.com/danynab">Daniel Meana Llorián</a>, 
+							<a href="https://github.com/zumacaya">Eduardo Parrado Puente</a>, 
+							<a href="https://github.com/BrunoLopezGarcia">Bruno López García</a>, 
+							<a href="https://github.com/marcosrgz">Marcos Rodríguez Martínez</a> y 
+							<a href="https://github.com/belaustegui">Cristian Álvarez Belaustegui</a></small>
 					</p>
 				</section>
 
 				<section>
 					<h2>Problema</h2>
-					<p>Necesitamos implementar la arquitectura de un sistema de gestión de entradas de cine.</p>
-					<p>El sistema debe gestionar la venta de entradas:</p>
-						<ul>
-							<li>A través de Internet</li>
-							<li>En la taquilla del cine</li>
-						</lu>
+					<ul>
+						<li>Necesitamos implementar la arquitectura de un sistema de gestión de entradas de cine.
+							<ul>
+								<small><li>Debe ser facil de utilizar.</li></small>
+							</ul>
+						</li>
+						<li>El sistema debe gestionar la venta de entradas:
+							<ul>
+								<li>A través de una página web de Internet</li>
+								<li>Directamente en la taquilla del cine</li>
+							</ul>
+						</li>
+					</ul>
 				</section>
 
 				<section>
 					<section>
-						<h2>Primera solución</h2>
-						<p>Una base de datos central. Acompañada de:</p>
+						<h1>Primera solución</h1>
+					</section>
+					<section>
+						<h2>Consistía en...</h2>
+						<p>Una <strong>base de datos central</strong> conectada a:</p>
 						<ul>
 							<li>Un servidor web que permita la compra por Internet</li>
 							<li>Una aplicación especial para los TPV de taquilla</li>
 							<li>Una aplicación especial para el administrador</li>
 						</ul>
-						<p><img src="img/1.png" class='logo'/></p>
 					</section>
 					<section>
-						<h2>Primera solución</h2>
-						<p>No satisface los requisitos:</p>
+						<h2>Vista de despliegue</h2>
+						<img src="img/1.png" class='logo'/>
+					</section>
+					<section>
+						<h2>Se ha desechado por...</h2>
 						<ul>
-							<li>Alto coste de desarrollo y mantenimiento</li>
-							<li>Proceso de desarrollo largo</li>
+							<li>No satisface los requisitos:
+								<ul>
+									<li>Alto coste de desarrollo y mantenimiento</li>
+									<li>Proceso de desarrollo largo</li>
+								</ul>
+							</li>
+							<li>Demasiado compleja para este problema.</li>
 						</ul>
-						<p>Demasiado compleja para este problema.</p>
 					</section>
 				</section>
 
 				<section>
 					<section>
-						<h2>Solución definitiva</h2>
-						<p>Tomamos una aproximación más sencilla:<br></p>
+						<h1>Solución definitiva</h1>
+					</section>
+					<section>
+						<h2>Se ha cambiado...</h2>
 						<ul>
-							<li>Un servidor web en el que conviven todas las aplicaciones</li>
+							<li>Tomamos una aproximación más sencilla:
+								<ul>
+									<li>Un servidor web en el que conviven todas las aplicaciones</li>
+								</ul>
+							</li>
+							<li>Aplicaciones accesibles desde cualquier navegador WEB</li>
 						</ul>
 					</section>
 					<section>
-						<h2>Solución definitiva</h2>
-						<p>Hacemos uso de varios patrones...<br></p>
+						<h2>¿Qué hemos utilizado?</h2>
 						<ul>
-							<li>MVC + N-capas</li>
-							<li>Fachada</li>
+							<li>Hacemos uso de varios patrones...
+								<ul>
+									<li>MVC + N-capas</li>
+									<li>Fachadas</li>
+								</ul>
+							</li>
+							<li>... y varias tecnologías que nos ayudan en el desarrollo:</p>
+								<ul>
+									<li><a href="http://www.playframework.com/">Play! Framework</a></li>
+									<li><a href="http://twitter.github.io/bootstrap/">Twitter Bootstrap</a></li>
+								</ul>
+							</li>
 						</ul>
-						<p>... y varias tecnologías que nos ayudan en el desarrollo:</p>
-						<ul>
-							<li><a href="http://www.playframework.com/">Play! Framework</a></li>
-							<li><a href="http://twitter.github.io/bootstrap/">Twitter Bootstrap</a></li>
-						</ul>
+						
+						<img src="img/play_logo.png" width="176" height="60" class='logo'/>
+
 					</section>
 					<section>
-						<h2>Solución definitiva</h2>
-						<p>Obtenemos varios beneficios:<br></p>
+						<h2>¿Por qué?</h2>
+						<p>Obtenemos varios beneficios:</p>
 						<ul>
 							<li>Mantenemos la modularidad</li>
 							<li>Se acorta el proceso de desarrollo</li>
@@ -113,25 +148,38 @@
 				
 				<section>
 					<section>
-						<h2>Sugerencias de películas</h2>
+						<h1>Sistema de sugerencia de películas</h1>
+					</section>
+					<section>
+						<h2>¿Qué debemos hacer?</h2>
 						<p>Debemos generar propuestas acordes con los intereses del espectador.</p>
 						<p>¿Disponemos de información adicional?</p>
 					</section>
-
 					<section>
 						<h2>Algoritmo Map-Reduce</h2>
-						<p>Utilizado por google para encontrar gran cantidad de resultados en fracciones de segundo<br/></p>
+						<p>Utilizado por google para encontrar gran cantidad de resultados en fracciones de segundos</p>
 						<img src="img/MapReduce.jpg" />
 					</section>
-					
 					<section>
-						<h2>¿Qué ventajas nos aporta?</h2>
+						<h2>¿Qué nos aporta?</h2>
+						<p>Múltiples <strong>ventajas</strong>:</p>
 						<ul>
 							<li>Gran velocidad</li>
 							<li>Escalable</li>
 							<li>Preciso</li>
 						</ul>
 					</section>
+				</section>
+				
+				<section>
+						<h2>Conclusiones:</h2>
+				</section>
+				
+				<section>
+					<h1>Demo</h1>
+					<a href="http://danynab.no-ip.org/" class="image navigate-next">
+						<img src="img/demo.jpg" width="576" height="328"/>
+					</a>
 				</section>
 			</div>
 
